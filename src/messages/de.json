@@ -55,6 +55,28 @@
     ],
     "assortmentTitle": "Sortiment für Frühstück, Pause und Büro",
     "assortmentText": "Brote, Brötchen, Süßes, Getränke, Snacks und Feinkost werden im nächsten Schritt als filterbarer Katalog aufgebaut.",
+    "conversionTitle": "Mehr als eine Bäckertüte",
+    "conversionText": "Für Kassel, Familien und Büros: Lieferung, Brot-Abo und Catering bleiben bewusst einfache Anfrage- oder Demo-Flows, bis echte Zahlungs- und Lieferintegrationen folgen.",
+    "conversionCards": [
+      {
+        "title": "Lieferung in Kassel",
+        "text": "Innenstadt frei ab 20 €, weitere Stadtteile mit fairer Lieferpauschale. PLZ-Prüfung und Karte folgen als consent-sicherer Schritt.",
+        "meta": "Zone 1-3",
+        "cta": "Liefergebiet prüfen"
+      },
+      {
+        "title": "Brot-Abo",
+        "text": "Single, Familie oder Flex: wöchentlich frisches Brot und Brötchen, mit Urlaubspause und Abholung oder Lieferung.",
+        "meta": "ab 12,90 € pro Woche",
+        "cta": "Abo vormerken"
+      },
+      {
+        "title": "Firmenservice",
+        "text": "Brotzeit-Boxen, Frühstück im Büro und Konferenzverpflegung für Teams in Kassel.",
+        "meta": "B2B auf Rechnung",
+        "cta": "Anfrage vorbereiten"
+      }
+    ],
     "cafeTitle": "Unser Café",
     "cafeText": "Für die Galerie sind später deine Innenraumfotos vorgesehen: Kaffee am Fenster, Kuchen in der Vitrine und die kleine Pause zwischen Karlsaue und Bebelplatz.",
     "trustItems": [

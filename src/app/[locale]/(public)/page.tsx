@@ -4,6 +4,10 @@ import Link from "next/link";
 import { buildPublicMetadata } from "@/features/seo/publicMetadata";
 import { parseSupportedLocale } from "@/features/seo/site";
 import { CatalogPreview } from "@/features/catalog/components/CatalogPreview";
+import {
+  ConversionSections,
+  type ConversionCard,
+} from "@/features/content/components/ConversionSections";
 
 type PathCard = {
   title: string;
@@ -34,6 +38,7 @@ export default async function HomePage({
   const steps = t.raw("steps") as string[];
   const bestsellers = t.raw("bestsellers") as string[];
   const trustItems = t.raw("trustItems") as string[];
+  const conversionCards = t.raw("conversionCards") as ConversionCard[];
 
   return (
     <div className="bg-porcelain">
@@ -129,7 +134,10 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section id="sortiment" className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-8">
+      <section
+        id="sortiment"
+        className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-8"
+      >
         <div>
           <h2 className="font-display text-4xl font-semibold">
             {t("assortmentTitle")}
@@ -152,6 +160,12 @@ export default async function HomePage({
           ))}
         </div>
       </section>
+
+      <ConversionSections
+        title={t("conversionTitle")}
+        text={t("conversionText")}
+        cards={conversionCards}
+      />
 
       <section id="cafe" className="bg-brand-deep text-cream">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-14 sm:px-8 lg:grid-cols-[1fr_1fr] lg:items-center">

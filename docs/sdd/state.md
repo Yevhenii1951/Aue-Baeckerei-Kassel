@@ -1,6 +1,6 @@
 # State
 
-Status: ABE-005 implemented locally.
+Status: ABE-006 implemented locally.
 
 Purpose: PORTFOLIO.
 
@@ -23,10 +23,12 @@ Done:
   discount in integer cents.
 - ABE-005 implemented: Backliste product totals and product x slot matrix
   aggregation.
+- ABE-006 implemented: public conversion sections for Kassel delivery,
+  Brot-Abo, and Firmenservice.
 
 Next:
 - Review landing/catalog visually in the browser.
-- Start ABE-006 delivery, catering, and Brot-Abo public conversion sections.
+- Start ABE-007 fuller cafe content and replaceable image slots.
 
 Notes:
 - `.gitignore` excludes copied dependency/build artifacts.

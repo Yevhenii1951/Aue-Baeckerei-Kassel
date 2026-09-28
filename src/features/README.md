@@ -10,6 +10,7 @@ Modules present in this base:
 | Module | Owns |
 | --- | --- |
 | `bakery-admin` | owner-facing production aggregates such as Backliste |
+| `content` | public landing sections and conversion components |
 | `identity` | staff profiles, roles, invitations, Supabase staff auth |
 | `catalog` | product data, allergen metadata, filtering and catalogue UI |
 | `ordering` | preorder cutoff, pickup slots, cart/order domain logic |
