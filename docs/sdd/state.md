@@ -2,14 +2,22 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). Infra and design-system remediation in review. ABE-010
-through ABE-013 merged on `main`. ABE-014 in review on
-`feature/abe-014-delivery-slots`.
+through ABE-014 merged on `main`. ABE-015 in review on
+`feature/abe-015-admin-dashboard-ui`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
-- ABE-014 delivery slots on `feature/abe-014-delivery-slots`: 2-hour delivery
+- ABE-015 `/admin` dashboard on `feature/abe-015-admin-dashboard-ui`: KPI tiles
+  (orders today, revenue, top product, 20:00 preorder cutoff), a today's-orders
+  list (ID, customer, pickup/delivery, time, position count, status badge, total)
+  and a Backliste panel from the shared `aggregateBackliste`. All values derive
+  from pure `demoDashboard.ts` data; `sumRevenueCents`, `orderTotalCents` and
+  `topProducts` are unit-tested. Anchors link to the Bestellungen and Backliste
+  sections, and the staff auth shell stays (Staff-Login link to `/admin/login`).
+  The day label comes from the client clock via `useClientNow` + Berlin date.
+- ABE-014 delivery slots (in review on `feature/abe-014-delivery-slots`):
   slots 10:00–20:00 (`deliverySlots.ts`, past slots vanish for today in
   Europe/Berlin), an express option for zones 1–2 ordered before 12:00
   (+3,00 €, 2-hour window), optionally delivery date tabs (today + next two
