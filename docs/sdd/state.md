@@ -2,13 +2,21 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). Infra and design-system remediation in review. ABE-010
-through ABE-018 merged on `main`. ABE-019 in progress on
-`feature/abe-019-order-server-actions`.
+through ABE-019 merged on `main`. ABE-020 in progress on
+`feature/abe-020-demo-seed`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-020 demo seed on `feature/abe-020-demo-seed`: added
+  `db/seeds/0002_ecommerce_demo.sql` with the full 66-product catalogue,
+  three Kassel delivery zones, five pickup slots and three demo pickup orders
+  with items/totals for admin/backliste smoke data. It uses the existing seed
+  runner; `db:local:seed` remains protected by the local `DATABASE_URL` +
+  `DEV_DATABASE_NAME` guard. New integration coverage resets a fresh test DB,
+  runs migrations + seeds, then verifies public catalogue/zones and operational
+  slots/orders/items.
 - ABE-019 order server actions on `feature/abe-019-order-server-actions`:
   added `createOrderAction` plus a transactional Postgres service. The server
   validates checkout/customer/payment input, validates cart slugs and quantities,
