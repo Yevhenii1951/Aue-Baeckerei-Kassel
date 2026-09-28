@@ -128,5 +128,10 @@
     "imprintTitle": "Impressum",
     "privacyTitle": "Datenschutzerklärung",
     "legalWarning": "Platzhalter-Text. Vor dem Livegang durch eine anwaltlich geprüfte Fassung ersetzen."
+  },
+  "vorbestellen": {
+    "eyebrow": "Morgen frisch aus dem Ofen",
+    "title": "Vorbestellen",
+    "intro": "Wähle dein Abholdatum, den passenden Zeitraum und sende uns deine Bestellung. Nach 20 Uhr gilt die Vorbestellung für übermorgen."
   }
 }
