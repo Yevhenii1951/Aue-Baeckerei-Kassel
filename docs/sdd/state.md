@@ -2,13 +2,20 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). Infra and design-system remediation in review. ABE-010
-through ABE-016 merged on `main`. ABE-017 in progress on
-`feature/abe-017-backliste-ui`.
+through ABE-017 merged on `main`. ABE-018 in progress on
+`feature/abe-018-database-schema`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-018 database schema on `feature/abe-018-database-schema`: migration
+  `0005_ecommerce_schema.sql` adds `products`, `orders`, `order_items`,
+  `pickup_slots` and `delivery_zones` with integer cent prices, `timestamptz`
+  operational timestamps, indexes, RLS and explicit grants. Public reads are
+  limited to published products and active delivery zones; active staff sessions
+  can manage ecommerce records. New integration tests cover table/RLS presence,
+  money/timestamp column types, public read limits and staff writes.
 - ABE-017 Backliste UI on `feature/abe-017-backliste-ui`: `/admin#backliste`
   now has a production date picker, sorted product totals, a product x slot
   matrix, print-friendly controls and a client-side CSV export from the shared
