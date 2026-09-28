@@ -29,6 +29,8 @@ export type ProductFilter = {
   query?: string;
 };
 
+export type ProductSort = "beliebt" | "name-asc" | "price-asc" | "price-desc";
+
 export const categoryLabels: Record<ProductCategory, string> = {
   bread: "Brote",
   rolls: "Brötchen",

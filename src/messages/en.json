@@ -119,6 +119,11 @@
       "Admin baking list for production"
     ]
   },
+  "sortiment": {
+    "eyebrow": "Order online or reserve for tomorrow",
+    "title": "Assortment",
+    "intro": "Breads, rolls, sweets, drinks, snacks and fine goods with filters, allergens and cart. Ordering runs as a demo flow, while price logic already uses cents."
+  },
   "contactLegal": {
     "imprintTitle": "Legal notice",
     "privacyTitle": "Privacy policy",

@@ -1,6 +1,6 @@
 # State
 
-Status: ABE-008 implemented locally.
+Status: ABE-009 implemented locally.
 
 Purpose: PORTFOLIO.
 
@@ -28,10 +28,11 @@ Done:
 - ABE-007 implemented: fuller cafe section with pairings, hours, and
   replaceable photo slots.
 - ABE-008 implemented: local bakery JSON-LD and asset/source notes.
+- ABE-009 implemented: `/sortiment` shop surface with category tabs, search,
+  tag/allergen filters, sorting, product actions, and local cart summary.
 
 Next:
-- Review landing/catalog visually in the browser.
-- Continue with a visual QA pass or begin Phase 2 routes/forms.
+- Start ABE-010 cart drawer and persistent checkout path.
 
 Notes:
 - `.gitignore` excludes copied dependency/build artifacts.

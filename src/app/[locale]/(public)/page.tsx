@@ -84,7 +84,7 @@ export default async function HomePage({
               <Link href={`/${locale}#vorbestellen`} className="btn-lime">
                 {t("primaryCta")}
               </Link>
-              <Link href={`/${locale}#sortiment`} className="btn-ghost-dark">
+              <Link href={`/${locale}/sortiment`} className="btn-ghost-dark">
                 {t("secondaryCta")}
               </Link>
             </div>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { filterProducts } from "@/features/catalog/filters";
+import { filterProducts, sortProducts } from "@/features/catalog/filters";
 import { demoProducts } from "@/features/catalog/demoProducts";
 
 describe("catalog filters", () => {
@@ -36,5 +36,13 @@ describe("catalog filters", () => {
     });
 
     expect(result.map((product) => product.name)).toEqual(["Avocado Bagel"]);
+  });
+
+  it("sorts products by price", () => {
+    const products = filterProducts(demoProducts, { category: "drinks" });
+    const sorted = sortProducts(products, "price-asc");
+
+    expect(sorted[0]?.name).toBe("Caffè Americano");
+    expect(sorted.at(-1)?.name).toBe("Caffè Crema Mild Bohnen");
   });
 });

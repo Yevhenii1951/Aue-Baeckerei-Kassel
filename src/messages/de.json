@@ -119,6 +119,11 @@
       "Admin-Backliste für die Produktion"
     ]
   },
+  "sortiment": {
+    "eyebrow": "Online bestellen oder für morgen sichern",
+    "title": "Sortiment",
+    "intro": "Brote, Brötchen, Süßes, Getränke, Snacks und Feinkost mit Filtern, Allergenen und Warenkorb. Die Bestellung läuft als Demo-Flow, die Preislogik arbeitet bereits in Cent."
+  },
   "contactLegal": {
     "imprintTitle": "Impressum",
     "privacyTitle": "Datenschutzerklärung",

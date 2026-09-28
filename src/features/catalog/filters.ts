@@ -1,4 +1,9 @@
-import type { Product, ProductCategory, ProductFilter } from "./types";
+import type {
+  Product,
+  ProductCategory,
+  ProductFilter,
+  ProductSort,
+} from "./types";
 
 export function filterProducts(
   products: Product[],
@@ -44,4 +49,34 @@ export function productsByCategory(
   category: ProductCategory,
 ): Product[] {
   return filterProducts(products, { category });
+}
+
+export function sortProducts(
+  products: Product[],
+  sort: ProductSort,
+): Product[] {
+  const copy = [...products];
+
+  if (sort === "price-asc") {
+    return copy.sort((left, right) => left.priceCents - right.priceCents);
+  }
+
+  if (sort === "price-desc") {
+    return copy.sort((left, right) => right.priceCents - left.priceCents);
+  }
+
+  if (sort === "name-asc") {
+    return copy.sort((left, right) => left.name.localeCompare(right.name, "de-DE"));
+  }
+
+  return copy.sort((left, right) => {
+    const leftPopular = left.tags.includes("beliebt") ? 0 : 1;
+    const rightPopular = right.tags.includes("beliebt") ? 0 : 1;
+
+    if (leftPopular !== rightPopular) {
+      return leftPopular - rightPopular;
+    }
+
+    return left.name.localeCompare(right.name, "de-DE");
+  });
 }

@@ -26,7 +26,7 @@ export default async function SiteHeader({ locale }: SiteHeaderProps) {
               </Link>
             </li>
             <li>
-              <Link href={`/${locale}#sortiment`} className="nav-link">
+              <Link href={`/${locale}/sortiment`} className="nav-link">
                 {t("navAssortment")}
               </Link>
             </li>
