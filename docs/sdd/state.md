@@ -8,6 +8,18 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-024 Datenschutz sections on `feature/abe-024-datenschutz-sections`: the
+  two placeholder paragraphs became six sections covering technically necessary
+  data, optional third-party content, order/contact data, the payment demo,
+  server logs and the pre-launch review. Copy is extracted to
+  `src/features/legal/privacySections.ts` and rendered by a reusable
+  `LegalSectionBlock`, so the page stays under the file limit. Every statement
+  was checked against the code rather than assumed: order columns are
+  `customer_name/email/phone` + `delivery_address` + `customer_note`
+  (`orderService.ts:84`), the payment step takes no card data, and the logger
+  redacts email/phone/address/password/token keys (`src/lib/logger.ts:5`). The
+  embeds that are *not* used are named explicitly, which is easier to defend
+  than silence. 6 new unit tests; footer Impressum link verified reachable.
 - ABE-023 cookie consent on `feature/abe-023-cookie-consent`: new
   `src/features/consent` with a pure Zod-validated `consentStorage` core
   (mirrors `cartStorage.ts`), a module store via `useSyncExternalStore`
