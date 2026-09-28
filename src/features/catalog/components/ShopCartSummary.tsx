@@ -1,15 +1,10 @@
-import { calculateCart, type CartItemInput } from "@/features/ordering/cart";
+"use client";
 
-type ShopCartSummaryProps = {
-  items: CartItemInput[];
-  onChangeQuantity: (productId: string, quantity: number) => void;
-};
+import { useCart } from "@/features/ordering/cart-provider";
+import { formatPrice } from "@/features/ordering/price";
 
-export function ShopCartSummary({
-  items,
-  onChangeQuantity,
-}: ShopCartSummaryProps): React.ReactElement {
-  const totals = calculateCart(items, { breakfastBundle: true });
+export function ShopCartSummary(): React.ReactElement {
+  const { items, totals, changeQuantity, openCart } = useCart();
 
   return (
     <aside className="sticky bottom-0 rounded-t-lg border border-brand-deep/10 bg-brand-deep p-4 text-cream shadow-panel lg:top-24 lg:rounded-lg">
@@ -43,7 +38,7 @@ export function ShopCartSummary({
               <button
                 type="button"
                 onClick={() =>
-                  onChangeQuantity(line.productId, line.quantity - 1)
+                  changeQuantity(line.productId, line.quantity - 1)
                 }
                 className="size-8 rounded-md border border-white/20"
                 aria-label={`${line.name} reduzieren`}
@@ -53,7 +48,7 @@ export function ShopCartSummary({
               <button
                 type="button"
                 onClick={() =>
-                  onChangeQuantity(line.productId, line.quantity + 1)
+                  changeQuantity(line.productId, line.quantity + 1)
                 }
                 className="size-8 rounded-md border border-white/20"
                 aria-label={`${line.name} erhöhen`}
@@ -75,16 +70,10 @@ export function ShopCartSummary({
         type="button"
         className="mt-4 min-h-11 w-full rounded-lg bg-amber px-4 py-2 font-semibold text-brand-deep disabled:opacity-55"
         disabled={items.length === 0}
+        onClick={openCart}
       >
         Zur Vorbestellung
       </button>
     </aside>
   );
-}
-
-function formatPrice(priceCents: number): string {
-  return new Intl.NumberFormat("de-DE", {
-    style: "currency",
-    currency: "EUR",
-  }).format(priceCents / 100);
 }

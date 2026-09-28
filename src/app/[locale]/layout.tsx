@@ -5,6 +5,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/features/seo/site";
+import { CartProvider } from "@/features/ordering/cart-provider";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -49,7 +50,7 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${cormorant.variable} ${manrope.variable}`}>
       <body className="min-h-screen bg-cream text-ink font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <CartProvider>{children}</CartProvider>
         </NextIntlClientProvider>
       </body>
     </html>

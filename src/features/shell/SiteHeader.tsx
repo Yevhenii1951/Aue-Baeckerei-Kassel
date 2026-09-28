@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { SiteLocale } from "@/features/seo/site";
+import { CartToggleButton } from "./CartToggleButton";
 
 type SiteHeaderProps = {
   locale: SiteLocale;
@@ -49,6 +50,9 @@ export default async function SiteHeader({ locale }: SiteHeaderProps) {
               <Link href={`/${locale}/datenschutz`} className="nav-link">
                 {t("navPrivacy")}
               </Link>
+            </li>
+            <li>
+              <CartToggleButton />
             </li>
           </ul>
         </nav>
