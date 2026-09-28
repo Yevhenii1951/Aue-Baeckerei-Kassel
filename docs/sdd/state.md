@@ -2,13 +2,21 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). Infra and design-system remediation in review. ABE-010
-through ABE-014 merged on `main`. ABE-015 in review on
-`feature/abe-015-admin-dashboard-ui`.
+through ABE-015 merged on `main`. ABE-016 in review on
+`feature/abe-016-orders-management-ui`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-016 admin orders management UI on
+  `feature/abe-016-orders-management-ui`: `/admin` now has filterable demo
+  orders by date (Heute/Morgen), operational status and fulfillment type. The
+  status path is visible (`Neu → In Zubereitung → Bereit → Abgeholt →
+  Geliefert`), order cards expand to show customer/order detail, items, sum,
+  note and disabled demo-only cancel/refund buttons. New pure filter helpers in
+  `orderFilters.ts` are unit-tested, including the verification scenario
+  Morgen + Abholung showing only tomorrow pickup orders.
 - ABE-015 `/admin` dashboard on `feature/abe-015-admin-dashboard-ui`: KPI tiles
   (orders today, revenue, top product, 20:00 preorder cutoff), a today's-orders
   list (ID, customer, pickup/delivery, time, position count, status badge, total)
