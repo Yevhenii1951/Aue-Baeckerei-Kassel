@@ -138,5 +138,10 @@
     "eyebrow": "The last step",
     "title": "Checkout",
     "intro": "Review your selection, choose pickup or delivery and a payment method. This demo flow never calls a real payment provider."
+  },
+  "lieferung": {
+    "eyebrow": "Fresh to your street",
+    "title": "Delivery",
+    "intro": "We deliver in three zones around the bakery. Check whether your postal code is covered and what delivery costs."
   }
 }

@@ -138,5 +138,10 @@
     "eyebrow": "Der letzte Schritt",
     "title": "Kasse",
     "intro": "Prüfe deine Auswahl, wähle Abholung oder Lieferung und eine Zahlungsart. In dieser Demo-Strecke wird nichts real bezahlt."
+  },
+  "lieferung": {
+    "eyebrow": "Frisch in deine Straße",
+    "title": "Lieferung",
+    "intro": "Wir liefern in drei Zonen rund um die Bäckerei. Prüfe hier, ob deine PLZ dabei ist und was die Lieferung kostet."
   }
 }

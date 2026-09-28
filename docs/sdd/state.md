@@ -1,15 +1,22 @@
 # State
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
-workflow was enforced). Infra and design-system remediation in review. ABE-010
-and ABE-011 merged on `main`. ABE-012 in review on
-`feature/abe-012-checkout-simulation`.
+workflow was enforced). Infra and design-system remediation in review. ABE-010,
+ABE-011 and ABE-012 merged on `main`. ABE-013 in review on
+`feature/abe-013-delivery-zone-checker`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
-- ABE-012 `/kasse` demo checkout on `feature/abe-012-checkout-simulation`:
+- ABE-013 `/lieferung` delivery zone checker on
+  `feature/abe-013-delivery-zone-checker`: `delivery.ts` maps Kassel PLZs to
+  zones (1/2/3 with fee 2,50/4,50/6,50 € and free thresholds 20/30/40 € —
+  values set with the project owner), `/lieferung` explains the three zones and
+  checks a PLZ with a clear service/unavailable message, and the `/kasse`
+  delivery panel shows the matched zone and fee live as the PLZ is typed.
+- ABE-012 `/kasse` demo checkout (in review on
+  `feature/abe-012-checkout-simulation`):
   fulfillment switch (Abholung/Lieferung with address fields), 5 payment
   methods (Stripe/PayPal/Klarna/Bar·EC/Rechnung, no real API), Zod validation
   in `checkout-form.ts`, demo order number `B-2026-<seq>` (`orderNumber.ts`),
