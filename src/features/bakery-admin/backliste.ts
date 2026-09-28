@@ -30,6 +30,32 @@ export type Backliste = {
   slotMatrix: SlotMatrixRow[];
 };
 
+export function backlisteSlots(backliste: Backliste): string[] {
+  const slots = new Set<string>();
+
+  for (const row of backliste.slotMatrix) {
+    Object.keys(row.slots).forEach((slot) => slots.add(slot));
+  }
+
+  return Array.from(slots).sort((left, right) =>
+    left.localeCompare(right, "de-DE"),
+  );
+}
+
+export function backlisteCsv(backliste: Backliste): string {
+  const slots = backlisteSlots(backliste);
+  const rows = [
+    ["Produkt", "Gesamt", ...slots],
+    ...backliste.slotMatrix.map((row) => [
+      row.name,
+      String(backliste.productTotals.find((total) => total.productId === row.productId)?.quantity ?? 0),
+      ...slots.map((slot) => String(row.slots[slot] ?? 0)),
+    ]),
+  ];
+
+  return rows.map((row) => row.map(csvCell).join(",")).join("\n");
+}
+
 export function aggregateBackliste(
   orders: BacklisteOrder[],
   productionDate: string,
@@ -79,4 +105,8 @@ function sortByQuantityThenName(left: ProductTotal, right: ProductTotal): number
 
 function sortMatrixRows(left: SlotMatrixRow, right: SlotMatrixRow): number {
   return left.name.localeCompare(right.name, "de-DE");
+}
+
+function csvCell(value: string): string {
+  return `"${value.replaceAll('"', '""')}"`;
 }

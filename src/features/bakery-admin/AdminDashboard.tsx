@@ -18,6 +18,7 @@ import { applyOrderFilters } from "./orderFilters";
 import type { OrderFilters as OrderFilterState } from "./orderFilters";
 import { OrderList } from "./OrderList";
 import { OrderFilters } from "./OrderFilters";
+import { BacklistePanel } from "./BacklistePanel";
 
 const KPI_LABELS = {
   orders: "Bestellungen heute",
@@ -33,6 +34,7 @@ export function AdminDashboard(): React.ReactElement {
     status: "all",
     mode: "all",
   });
+  const [backlisteDate, setBacklisteDate] = React.useState("");
 
   if (now === null) {
     return <div />;
@@ -41,11 +43,15 @@ export function AdminDashboard(): React.ReactElement {
   const day = berlinDateString(now);
   const allOrders = demoOrders(day);
   const activeFilter = { ...filter, date: filter.date || day };
+  const activeBacklisteDate = backlisteDate || addDay(day);
 
   const displayedOrders = applyOrderFilters(allOrders, activeFilter);
   const revenueCents = sumRevenueCents(displayedOrders);
   const popular = topProducts(displayedOrders);
-  const backlog = aggregateBackliste(demoBacklisteOrders(day), day);
+  const backlog = aggregateBackliste(
+    demoBacklisteOrders(activeBacklisteDate),
+    activeBacklisteDate,
+  );
 
   return (
     <div className="grid gap-8">
@@ -106,23 +112,12 @@ export function AdminDashboard(): React.ReactElement {
 
       <section className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
         <OrderList orders={displayedOrders} />
-        <section id="backliste" className="rounded-lg border border-brand-deep/10 bg-paper p-5 shadow-card">
-          <h2 className="text-lg font-semibold text-brand-deep">Backliste</h2>
-          <p className="mt-1 text-sm text-ink/60">Produktionsmengen je Zeitraum</p>
-          <ul className="mt-4 grid gap-2">
-            {backlog.productTotals.map((row) => (
-              <li
-                key={row.name}
-                className="flex items-baseline justify-between border-t border-brand-deep/10 pt-2 text-sm"
-              >
-                <span className="text-ink/75">{row.name}</span>
-                <span className="font-medium text-brand-deep">
-                  {row.quantity} Stück
-                </span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <BacklistePanel
+          backliste={backlog}
+          selectedDate={activeBacklisteDate}
+          onDateChange={setBacklisteDate}
+          minDate={day}
+        />
       </section>
     </div>
   );
