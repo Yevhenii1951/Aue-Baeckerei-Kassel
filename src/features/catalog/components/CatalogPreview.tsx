@@ -40,7 +40,7 @@ export function CatalogPreview(): React.ReactElement {
             (tag) => (
               <span
                 key={tag}
-                className="rounded-lg border border-sage/20 bg-mint px-3 py-1 text-sm font-medium text-sage"
+                className="rounded-lg border border-sage/20 bg-cream px-3 py-1 text-sm font-medium text-sage"
               >
                 {tag}
               </span>
@@ -74,7 +74,7 @@ export function CatalogPreview(): React.ReactElement {
 
 function ProductCard({ product }: { product: Product }): React.ReactElement {
   return (
-    <article className="flex min-h-56 flex-col justify-between rounded-lg border border-brand-deep/10 bg-paper p-5 shadow-dining-soft">
+    <article className="flex min-h-56 flex-col justify-between rounded-lg border border-brand-deep/10 bg-paper p-5 shadow-card">
       <div>
         <div className="flex items-start justify-between gap-3">
           <p className="text-sm font-medium text-sage">
@@ -103,7 +103,7 @@ function ProductCard({ product }: { product: Product }): React.ReactElement {
         {product.tags.slice(0, 2).map((tag) => (
           <span
             key={tag}
-            className="rounded-md bg-lime-soft px-2 py-1 text-xs font-semibold text-brand-deep"
+            className="rounded-md bg-amber-soft px-2 py-1 text-xs font-semibold text-brand-deep"
           >
             {tag}
           </span>

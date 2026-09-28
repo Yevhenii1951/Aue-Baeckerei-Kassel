@@ -27,7 +27,7 @@ export default async function SortimentPage({
   const t = await getTranslations("sortiment");
 
   return (
-    <div className="bg-porcelain">
+    <div className="bg-cream">
       <section className="border-b border-brand-deep/10 bg-paper">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-8">
           <p className="text-sm font-semibold text-sage">{t("eyebrow")}</p>

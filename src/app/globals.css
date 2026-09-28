@@ -6,26 +6,21 @@
     Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display: "Grenette", var(--font-cormorant), Georgia, "Times New Roman", serif;
 
-  --color-brand: #7a3f22;
-  --color-brand-dark: #512813;
-  --color-brand-deep: #17120e;
-  --color-lime: #d79a43;
-  --color-lime-soft: #f2d59b;
-  --color-cream: #fff9ef;
-  --color-mint: #eef2e9;
-  --color-sage: #315c45;
-  --color-blue-smoke: #d8cec0;
-  --color-porcelain: #fff9ef;
-  --color-wine: #2a1710;
+  /* Palette roles, named after the bakery rather than the material colour.
+     Every value is used by at least one component; adding a token means
+     adding a use. See docs/sdd/design.md for the rationale. */
+  --color-brand: #7a3f22; /* crust brown, primary action */
+  --color-brand-dark: #512813; /* crust brown, hover/secondary */
+  --color-brand-deep: #17120e; /* oven black, dark surfaces and text */
+  --color-amber: #d79a43; /* ferment amber, freshness and cutoff */
+  --color-amber-soft: #f2d59b; /* amber tint for badges */
+  --color-cream: #fff9ef; /* flour paper, light page surface */
+  --color-paper: #fffdf8; /* card surface, a step lighter than cream */
+  --color-sage: #315c45; /* Aue green, local and cafe accents */
+  --color-ink: #1f1712; /* body text */
 
-  --color-linen: #fff9ef;
-  --color-paper: #fffdf8;
-  --color-ink: #1f1712;
-  --color-wheat: #315c45;
-  --color-accent: #d79a43;
-
-  --shadow-dining: 0 22px 70px rgb(18 15 13 / 0.12);
-  --shadow-dining-soft: 0 12px 34px rgb(18 15 13 / 0.08);
+  --shadow-panel: 0 22px 70px rgb(18 15 13 / 0.12);
+  --shadow-card: 0 12px 34px rgb(18 15 13 / 0.08);
 }
 
 @layer base {
@@ -38,16 +33,16 @@
   body {
     overflow-x: clip;
     background:
-      linear-gradient(90deg, rgb(124 20 40 / 0.035) 1px, transparent 1px),
-      linear-gradient(180deg, rgb(73 104 74 / 0.035) 1px, transparent 1px),
-      var(--color-porcelain);
+      linear-gradient(90deg, color-mix(in srgb, var(--color-brand) 3.5%, transparent) 1px, transparent 1px),
+      linear-gradient(180deg, color-mix(in srgb, var(--color-sage) 3.5%, transparent) 1px, transparent 1px),
+      var(--color-cream);
     background-size: 42px 42px;
     color: var(--color-ink);
     text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background: var(--color-lime);
+    background: var(--color-amber);
     color: var(--color-brand-deep);
   }
 
@@ -71,51 +66,29 @@
 }
 
 @layer components {
-  .premium-surface {
+  .surface {
     @apply border border-brand-deep/10 bg-paper;
-    box-shadow: var(--shadow-dining-soft);
+    box-shadow: var(--shadow-card);
   }
 
-  .premium-panel {
+  .panel {
     @apply border border-brand-deep/10 bg-paper/95;
-    box-shadow: var(--shadow-dining);
+    box-shadow: var(--shadow-panel);
   }
 
-  .premium-rule {
-    background:
-      linear-gradient(90deg, transparent, rgb(200 148 53 / 0.65), transparent),
-      linear-gradient(90deg, transparent 0 44%, rgb(124 20 40 / 0.8) 44% 56%, transparent 56%);
-    height: 1px;
-  }
-
-  .premium-eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] text-brand-dark;
-  }
-
-  .premium-eyebrow::before {
-    content: "";
-    width: 1.7rem;
-    height: 1px;
-    background: var(--color-lime);
-  }
-
-  .btn-primary {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-brand px-6 py-2.5 font-semibold text-cream shadow-lg shadow-brand-deep/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-xl hover:shadow-brand-deep/20;
-  }
-
-  /* Gold accent CTA, near-black label */
-  .btn-lime {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-lime px-6 py-2.5 font-bold text-brand-deep shadow-lg shadow-brand-deep/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-lime-soft hover:shadow-xl hover:shadow-brand-deep/20;
+  /* Amber accent CTA, near-black label */
+  .btn-amber {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-amber px-6 py-2.5 font-bold text-brand-deep shadow-lg shadow-brand-deep/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-soft hover:shadow-xl hover:shadow-brand-deep/20;
   }
 
   /* Quiet CTA for dark surfaces */
   .btn-ghost-dark {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/35 px-6 py-2.5 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-lime hover:bg-white/10 hover:text-lime;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/35 px-6 py-2.5 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-amber hover:bg-white/10 hover:text-amber;
   }
 
   /* Nav link for dark surfaces, sliding gold underline */
   .nav-link {
-    @apply relative text-sm font-semibold text-white/82 transition-colors duration-300 hover:text-lime;
+    @apply relative text-sm font-semibold text-white/82 transition-colors duration-300 hover:text-amber;
   }
   .nav-link::after {
     content: "";
@@ -126,51 +99,11 @@
     width: 100%;
     transform: scaleX(0);
     transform-origin: left;
-    background: var(--color-lime);
+    background: var(--color-amber);
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .nav-link:hover::after {
     transform: scaleX(1);
-  }
-
-  /* Nav link for light surfaces, sliding red underline */
-  .nav-link-light {
-    @apply relative text-sm font-semibold text-ink/72 transition-colors duration-300 hover:text-brand-dark;
-  }
-  .nav-link-light::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    height: 2px;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: left;
-    background: var(--color-brand);
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .nav-link-light:hover::after {
-    transform: scaleX(1);
-  }
-
-  /* Scroll reveal: hidden until IntersectionObserver adds .is-visible */
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Full-bleed section breakout from a centered container */
-  .bleed {
-    width: 100vw;
-    margin-right: calc(50% - 50vw);
-    margin-left: calc(50% - 50vw);
   }
 
   form:not([class*="contents"]) input:not([type="checkbox"]):not([type="radio"]),
@@ -208,12 +141,21 @@
     border-radius: 0.5rem;
   }
 
-  .shadow-dining {
-    box-shadow: var(--shadow-dining);
+  /* Tailwind v4 does not emit a shadow utility for a custom --shadow-* token,
+     so both shadows are declared by hand. */
+  .shadow-panel {
+    box-shadow: var(--shadow-panel);
   }
 
-  .shadow-dining-soft {
-    box-shadow: var(--shadow-dining-soft);
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  /* The hero video is the one piece of motion that a media query cannot
+     pause on its own, so reduced-motion users get the poster frame instead
+     and the video is removed from the box entirely. */
+  .hero-still {
+    display: none;
   }
 }
 
@@ -227,14 +169,16 @@
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal {
-    opacity: 1;
-    transform: none;
+  .hero-video {
+    display: none;
+  }
+  .hero-still {
+    display: block;
   }
 }
 
 :focus-visible {
   outline: 2px solid var(--color-brand-deep);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-lime);
+  box-shadow: 0 0 0 4px var(--color-amber);
 }

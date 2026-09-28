@@ -32,7 +32,7 @@ export function CafeSection({
           <div>
             <h2 className="font-display text-4xl font-semibold">{title}</h2>
             <p className="mt-5 max-w-xl leading-7 text-cream/75">{text}</p>
-            <p className="mt-5 font-semibold text-lime">{hours}</p>
+            <p className="mt-5 font-semibold text-amber">{hours}</p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {pairings.map((pairing) => (
@@ -53,9 +53,9 @@ export function CafeSection({
           {photoSlots.map((slot) => (
             <article
               key={slot.title}
-              className="min-h-64 rounded-lg border border-lime/25 bg-[linear-gradient(135deg,rgb(255_249_239/0.14),rgb(215_154_67/0.12))] p-5"
+              className="min-h-64 rounded-lg border border-amber/25 bg-[linear-gradient(135deg,rgb(255_249_239/0.14),rgb(215_154_67/0.12))] p-5"
             >
-              <p className="font-semibold text-lime">{slot.title}</p>
+              <p className="font-semibold text-amber">{slot.title}</p>
               <p className="mt-3 text-sm leading-6 text-cream/72">{slot.text}</p>
             </article>
           ))}

@@ -18,7 +18,7 @@ export function ProductGridCard({
   onPreorder,
 }: ProductGridCardProps): React.ReactElement {
   return (
-    <article className="flex min-h-80 flex-col justify-between rounded-lg border border-brand-deep/10 bg-paper p-5 shadow-dining-soft">
+    <article className="flex min-h-80 flex-col justify-between rounded-lg border border-brand-deep/10 bg-paper p-5 shadow-card">
       <div>
         <div className="flex items-start justify-between gap-4">
           <p className="text-sm font-medium text-sage">
@@ -48,7 +48,7 @@ export function ProductGridCard({
           {product.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="rounded-md bg-lime-soft px-2 py-1 text-xs font-semibold text-brand-deep"
+              className="rounded-md bg-amber-soft px-2 py-1 text-xs font-semibold text-brand-deep"
             >
               {tag}
             </span>
