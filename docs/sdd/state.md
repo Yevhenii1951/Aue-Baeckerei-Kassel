@@ -2,8 +2,7 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). Infra and design-system remediation in review. ABE-010
-through ABE-020 merged on `main`. ABE-021 in progress on
-`feature/abe-021-product-detail-pages`.
+through ABE-021 merged on `main`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
@@ -123,10 +122,10 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
-- ABE-012+: move on to the next unrouted vertical. The product photography
-  ticket precedes ABE-021.
+- ABE-022 local SEO pages.
 - Product photography. Not covered by any ticket: `Product` has no image
-  field and `ProductGridCard` renders text only. Needs a ticket before ABE-021.
+  field and product/card views render text only. Needs a ticket before visual
+  product photography work.
 - i18n of the new bakery features. `de/en/uk` message files are complete, but
   all 17 bakery components hardcode German, so `/en/sortiment` and
   `/uk/sortiment` serve German. NFR-1 permits the fallback for now. ABE-011
