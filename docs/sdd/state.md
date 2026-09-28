@@ -8,6 +8,17 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-028 consent-safe delivery map on `feature/abe-028-map-delivery-ui`:
+  `DeliveryZoneMap.tsx` draws the three zones as concentric circles around the
+  bakery using radii taken from `DELIVERY_ZONES` (2/5/8 km) instead of invented
+  bounds, so the picture cannot drift from the fee table, plus a bakery marker
+  and a colour legend. Leaflet + `@types/leaflet` were added at the same
+  versions Kalyna uses; the CSS import sits on the server page, following the
+  Kalyna `kontakt` page. The component reuses the ABE-023 store, so a fresh
+  visitor sees a text placeholder and PLZ checking keeps working. Verified
+  against a production build: zero leaflet/OSM requests before consent, 26 tiles
+  and 4 SVG circles after, PLZ 34123 still resolves to Zone 2 / 4,50 € with the
+  map denied.
 - ABE-022 local SEO pages on `feature/abe-022-local-seo-pages`: five
   intent-focused pages (`/lieferung-kassel`, `/brot-abo-kassel`,
   `/catering-kassel`, `/cafe-kassel`, `/sauerteigbrot-kassel`) from a new

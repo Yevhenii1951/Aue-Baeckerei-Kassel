@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import "leaflet/dist/leaflet.css";
 import { DeliveryZoneChecker } from "@/features/ordering/DeliveryZoneChecker";
+import { DeliveryZoneMap } from "@/features/ordering/DeliveryZoneMap";
 import {
   DELIVERY_ZONES,
   type DeliveryZoneInfo,
@@ -50,6 +52,10 @@ export default async function LieferungPage({
         </div>
 
         <DeliveryZoneChecker subtotalCents={0} />
+
+        <div className="mt-10">
+          <DeliveryZoneMap />
+        </div>
       </section>
     </div>
   );
