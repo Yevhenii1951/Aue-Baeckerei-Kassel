@@ -8,6 +8,19 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-023 cookie consent on `feature/abe-023-cookie-consent`: new
+  `src/features/consent` with a pure Zod-validated `consentStorage` core
+  (mirrors `cartStorage.ts`), a module store via `useSyncExternalStore`
+  (mirrors `fulfillment-store.ts`), a bottom `ConsentBanner` and a footer
+  `ConsentRevokeLink`. Technically necessary mode is the default: the map
+  category starts `pending` and no third-party request is made before a choice.
+  A denied choice persists as `denied` (not as a missing value), so the banner
+  does not nag on every visit, and the footer link resets it back to `pending`.
+  Datenschutz gained an "Optionale Inhalte Dritter" section naming the
+  necessary/map categories, the OpenStreetMap IP exposure, and the embeds that
+  are deliberately absent. Verified in the browser: zero OSM/tile/analytics
+  requests before consent, banner appears, both choices persist, revoke returns
+  the banner.
 - Portfolio/photo notice on `feature/abe-024-legal-photo-notice`: the Impressum
   now states the site is a portfolio demo with sample data, that the product
   photos are illustrative with provenance documented in the repository, and that

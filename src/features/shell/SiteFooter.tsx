@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { SiteLocale } from "@/features/seo/site";
+import { ConsentRevokeLink } from "@/features/consent/ConsentRevokeLink";
 
 type SiteFooterProps = {
   locale: SiteLocale;
@@ -42,6 +43,7 @@ export default async function SiteFooter({ locale }: SiteFooterProps) {
           </ul>
         </nav>
         <p className="text-cream/70">{t("footerNote")}</p>
+        <ConsentRevokeLink />
       </div>
     </footer>
   );
