@@ -39,7 +39,7 @@ export default async function SortimentPage({
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-8">
-        <CatalogShop products={demoProducts} />
+        <CatalogShop products={demoProducts} locale={locale} />
       </section>
     </div>
   );

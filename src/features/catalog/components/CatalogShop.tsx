@@ -15,6 +15,7 @@ import { ShopCartSummary } from "./ShopCartSummary";
 
 type CatalogShopProps = {
   products: Product[];
+  locale: string;
 };
 
 const categories: ProductCategory[] = [
@@ -28,7 +29,7 @@ const categories: ProductCategory[] = [
 const tagFilters = ["vegan", "dinkel", "beliebt", "premium", "mittag"];
 const allergenFilters: AllergenCode[] = ["A", "C", "F", "G", "H", "N"];
 
-export function CatalogShop({ products }: CatalogShopProps): React.ReactElement {
+export function CatalogShop({ products, locale }: CatalogShopProps): React.ReactElement {
   const [category, setCategory] = useState<ProductCategory | "all">("all");
   const [query, setQuery] = useState("");
   const [tag, setTag] = useState("");
@@ -108,6 +109,7 @@ export function CatalogShop({ products }: CatalogShopProps): React.ReactElement 
             <ProductGridCard
               key={product.id}
               product={product}
+              locale={locale}
               quantity={
                 items.find((item) => item.productId === product.id)
                   ?.quantity ?? 0
