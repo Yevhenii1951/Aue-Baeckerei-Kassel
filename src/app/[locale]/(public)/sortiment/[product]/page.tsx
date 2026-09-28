@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -90,6 +91,15 @@ export default async function ProductPage({ params }: ProductPageProps): Promise
 
       <section className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-10 sm:px-8 lg:grid-cols-[1fr_22rem]">
         <div className="grid gap-6">
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            width={1200}
+            height={900}
+            priority
+            sizes="(min-width: 1024px) 44rem, 100vw"
+            className="aspect-[4/3] w-full rounded-lg object-cover shadow-card"
+          />
           <InfoBlock title="Zutaten" value={ingredientText(product)} />
           <InfoBlock title="Allergene" value={allergenText(product)} />
           <InfoBlock title="Tags" value={product.tags.join(", ")} />

@@ -8,6 +8,10 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- Product photos on `feature/abe-photos-product-images`: converted 66 supplied
+  JPG product photos from `~/Downloads/` to 1200x900 WebP in `public/products`
+  (one per catalogue product) and wired them to catalogue cards, product detail
+  pages and product JSON-LD.
 - ABE-021 product detail pages on `feature/abe-021-product-detail-pages`:
   added `/sortiment/[product]` with static params for demo catalogue products,
   unknown-product `notFound()`, per-product metadata, product JSON-LD, price,
@@ -123,9 +127,6 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 ## Next
 
 - ABE-022 local SEO pages.
-- Product photography. Not covered by any ticket: `Product` has no image
-  field and product/card views render text only. Needs a ticket before visual
-  product photography work.
 - i18n of the new bakery features. `de/en/uk` message files are complete, but
   all 17 bakery components hardcode German, so `/en/sortiment` and
   `/uk/sortiment` serve German. NFR-1 permits the fallback for now. ABE-011

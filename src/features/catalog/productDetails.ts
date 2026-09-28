@@ -6,6 +6,7 @@ export type ProductJsonLd = {
   "@type": "Product";
   name: string;
   description: string;
+  image?: string;
   category: string;
   sku: string;
   offers: {
@@ -53,6 +54,7 @@ export function buildProductJsonLd(product: Product, url: string): ProductJsonLd
     "@type": "Product",
     name: product.name,
     description: product.description,
+    image: `${new URL(url).origin}${product.imageUrl}`,
     category: categoryLabels[product.category],
     sku: product.id,
     offers: {

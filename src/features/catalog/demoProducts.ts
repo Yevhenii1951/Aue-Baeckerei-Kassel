@@ -86,6 +86,7 @@ function product(
     category,
     name,
     description,
+    imageUrl: `/products/${id}.webp`,
     priceCents,
     unit,
     ingredients: [],

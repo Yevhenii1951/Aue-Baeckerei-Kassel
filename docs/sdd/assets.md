@@ -7,14 +7,17 @@
   wasteful for a decorative background; it was re-encoded to H.264 CRF 30.
 - `public/hero-oven.jpg` — still frame from the loop at 1600px wide, 117 KB.
   Used as the video `poster` and as the reduced-motion fallback.
-- Product and cafe visuals: no photograph exists yet. Cards render text, price,
-  allergens and actions only. See "Before Public Commercial Use" below.
+- `public/products/*.webp` — 66 product photos (one per catalogue product)
+  converted from project-owner supplied JPG files in `~/Downloads/`. Output
+  size is 1200x900 WebP.
+- Cafe visuals: no photograph exists yet. See "Before Public Commercial Use"
+  below.
 
 ## Provenance
 
-Both hero files derive from the same source clip supplied by the project owner.
-Record the original source URL, licence and photographer here before any
-commercial or public client use:
+Hero files and product photos were supplied by the project owner for this
+portfolio build. Record the original source URL, licence and photographer here
+before any commercial or public client use:
 
 - Source: _not yet recorded_
 - Licence: _not yet recorded_
