@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { aggregateBackliste } from "@/features/bakery-admin/backliste";
+import {
+  aggregateBackliste,
+  backlisteCsv,
+  backlisteSlots,
+} from "@/features/bakery-admin/backliste";
 
 describe("backliste aggregation", () => {
   it("aggregates product totals for the selected production date", () => {
@@ -35,6 +39,18 @@ describe("backliste aggregation", () => {
         slots: { "06:30": 2, "07:00": 1 },
       },
     ]);
+  });
+
+  it("sorts visible matrix slots and exports a CSV", () => {
+    const backliste = aggregateBackliste([
+      order("B-1", "2026-09-29", "07:00", [item("hausbrot", "Hausbrot", 1)]),
+      order("B-2", "2026-09-29", "06:30", [item("hausbrot", "Hausbrot", 2)]),
+    ], "2026-09-29");
+
+    expect(backlisteSlots(backliste)).toEqual(["06:30", "07:00"]);
+    expect(backlisteCsv(backliste)).toBe(
+      '"Produkt","Gesamt","06:30","07:00"\n"Hausbrot","3","2","1"',
+    );
   });
 });
 

@@ -2,13 +2,18 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). Infra and design-system remediation in review. ABE-010
-through ABE-015 merged on `main`. ABE-016 in review on
-`feature/abe-016-orders-management-ui`.
+through ABE-016 merged on `main`. ABE-017 in progress on
+`feature/abe-017-backliste-ui`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-017 Backliste UI on `feature/abe-017-backliste-ui`: `/admin#backliste`
+  now has a production date picker, sorted product totals, a product x slot
+  matrix, print-friendly controls and a client-side CSV export from the shared
+  `aggregateBackliste` data. Added pure `backlisteSlots` and `backlisteCsv`
+  helpers with unit coverage for the visible matrix/export scenario.
 - ABE-016 admin orders management UI on
   `feature/abe-016-orders-management-ui`: `/admin` now has filterable demo
   orders by date (Heute/Morgen), operational status and fulfillment type. The
