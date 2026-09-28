@@ -11,6 +11,7 @@ Modules present in this base:
 | --- | --- |
 | `identity` | staff profiles, roles, invitations, Supabase staff auth |
 | `catalog` | product data, allergen metadata, filtering and catalogue UI |
+| `ordering` | preorder cutoff, pickup slots, cart/order domain logic |
 | `seo` | locale-aware metadata, canonical and hreflang URLs |
 | `legal` | Impressum/Datenschutz draft shell |
 | `shell` | site header and footer |

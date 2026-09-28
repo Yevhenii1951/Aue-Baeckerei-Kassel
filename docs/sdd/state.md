@@ -1,6 +1,6 @@
 # State
 
-Status: ABE-002 implemented locally.
+Status: ABE-003 implemented locally.
 
 Purpose: PORTFOLIO.
 
@@ -17,10 +17,12 @@ Done:
 - Local dev server started on `http://localhost:3001`.
 - ABE-002 implemented: large typed demo catalogue, filter helpers, unit tests,
   and homepage catalogue preview.
+- ABE-003 implemented: Europe/Berlin cutoff logic and 30-minute pickup slots
+  with capacity status.
 
 Next:
 - Review landing/catalog visually in the browser.
-- Start ABE-003 preorder cutoff and pickup slot logic.
+- Start ABE-004 cart totals.
 
 Notes:
 - `.gitignore` excludes copied dependency/build artifacts.
