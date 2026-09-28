@@ -1,6 +1,6 @@
 # State
 
-Status: ABE-003 implemented locally.
+Status: ABE-004 implemented locally.
 
 Purpose: PORTFOLIO.
 
@@ -19,10 +19,12 @@ Done:
   and homepage catalogue preview.
 - ABE-003 implemented: Europe/Berlin cutoff logic and 30-minute pickup slots
   with capacity status.
+- ABE-004 implemented: cart totals, quantity updates, and breakfast bundle
+  discount in integer cents.
 
 Next:
 - Review landing/catalog visually in the browser.
-- Start ABE-004 cart totals.
+- Start ABE-005 admin Backliste aggregation.
 
 Notes:
 - `.gitignore` excludes copied dependency/build artifacts.
