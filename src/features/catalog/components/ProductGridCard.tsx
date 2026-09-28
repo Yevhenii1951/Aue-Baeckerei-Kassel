@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   allergenLabels,
   categoryLabels,
@@ -6,6 +7,7 @@ import {
 
 type ProductGridCardProps = {
   product: Product;
+  locale: string;
   quantity: number;
   onAdd: (product: Product) => void;
   onPreorder: (product: Product) => void;
@@ -13,6 +15,7 @@ type ProductGridCardProps = {
 
 export function ProductGridCard({
   product,
+  locale,
   quantity,
   onAdd,
   onPreorder,
@@ -28,7 +31,11 @@ export function ProductGridCard({
             {formatPrice(product.priceCents)}
           </p>
         </div>
-        <h2 className="mt-3 text-xl font-semibold">{product.name}</h2>
+        <h2 className="mt-3 text-xl font-semibold">
+          <Link href={`/${locale}/sortiment/${product.id}`} className="hover:text-brand">
+            {product.name}
+          </Link>
+        </h2>
         <p className="mt-3 text-sm leading-6 text-ink/70">
           {product.description}
         </p>

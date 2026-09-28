@@ -2,13 +2,20 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). Infra and design-system remediation in review. ABE-010
-through ABE-019 merged on `main`. ABE-020 in progress on
-`feature/abe-020-demo-seed`.
+through ABE-020 merged on `main`. ABE-021 in progress on
+`feature/abe-021-product-detail-pages`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-021 product detail pages on `feature/abe-021-product-detail-pages`:
+  added `/sortiment/[product]` with static params for demo catalogue products,
+  unknown-product `notFound()`, per-product metadata, product JSON-LD, price,
+  unit, tags, allergens, ingredient fallback, CTAs and related products by
+  category/tag. Catalogue cards now link to detail pages. Ingredient arrays are
+  still empty in the current demo data; the detail page does not invent facts
+  and shows the existing fallback until real product data is added.
 - ABE-020 demo seed on `feature/abe-020-demo-seed`: added
   `db/seeds/0002_ecommerce_demo.sql` with the full 66-product catalogue,
   three Kassel delivery zones, five pickup slots and three demo pickup orders
