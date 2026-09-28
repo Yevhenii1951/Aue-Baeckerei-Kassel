@@ -50,7 +50,7 @@ export default async function HomePage({
   const cafePhotoSlots = t.raw("cafePhotoSlots") as CafePhotoSlot[];
 
   return (
-    <div className="bg-porcelain">
+    <div className="bg-cream">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -58,20 +58,27 @@ export default async function HomePage({
         }}
       />
       <section className="relative min-h-[calc(100svh-4rem)] overflow-hidden bg-brand-deep text-cream">
+        <div
+          className="hero-still absolute inset-0 h-full w-full bg-cover bg-center opacity-50"
+          style={{ backgroundImage: "url(/hero-oven.jpg)" }}
+        />
         <video
-          className="absolute inset-0 h-full w-full object-cover opacity-50"
+          className="hero-video absolute inset-0 h-full w-full object-cover opacity-50"
           autoPlay
           muted
           loop
           playsInline
-          poster=""
+          preload="metadata"
+          poster="/hero-oven.jpg"
+          aria-hidden="true"
+          tabIndex={-1}
         >
-          <source src="/373419_medium.mp4" type="video/mp4" />
+          <source src="/hero-oven.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(23_18_14/0.92),rgb(23_18_14/0.56)_48%,rgb(23_18_14/0.18))]" />
         <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-6xl flex-col justify-end gap-10 px-4 py-12 sm:px-8 lg:py-16">
           <div className="max-w-3xl">
-            <p className="mb-5 text-sm font-semibold text-lime">
+            <p className="mb-5 text-sm font-semibold text-amber">
               {t("eyebrow")}
             </p>
             <h1 className="font-display text-5xl font-semibold leading-[0.96] sm:text-7xl lg:text-8xl">
@@ -81,7 +88,7 @@ export default async function HomePage({
               {t("intro")}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href={`/${locale}#vorbestellen`} className="btn-lime">
+              <Link href={`/${locale}#vorbestellen`} className="btn-amber">
                 {t("primaryCta")}
               </Link>
               <Link href={`/${locale}/sortiment`} className="btn-ghost-dark">
@@ -92,9 +99,9 @@ export default async function HomePage({
 
           <div className="grid gap-3 border-t border-white/20 pt-5 text-sm text-cream/80 sm:grid-cols-[1fr_auto] sm:items-end">
             <p>{t("heroNote")}</p>
-            <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-lime/50 bg-brand-deep/72 px-4 py-3 shadow-dining-soft">
+            <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-amber/50 bg-brand-deep/72 px-4 py-3 shadow-card">
               <span>{t("cutoffLabel")}</span>
-              <strong className="text-lime">{t("cutoffTime")}</strong>
+              <strong className="text-amber">{t("cutoffTime")}</strong>
             </div>
           </div>
         </div>
@@ -112,7 +119,7 @@ export default async function HomePage({
         {paths.map((path) => (
           <article
             key={path.title}
-            className="premium-surface flex min-h-60 flex-col justify-between gap-8 rounded-lg p-6"
+            className="surface flex min-h-60 flex-col justify-between gap-8 rounded-lg p-6"
           >
             <div>
               <h3 className="text-2xl font-semibold">{path.title}</h3>
@@ -137,9 +144,9 @@ export default async function HomePage({
             {steps.map((step, index) => (
               <li
                 key={step}
-                className="grid grid-cols-[3rem_1fr] items-center gap-4 rounded-lg border border-brand-deep/10 bg-porcelain p-4"
+                className="grid grid-cols-[3rem_1fr] items-center gap-4 rounded-lg border border-brand-deep/10 bg-cream p-4"
               >
-                <span className="flex size-12 items-center justify-center rounded-lg bg-brand-deep font-semibold text-lime">
+                <span className="flex size-12 items-center justify-center rounded-lg bg-brand-deep font-semibold text-amber">
                   {index + 1}
                 </span>
                 <span className="leading-7 text-ink/78">{step}</span>

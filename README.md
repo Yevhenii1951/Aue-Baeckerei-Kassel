@@ -14,30 +14,45 @@ domain, SDD artifacts, and feature tickets.
 - Supabase/Postgres infrastructure for future staff/admin workflows
 - German legal shell with Impressum and Datenschutz routes
 - SDD docs in `docs/sdd/`
-- first hero asset at `public/373419_medium.mp4`
+- first hero assets at `public/hero-oven.mp4` and `public/hero-oven.jpg`
 
 ## Setup
 
 ```bash
 npm install
-cp .env.example .env.local          # fill in URL, SITE_NAME, DEV_DATABASE_NAME, DATABASE_URL, Supabase
-createdb app_dev
+cp .env.example .env.local          # fill in URL, SITE_NAME, DEV_DATABASE_NAME, DATABASE_URL
+createdb aue_beckerei
 npm run db:local:migrate
+npm run db:local:seed
 npm run dev
 ```
 
 `db:local:migrate` reads `DATABASE_URL` and `DEV_DATABASE_NAME` from
-`.env.local`, so no inline environment variable is needed.
+`.env.local`, so no inline environment variable is needed. Supabase is not
+required to run the public site or the demo catalogue; it is only needed once
+staff auth is wired up.
 
 For the tests, create a second, disposable database:
 
 ```bash
-createdb app_test
-printf 'APP_ENV=test\nTEST_DATABASE_NAME=app_test\nTEST_DATABASE_URL=postgresql://<user>@/app_test?host=/var/run/postgresql\n' > .env.test.local
+createdb aue_beckerei_test
+printf 'APP_ENV=test\nTEST_DATABASE_NAME=aue_beckerei_test\nTEST_DATABASE_URL=postgresql://<user>@/aue_beckerei_test?host=/var/run/postgresql\n' > .env.test.local
 ```
 
 `npm run check` also runs unit and integration tests. Database-backed tests need
 the local test database described in `.env.example`.
+
+## Workflow
+
+One ticket is one branch and one PR. Branches are `feature/abe-<n>-<slug>`,
+matching the ticket ID in `docs/sdd/tickets/`. `npm run check` must be green
+before a PR is opened; CI runs the same command plus `npm run build`.
+
+```bash
+git checkout -b feature/abe-010-cart-drawer
+```
+
+Never commit feature work directly to `main`.
 
 ## Environment
 

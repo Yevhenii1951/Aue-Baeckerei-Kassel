@@ -12,7 +12,7 @@ export function ShopCartSummary({
   const totals = calculateCart(items, { breakfastBundle: true });
 
   return (
-    <aside className="sticky bottom-0 rounded-t-lg border border-brand-deep/10 bg-brand-deep p-4 text-cream shadow-dining lg:top-24 lg:rounded-lg">
+    <aside className="sticky bottom-0 rounded-t-lg border border-brand-deep/10 bg-brand-deep p-4 text-cream shadow-panel lg:top-24 lg:rounded-lg">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold">Warenkorb</h2>
@@ -22,7 +22,7 @@ export function ShopCartSummary({
               : `${items.length} Positionen ausgewählt`}
           </p>
         </div>
-        <p className="font-semibold text-lime">
+        <p className="font-semibold text-amber">
           {formatPrice(totals.totalCents)}
         </p>
       </div>
@@ -66,14 +66,14 @@ export function ShopCartSummary({
       </div>
 
       {totals.discountCents > 0 ? (
-        <p className="mt-4 text-sm text-lime">
+        <p className="mt-4 text-sm text-amber">
           Frühstücks-Bundle: -{formatPrice(totals.discountCents)}
         </p>
       ) : null}
 
       <button
         type="button"
-        className="mt-4 min-h-11 w-full rounded-lg bg-lime px-4 py-2 font-semibold text-brand-deep disabled:opacity-55"
+        className="mt-4 min-h-11 w-full rounded-lg bg-amber px-4 py-2 font-semibold text-brand-deep disabled:opacity-55"
         disabled={items.length === 0}
       >
         Zur Vorbestellung

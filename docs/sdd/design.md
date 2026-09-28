@@ -33,8 +33,25 @@ Kassel parks and cafe plants.
 - Rye grey: `#D8CEC0` for borders, muted panels, and disabled states.
 - Aue green: `#315C45` for local/sustainable/cafe accents.
 
-Tokens should live in `src/app/globals.css`. JSX should use token classes, not
-hardcoded brand colors.
+Token names in `src/app/globals.css` follow the bakery, not the raw colour,
+so JSX reads `bg-amber` and `text-brand-deep` rather than a colour word:
+
+| Token | Role |
+| --- | --- |
+| `--color-brand` | crust brown, primary action |
+| `--color-brand-dark` | crust brown, hover/secondary action |
+| `--color-brand-deep` | oven black, dark surfaces and strong text |
+| `--color-amber` | ferment amber, freshness, cutoff, price |
+| `--color-amber-soft` | amber tint for badges |
+| `--color-cream` | flour paper, light page surface |
+| `--color-paper` | card surface, one step lighter than cream |
+| `--color-sage` | Aue green, local and cafe accents |
+| `--color-ink` | body text |
+
+Every token must have at least one use. A colour that no component references
+does not belong in the theme; add it in the same commit as its first use.
+Component classes are `.surface`, `.panel`, `.btn-amber`, `.btn-ghost-dark`
+and `.nav-link`. JSX uses token classes, never hardcoded brand colours.
 
 ## Typography
 
@@ -113,12 +130,13 @@ full-width bands or unframed constrained layouts.
 
 ## Image Direction
 
-Use the provided hero video from `public/373419_medium.mp4`.
+The hero loop is `public/hero-oven.mp4` with `public/hero-oven.jpg` as its
+poster frame. `prefers-reduced-motion` swaps the video for the still, so the
+first viewport never depends on motion.
 
-For product cards, temporary external images may be used only as replaceable
-portfolio placeholders with source notes. Prefer semantically close photos:
-sourdough bread, bread rolls, cinnamon buns, coffee drinks, sandwiches, cafe
-interior, jam, gift baskets.
+Product cards currently render no photograph. Product imagery is a known gap
+and is not covered by an existing ticket — see `docs/sdd/state.md`. Until owned
+photos exist, a product card is text, price, allergens and actions only.
 
 Long-term asset plan: replace placeholders with owned bakery photos before any
 commercial or public client use.
@@ -126,11 +144,11 @@ commercial or public client use.
 ## Motion
 
 - Hero video autoplay muted loop, with readable overlay.
-- Respect `prefers-reduced-motion`: no reveal animations and no distracting
-  parallax for reduced-motion users.
-- Use motion mainly for user feedback: add to cart, slot selected, filter
-  changed, drawer open/close.
-- No Framer Motion.
+- `prefers-reduced-motion` gets the poster frame instead of the loop.
+- No Framer Motion. No scroll-reveal animation exists; if one is added it
+  needs its own IntersectionObserver hook, because a bare CSS class that hides
+  content until a script reveals it will hide it forever if the script is
+  missing.
 
 ## Copy Voice
 

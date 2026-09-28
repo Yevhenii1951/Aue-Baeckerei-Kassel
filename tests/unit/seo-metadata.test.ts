@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildPublicMetadata } from "@/features/seo/publicMetadata";
-import { SITE_URL } from "@/features/seo/site";
+import { SITE_NAME, SITE_URL } from "@/features/seo/site";
 
 describe("public metadata", () => {
   it("uses a self-canonical and matching locale alternatives", () => {
@@ -36,5 +36,23 @@ describe("public metadata", () => {
 
     expect(metadata.openGraph?.url).toBe(`${SITE_URL}/uk/datenschutz`);
     expect(metadata.openGraph?.alternateLocale).toEqual(["de", "en"]);
+  });
+
+  it("points the Open Graph image at the generated locale route", () => {
+    const metadata = buildPublicMetadata({
+      locale: "de",
+      path: "",
+      title: "Aue-Bäckerei Kassel",
+      description: "Handwerksbäckerei in Kassel.",
+    });
+
+    expect(metadata.openGraph?.images).toEqual([
+      {
+        url: "/de/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: SITE_NAME,
+      },
+    ]);
   });
 });

@@ -27,7 +27,7 @@ export function ConversionSections({
           {cards.map((card) => (
             <article
               key={card.title}
-              className="flex min-h-72 flex-col justify-between rounded-lg border border-brand-deep/10 bg-porcelain p-6 shadow-dining-soft"
+              className="flex min-h-72 flex-col justify-between rounded-lg border border-brand-deep/10 bg-cream p-6 shadow-card"
             >
               <div>
                 <p className="text-sm font-semibold text-sage">{card.meta}</p>

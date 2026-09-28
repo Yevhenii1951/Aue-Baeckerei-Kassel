@@ -24,7 +24,7 @@ export default async function AdminLoginPage({
   if (staff) redirect(getAdminPath(locale));
 
   return (
-    <main className="min-h-screen bg-linen px-4 py-10 text-ink sm:px-6">
+    <main className="min-h-screen bg-cream px-4 py-10 text-ink sm:px-6">
       <section className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[1fr_24rem] lg:items-start">
         <div className="space-y-5 pt-4">
           <Link
@@ -49,7 +49,7 @@ export default async function AdminLoginPage({
             </p>
           )}
         </div>
-        <div className="rounded-md border border-ink/10 bg-linen p-5 shadow-sm">
+        <div className="rounded-md border border-ink/10 bg-cream p-5 shadow-sm">
           {configured ? (
             <AdminLoginForm locale={locale} />
           ) : (

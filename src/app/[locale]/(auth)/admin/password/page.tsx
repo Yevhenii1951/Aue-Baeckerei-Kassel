@@ -23,8 +23,8 @@ export default async function AdminPasswordPage({
   const configured = isSupabaseStaffAuthConfigured();
 
   return (
-    <main className="min-h-screen bg-linen px-4 py-10 text-ink sm:px-6">
-      <section className="mx-auto max-w-md space-y-6 rounded-md border border-ink/10 bg-linen p-5 shadow-sm">
+    <main className="min-h-screen bg-cream px-4 py-10 text-ink sm:px-6">
+      <section className="mx-auto max-w-md space-y-6 rounded-md border border-ink/10 bg-cream p-5 shadow-sm">
         <div className="space-y-2">
           <h1 className="font-display text-3xl font-semibold">
             Set staff password
