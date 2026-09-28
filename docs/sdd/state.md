@@ -2,13 +2,21 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). Infra and design-system remediation in review. ABE-010
-through ABE-017 merged on `main`. ABE-018 in progress on
-`feature/abe-018-database-schema`.
+through ABE-018 merged on `main`. ABE-019 in progress on
+`feature/abe-019-order-server-actions`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-019 order server actions on `feature/abe-019-order-server-actions`:
+  added `createOrderAction` plus a transactional Postgres service. The server
+  validates checkout/customer/payment input, validates cart slugs and quantities,
+  recalculates product prices from published DB products, checks pickup-slot
+  capacity under row lock, and persists `orders` + `order_items` atomically. Full
+  pickup slots return a clear `FULL_SLOT` result without partial records. The
+  checkout UI remains on the demo confirmation until ABE-020 seeds real products
+  and pickup slots for the public flow.
 - ABE-018 database schema on `feature/abe-018-database-schema`: migration
   `0005_ecommerce_schema.sql` adds `products`, `orders`, `order_items`,
   `pickup_slots` and `delivery_zones` with integer cent prices, `timestamptz`
