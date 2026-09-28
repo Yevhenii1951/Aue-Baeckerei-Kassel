@@ -128,5 +128,10 @@
     "imprintTitle": "Legal notice",
     "privacyTitle": "Privacy policy",
     "legalWarning": "Placeholder text. Replace with a legally reviewed version before going live."
+  },
+  "vorbestellen": {
+    "eyebrow": "Fresh from the oven tomorrow",
+    "title": "Pre-order",
+    "intro": "Choose your pickup date, the right time window and send us your order. After 8 pm your pre-order counts for the day after tomorrow."
   }
 }

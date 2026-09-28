@@ -37,6 +37,19 @@ export function earliestPreorderDate(
   );
 }
 
+export function nextNDates(start: string, count: number): string[] {
+  const [year, month, day] = start.split("-").map(Number);
+
+  return Array.from({ length: count }, (_, offset) => {
+    const next = new Date(Date.UTC(year, month - 1, day + offset, 12));
+    return [
+      next.getUTCFullYear(),
+      pad(next.getUTCMonth() + 1),
+      pad(next.getUTCDate()),
+    ].join("-");
+  });
+}
+
 export function buildPickupSlots(
   date: string,
   input: BuildPickupSlotsInput,

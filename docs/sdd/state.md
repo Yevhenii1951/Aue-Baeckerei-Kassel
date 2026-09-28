@@ -2,12 +2,22 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). Infra and design-system remediation in review. ABE-010
-in review on `feature/abe-010-cart-drawer`.
+merged on `main`. ABE-011 in review on `feature/abe-011-vorbestellung`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-011 `/vorbestellen` preorder flow on `feature/abe-011-vorbestellung`:
+  page reads the persistent cart store, picks a pickup date (20:00
+  Europe/Berlin cutoff, earliest date via `useSyncExternalStore` — no build-time
+  date baked), a 30-minute slot, and the customer form (name/email/phone/notes,
+  Zod in `preorder-form.ts`). Slots come from deterministic `demoSlots.ts`
+  (capacity 15) so full/limited/available all show. Order summary reuses
+  `PreorderSummary` (items, discount, total). New code is de-hardcoded, but a
+  `vorbestellen` namespace was added to de/en/uk to satisfy the i18n parity
+  test. Browser-checked: date shift, slot reset per date, validation errors,
+  confirmation screen, empty-cart state.
 - Cart is a shared store, not per-page state: `@/features/ordering/cart-provider`
   (module store via `useSyncExternalStore`), persisted to
   `localStorage["aue.cart.v1"]`, parsed with a Zod schema in `cartStorage.ts`
@@ -34,14 +44,15 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
-- ABE-011 `/vorbestellen` preorder flow, building on the persistent cart store
-  and the existing cutoff/slot logic in `src/features/ordering/preorder.ts`. The
-  drawer CTA already links there; the page is not built yet.
+- ABE-012+: move on to the next unrouted vertical. The product photography
+  ticket precedes ABE-021.
 - Product photography. Not covered by any ticket: `Product` has no image
   field and `ProductGridCard` renders text only. Needs a ticket before ABE-021.
 - i18n of the new bakery features. `de/en/uk` message files are complete, but
   all 17 bakery components hardcode German, so `/en/sortiment` and
-  `/uk/sortiment` serve German. NFR-1 permits the fallback for now.
+  `/uk/sortiment` serve German. NFR-1 permits the fallback for now. ABE-011
+  added a `vorbestellen` namespace to all three files to keep the parity test
+  green.
 
 ## Notes
 

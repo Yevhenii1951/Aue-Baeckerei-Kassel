@@ -3,6 +3,7 @@ import {
   buildPickupSlots,
   earliestPreorderDate,
   getSlotStatus,
+  nextNDates,
 } from "@/features/ordering/preorder";
 
 describe("preorder cutoff", () => {
@@ -16,6 +17,16 @@ describe("preorder cutoff", () => {
     const now = new Date("2026-09-28T18:30:00.000Z");
 
     expect(earliestPreorderDate(now)).toBe("2026-09-30");
+  });
+});
+
+describe("preorder date range", () => {
+  it("lists consecutive calendar days from the earliest date", () => {
+    expect(nextNDates("2026-09-29", 3)).toEqual([
+      "2026-09-29",
+      "2026-09-30",
+      "2026-10-01",
+    ]);
   });
 });
 
