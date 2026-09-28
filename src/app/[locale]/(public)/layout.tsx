@@ -4,6 +4,7 @@ import { parseSupportedLocale } from "@/features/seo/site";
 import SiteHeader from "@/features/shell/SiteHeader";
 import SiteFooter from "@/features/shell/SiteFooter";
 import { CartDrawer } from "@/features/ordering/CartDrawer";
+import { ConsentBanner } from "@/features/consent/ConsentBanner";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -39,6 +40,7 @@ export default async function PublicLayout({
       </main>
       <SiteFooter locale={supported} />
       <CartDrawer locale={supported} />
+      <ConsentBanner />
     </div>
   );
 }
