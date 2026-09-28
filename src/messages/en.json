@@ -133,5 +133,10 @@
     "eyebrow": "Fresh from the oven tomorrow",
     "title": "Pre-order",
     "intro": "Choose your pickup date, the right time window and send us your order. After 8 pm your pre-order counts for the day after tomorrow."
+  },
+  "kasse": {
+    "eyebrow": "The last step",
+    "title": "Checkout",
+    "intro": "Review your selection, choose pickup or delivery and a payment method. This demo flow never calls a real payment provider."
   }
 }
