@@ -8,11 +8,7 @@ import {
   type ProductCategory,
   type ProductSort,
 } from "@/features/catalog/types";
-import {
-  calculateCart,
-  setCartItemQuantity,
-  type CartItemInput,
-} from "@/features/ordering/cart";
+import { useCart } from "@/features/ordering/cart-provider";
 import { CategoryTabs } from "./CategoryTabs";
 import { ProductGridCard } from "./ProductGridCard";
 import { ShopCartSummary } from "./ShopCartSummary";
@@ -38,7 +34,7 @@ export function CatalogShop({ products }: CatalogShopProps): React.ReactElement 
   const [tag, setTag] = useState("");
   const [allergen, setAllergen] = useState<AllergenCode | "">("");
   const [sort, setSort] = useState<ProductSort>("beliebt");
-  const [cartItems, setCartItems] = useState<CartItemInput[]>([]);
+  const { items, totals, addToCart } = useCart();
 
   const visibleProducts = useMemo(() => {
     const filtered = filterProducts(products, {
@@ -50,32 +46,6 @@ export function CatalogShop({ products }: CatalogShopProps): React.ReactElement 
 
     return sortProducts(filtered, sort);
   }, [allergen, category, products, query, sort, tag]);
-
-  function addToCart(product: Product): void {
-    const existing = cartItems.find((item) => item.productId === product.id);
-
-    if (existing) {
-      setCartItems(setCartItemQuantity(cartItems, product.id, existing.quantity + 1));
-      return;
-    }
-
-    setCartItems([
-      ...cartItems,
-      {
-        productId: product.id,
-        name: product.name,
-        category: product.category,
-        unitPriceCents: product.priceCents,
-        quantity: 1,
-      },
-    ]);
-  }
-
-  function changeQuantity(productId: string, quantity: number): void {
-    setCartItems(setCartItemQuantity(cartItems, productId, quantity));
-  }
-
-  const totals = calculateCart(cartItems, { breakfastBundle: true });
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_22rem]">
@@ -139,7 +109,7 @@ export function CatalogShop({ products }: CatalogShopProps): React.ReactElement 
               key={product.id}
               product={product}
               quantity={
-                cartItems.find((item) => item.productId === product.id)
+                items.find((item) => item.productId === product.id)
                   ?.quantity ?? 0
               }
               onAdd={addToCart}
@@ -149,7 +119,7 @@ export function CatalogShop({ products }: CatalogShopProps): React.ReactElement 
         </div>
       </div>
 
-      <ShopCartSummary items={cartItems} onChangeQuantity={changeQuantity} />
+      <ShopCartSummary />
     </div>
   );
 }

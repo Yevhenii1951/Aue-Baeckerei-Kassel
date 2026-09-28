@@ -3,6 +3,7 @@ import { routing } from "@/i18n/routing";
 import { parseSupportedLocale } from "@/features/seo/site";
 import SiteHeader from "@/features/shell/SiteHeader";
 import SiteFooter from "@/features/shell/SiteFooter";
+import { CartDrawer } from "@/features/ordering/CartDrawer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -37,6 +38,7 @@ export default async function PublicLayout({
         {children}
       </main>
       <SiteFooter locale={supported} />
+      <CartDrawer locale={supported} />
     </div>
   );
 }
