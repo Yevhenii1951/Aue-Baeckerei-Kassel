@@ -16,17 +16,23 @@
 ## Provenance
 
 Hero files and product photos were supplied by the project owner for this
-portfolio build. Record the original source URL, licence and photographer here
-before any commercial or public client use:
+portfolio build. The owner states the product photos originate from openly
+available sources rather than from a commissioned shoot, so the individual
+rights holders are unknown until the sources are named. Record them here before
+any commercial or public client use:
 
-- Source: _not yet recorded_
+- Source: _not yet recorded — owner states openly available sources_
 - Licence: _not yet recorded_
 - Photographer / rights holder: _not yet recorded_
+
+The Impressum carries a matching note so the portfolio context is visible to
+visitors. That note points here for the records; it does not assert a licence.
 
 ## Before Public Commercial Use
 
 - Add real product and cafe photography, or owned placeholders with recorded
-  licences. The catalogue currently has no image surface at all.
+  licences. The product catalogue now ships with 66 illustrative photos; the cafe
+  still has no photography at all.
 - Record source, license, photographer, and allowed usage for every asset.
 - Do not enable Google Reviews, Instagram, maps, analytics, or tracking embeds
   without consent handling and Datenschutz updates.
