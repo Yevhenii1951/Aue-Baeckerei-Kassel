@@ -13,7 +13,7 @@ export type Product = {
   category: ProductCategory;
   name: string;
   description: string;
-  imageUrl?: string;
+  imageUrl: string;
   priceCents: number;
   unit: string;
   ingredients: string[];

@@ -54,7 +54,7 @@ export function buildProductJsonLd(product: Product, url: string): ProductJsonLd
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: product.imageUrl ? `${urlRoot(url)}${product.imageUrl}` : undefined,
+    image: `${new URL(url).origin}${product.imageUrl}`,
     category: categoryLabels[product.category],
     sku: product.id,
     offers: {
@@ -65,10 +65,6 @@ export function buildProductJsonLd(product: Product, url: string): ProductJsonLd
       url,
     },
   };
-}
-
-function urlRoot(url: string): string {
-  return new URL(url).origin;
 }
 
 function relatedScore(product: Product, candidate: Product): number {

@@ -7,10 +7,9 @@
   wasteful for a decorative background; it was re-encoded to H.264 CRF 30.
 - `public/hero-oven.jpg` — still frame from the loop at 1600px wide, 117 KB.
   Used as the video `poster` and as the reduced-motion fallback.
-- `public/products/*.webp` — 63 product photos converted from project-owner
-  supplied JPG files in `~/Downloads/{brod,brodchen,sussichkeiten,getreke,Snacks,Feinkost}`.
-  Output size is 1200x900 WebP. `kardamomknopf`, `rosinenknoten` and
-  `schokoweck` currently have no matching supplied file and render a placeholder.
+- `public/products/*.webp` — 66 product photos (one per catalogue product)
+  converted from project-owner supplied JPG files in `~/Downloads/`. Output
+  size is 1200x900 WebP.
 - Cafe visuals: no photograph exists yet. See "Before Public Commercial Use"
   below.
 

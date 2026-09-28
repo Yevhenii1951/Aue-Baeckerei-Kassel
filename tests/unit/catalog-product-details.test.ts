@@ -39,10 +39,10 @@ describe("catalog product details", () => {
     expect(jsonLd.offers.url).toBe("https://example.test/de/sortiment/baguette");
   });
 
-  it("only references product images that exist in public assets", () => {
-    const imageUrls = demoProducts.flatMap((product) => product.imageUrl ?? []);
+  it("gives every catalogue product an image that exists in public assets", () => {
+    const imageUrls = demoProducts.map((product) => product.imageUrl);
 
-    expect(imageUrls.length).toBe(63);
+    expect(imageUrls).toHaveLength(demoProducts.length);
     expect(
       imageUrls.every((imageUrl) =>
         existsSync(join(process.cwd(), "public", imageUrl)),

@@ -24,22 +24,16 @@ export function ProductGridCard({
   return (
     <article className="flex min-h-80 flex-col justify-between overflow-hidden rounded-lg border border-brand-deep/10 bg-paper shadow-card">
       <div>
-        {product.imageUrl ? (
-          <Link href={`/${locale}/sortiment/${product.id}`} className="block">
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              width={1200}
-              height={900}
-              sizes="(min-width: 1280px) 21rem, (min-width: 768px) 50vw, 100vw"
-              className="aspect-[4/3] w-full object-cover"
-            />
-          </Link>
-        ) : (
-          <div className="flex aspect-[4/3] items-center justify-center bg-amber-soft text-sm font-semibold text-brand-deep">
-            Foto folgt
-          </div>
-        )}
+        <Link href={`/${locale}/sortiment/${product.id}`} className="block">
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            width={1200}
+            height={900}
+            sizes="(min-width: 1280px) 21rem, (min-width: 768px) 50vw, 100vw"
+            className="aspect-[4/3] w-full object-cover"
+          />
+        </Link>
         <div className="flex items-start justify-between gap-4 px-5 pt-5">
           <p className="text-sm font-medium text-sage">
             {categoryLabels[product.category]}
