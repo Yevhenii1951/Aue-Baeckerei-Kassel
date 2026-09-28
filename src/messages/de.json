@@ -1,0 +1,72 @@
+{
+  "a11y": {
+    "skipToContent": "Zum Inhalt springen"
+  },
+  "shell": {
+    "brandPlaceholder": "Aue-Bäckerei",
+    "primaryNav": "Hauptnavigation",
+    "footerNav": "Fußzeilennavigation",
+    "navHome": "Start",
+    "navAssortment": "Sortiment",
+    "navPreorder": "Vorbestellen",
+    "navCafe": "Café",
+    "navImprint": "Impressum",
+    "navPrivacy": "Datenschutz",
+    "footerNote": "Portfolio-Demo für eine moderne Handwerksbäckerei in Kassel. Rechtstexte vor einem echten Livegang prüfen lassen."
+  },
+  "home": {
+    "eyebrow": "Handwerksbäckerei an der Karlsaue",
+    "title": "Morgens frisch, abends bestellt.",
+    "intro": "Sauerteigbrot, Brötchen, Kuchen und Kaffee aus Kassel. Bis 20:00 Uhr vorbestellen und am nächsten Morgen frisch abholen.",
+    "primaryCta": "Für morgen vorbestellen",
+    "secondaryCta": "Sortiment ansehen",
+    "cutoffLabel": "Bestellschluss heute",
+    "cutoffTime": "20:00 Uhr",
+    "heroNote": "Abholung ab 06:30 Uhr · Bebelplatz 12 · Kassel",
+    "pathsTitle": "Wofür kommst du heute vorbei?",
+    "paths": [
+      {
+        "title": "Vorbestellung",
+        "text": "Brot und Frühstück abends sichern, morgens ohne Warten abholen.",
+        "cta": "Slots ansehen"
+      },
+      {
+        "title": "Online Shop",
+        "text": "Marmelade, Kaffee, Backmischungen und Geschenke für zu Hause.",
+        "cta": "Shop öffnen"
+      },
+      {
+        "title": "Café besuchen",
+        "text": "Kaffee, Zimtschnecken und ein ruhiger Platz nahe der Karlsaue.",
+        "cta": "Café entdecken"
+      }
+    ],
+    "stepsTitle": "So funktioniert Vorbestellen",
+    "steps": [
+      "Lieblingsbrot, Brötchen und Kaffee auswählen.",
+      "Abholtag und 30-Minuten-Slot reservieren.",
+      "Bestellnummer zeigen und frisch gebackene Ware mitnehmen."
+    ],
+    "bestsellersTitle": "Gerade frisch aus dem Ofen",
+    "bestsellers": [
+      "Hausbrot mit Dinkelsauerteig",
+      "Laugenbrezel von Hand geschlungen",
+      "Zimtschnecke mit Zimt-Butter-Füllung"
+    ],
+    "assortmentTitle": "Sortiment für Frühstück, Pause und Büro",
+    "assortmentText": "Brote, Brötchen, Süßes, Getränke, Snacks und Feinkost werden im nächsten Schritt als filterbarer Katalog aufgebaut.",
+    "cafeTitle": "Unser Café",
+    "cafeText": "Für die Galerie sind später deine Innenraumfotos vorgesehen: Kaffee am Fenster, Kuchen in der Vitrine und die kleine Pause zwischen Karlsaue und Bebelplatz.",
+    "trustItems": [
+      "Regionale Zutaten aus Nordhessen",
+      "Sauerteig und lange Teigführung",
+      "Allergene klar gekennzeichnet",
+      "Admin-Backliste für die Produktion"
+    ]
+  },
+  "contactLegal": {
+    "imprintTitle": "Impressum",
+    "privacyTitle": "Datenschutzerklärung",
+    "legalWarning": "Platzhalter-Text. Vor dem Livegang durch eine anwaltlich geprüfte Fassung ersetzen."
+  }
+}

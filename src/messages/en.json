@@ -1,0 +1,72 @@
+{
+  "a11y": {
+    "skipToContent": "Skip to content"
+  },
+  "shell": {
+    "brandPlaceholder": "Aue-Bäckerei",
+    "primaryNav": "Primary navigation",
+    "footerNav": "Footer navigation",
+    "navHome": "Start",
+    "navAssortment": "Assortment",
+    "navPreorder": "Preorder",
+    "navCafe": "Cafe",
+    "navImprint": "Legal notice",
+    "navPrivacy": "Privacy policy",
+    "footerNote": "Portfolio demo for a modern craft bakery in Kassel. Legal copy must be reviewed before a real launch."
+  },
+  "home": {
+    "eyebrow": "Craft bakery near Karlsaue",
+    "title": "Fresh in the morning, ordered in the evening.",
+    "intro": "Sourdough bread, rolls, cakes and coffee from Kassel. Preorder until 20:00 and pick up fresh the next morning.",
+    "primaryCta": "Preorder for tomorrow",
+    "secondaryCta": "View assortment",
+    "cutoffLabel": "Today's order cutoff",
+    "cutoffTime": "20:00",
+    "heroNote": "Pickup from 06:30 · Bebelplatz 12 · Kassel",
+    "pathsTitle": "What brings you in today?",
+    "paths": [
+      {
+        "title": "Preorder",
+        "text": "Reserve bread and breakfast in the evening, pick up without waiting.",
+        "cta": "View slots"
+      },
+      {
+        "title": "Online shop",
+        "text": "Jam, coffee, baking mixes and gifts for home.",
+        "cta": "Open shop"
+      },
+      {
+        "title": "Visit the cafe",
+        "text": "Coffee, cinnamon buns and a quiet place near Karlsaue.",
+        "cta": "Discover cafe"
+      }
+    ],
+    "stepsTitle": "How preorder works",
+    "steps": [
+      "Choose bread, rolls and coffee.",
+      "Reserve pickup day and 30-minute slot.",
+      "Show order number and take fresh baked goods."
+    ],
+    "bestsellersTitle": "Fresh from the oven",
+    "bestsellers": [
+      "House bread with spelt sourdough",
+      "Hand-shaped pretzel",
+      "Cinnamon bun with cinnamon butter"
+    ],
+    "assortmentTitle": "Assortment for breakfast, breaks and office",
+    "assortmentText": "Breads, rolls, sweets, drinks, snacks and fine goods will become a filterable catalogue in the next step.",
+    "cafeTitle": "Our cafe",
+    "cafeText": "Your future interior photos belong here: coffee by the window, cakes in the display and a small pause between Karlsaue and Bebelplatz.",
+    "trustItems": [
+      "Regional ingredients from North Hesse",
+      "Sourdough and long dough rest",
+      "Clear allergen labelling",
+      "Admin baking list for production"
+    ]
+  },
+  "contactLegal": {
+    "imprintTitle": "Legal notice",
+    "privacyTitle": "Privacy policy",
+    "legalWarning": "Placeholder text. Replace with a legally reviewed version before going live."
+  }
+}
