@@ -38,6 +38,9 @@ const baseSchema = z.object({
   mode: z.enum(["pickup", "delivery"], {
     errorMap: () => ({ message: "Bitte wähle Abholung oder Lieferung." }),
   }),
+  deliveryDate: z.string().optional().default(""),
+  deliverySlotId: z.string().optional().default(""),
+  express: z.boolean().optional().default(false),
   payment: z.enum(PaymentMethodId, {
     errorMap: () => ({ message: "Bitte wähle eine Zahlungsart." }),
   }),
@@ -83,6 +86,13 @@ export const checkoutFormSchema = baseSchema.superRefine((data, context) => {
         code: z.ZodIssueCode.custom,
         path: ["city"],
         message: "Bitte gib deinen Ort an.",
+      });
+    }
+    if (!data.deliveryDate || !data.deliverySlotId) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["deliverySlotId"],
+        message: "Bitte wähle einen Lieferzeitraum.",
       });
     }
   }

@@ -1,14 +1,26 @@
 # State
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
-workflow was enforced). Infra and design-system remediation in review. ABE-010,
-ABE-011 and ABE-012 merged on `main`. ABE-013 in review on
-`feature/abe-013-delivery-zone-checker`.
+workflow was enforced). Infra and design-system remediation in review. ABE-010
+through ABE-013 merged on `main`. ABE-014 in review on
+`feature/abe-014-delivery-slots`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-014 delivery slots on `feature/abe-014-delivery-slots`: 2-hour delivery
+  slots 10:00–20:00 (`deliverySlots.ts`, past slots vanish for today in
+  Europe/Berlin), an express option for zones 1–2 ordered before 12:00
+  (+3,00 €, 2-hour window), optionally delivery date tabs (today + next two
+  days), the delivery fee (zone fee, free above threshold) plus express
+  surcharge lands in the order summary and on the confirmation, and the
+  fulfillment selection (mode, date, slot, express) survives navigation via
+  `fulfillment-store.ts` (`localStorage["aue.fulfillment.v1"]`). Order form
+  requires a slot for delivery; `CheckoutConfirmation` shows Lieferzeit and
+  Lieferkosten. Browser-checked: slot + fee in summary, confirmation with time
+  and fee, reload keeps Lieferung and the slot. Fixed `useSyncExternalStore`
+  getSnapshot returning a fresh `Date` (infinite loop) via cached `useClientNow`.
 - ABE-013 `/lieferung` delivery zone checker on
   `feature/abe-013-delivery-zone-checker`: `delivery.ts` maps Kassel PLZs to
   zones (1/2/3 with fee 2,50/4,50/6,50 € and free thresholds 20/30/40 € —
@@ -72,8 +84,9 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Notes
 
-- Supabase is not configured and is not needed for the public site or the demo
-  catalogue. It becomes required at the staff-auth ticket (ABE-015+).
+- Supabase is not configured and is not needed for the public site, the demo
+  catalogue or the demo checkout/delivery/admin-dashboard (ABE-015 uses demo
+  data). It becomes required when orders/pickup persistence arrives (ABE-020+).
 - `.gitignore` excludes copied dependency/build artifacts.
 - `docs/sdd/` is tracked in this repository, unlike in the base.
 - The old `public/373419_medium.mp4` remains in git history at 7.1 MB; only

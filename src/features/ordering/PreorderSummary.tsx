@@ -3,8 +3,15 @@
 import { useCart } from "./cart-provider";
 import { formatPrice } from "./price";
 
-export function PreorderSummary(): React.ReactElement {
+type PreorderSummaryProps = {
+  deliveryFeeCents?: number | null;
+};
+
+export function PreorderSummary({
+  deliveryFeeCents = null,
+}: PreorderSummaryProps): React.ReactElement {
   const { items, totals } = useCart();
+  const totalCents = totals.totalCents + (deliveryFeeCents ?? 0);
 
   return (
     <aside className="rounded-lg border border-brand-deep/10 bg-paper p-5 shadow-card lg:sticky lg:top-24">
@@ -42,9 +49,19 @@ export function PreorderSummary(): React.ReactElement {
             <span>-{formatPrice(totals.discountCents)}</span>
           </p>
         ) : null}
+        {deliveryFeeCents !== null ? (
+          <p className="flex justify-between">
+            <span>Lieferung</span>
+            <span>
+              {deliveryFeeCents === 0
+                ? "kostenlos"
+                : formatPrice(deliveryFeeCents)}
+            </span>
+          </p>
+        ) : null}
         <p className="flex justify-between pt-2 text-base font-semibold text-brand-deep">
           <span>Gesamt</span>
-          <span>{formatPrice(totals.totalCents)}</span>
+          <span>{formatPrice(totalCents)}</span>
         </p>
       </div>
     </aside>

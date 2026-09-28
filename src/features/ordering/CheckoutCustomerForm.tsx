@@ -39,33 +39,6 @@ export function CheckoutCustomerForm({
 }: CheckoutCustomerFormProps): React.ReactElement {
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-5">
-      <fieldset className="grid gap-2">
-        <legend className="text-sm font-medium text-brand-deep">
-          Abholung oder Lieferung
-        </legend>
-        <div className="grid grid-cols-2 gap-2">
-          {(["pickup", "delivery"] as const).map((mode) => (
-            <div key={mode} className="rounded-lg border border-brand-deep/15">
-              <label className="flex cursor-pointer items-center gap-2 px-3 py-2.5">
-                <input
-                  type="radio"
-                  name="mode"
-                  value={mode}
-                  checked={values.mode === mode}
-                  onChange={() => onChange("mode", mode)}
-                />
-                <span className="text-sm font-medium">
-                  {mode === "pickup" ? "Abholung" : "Lieferung"}
-                </span>
-              </label>
-            </div>
-          ))}
-        </div>
-        {errors.mode ? (
-          <p className="text-sm text-red-700">{errors.mode}</p>
-        ) : null}
-      </fieldset>
-
       <fieldset className="grid gap-4">
         <legend className="text-sm font-medium text-brand-deep">
           Deine Kontaktdaten
