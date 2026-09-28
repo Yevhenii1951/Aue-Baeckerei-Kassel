@@ -8,6 +8,16 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- Portfolio/photo notice on `feature/abe-024-legal-photo-notice`: the Impressum
+  now states the site is a portfolio demo with sample data, that the product
+  photos are illustrative with provenance documented in the repository, and that
+  sources and licences must be cleared before commercial use. It also records
+  that all images are served from the project's own server with no external
+  image CDN, tracking or third-party embeds (verified: no tracker, no
+  `remotePatterns`, no external image hosts in `src`). `docs/sdd/assets.md`
+  records the owner's statement about the photo origin and drops a stale line
+  claiming the catalogue has no image surface. Remaining ABE-024 scope (order,
+  contact, payment mock, maps/embeds and logs sections) is still open.
 - Product photos on `feature/abe-photos-product-images`: converted 66 supplied
   JPG product photos from `~/Downloads/` to 1200x900 WebP in `public/products`
   (one per catalogue product) and wired them to catalogue cards, product detail

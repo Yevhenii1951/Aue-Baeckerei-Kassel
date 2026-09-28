@@ -19,6 +19,11 @@ export default async function ImprintPage({ params }: Readonly<{ params: Promise
       <section><h2 className="text-xl font-semibold">Anbieter-Platzhalter</h2><p>Firmenname (Rechtsform)<br />Straße, PLZ Ort</p></section>
       <section><h2 className="text-xl font-semibold">Kontakt-Platzhalter</h2><p>Telefon: +49 000 0000000<br />E-Mail: kontakt@example.com</p></section>
       <p>Vertretungsberechtigte Person sowie Register- und Steuerangaben sind bewusst nicht erfunden und vor einem realen Start zu ergänzen.</p>
+      <section><h2 className="text-xl font-semibold">Hinweis zu diesem Portfolio-Projekt</h2>
+        <p>Diese Website ist ein Portfolio- und Demonstrationsprojekt und stellt kein Angebot eines realen Geschäftsbetriebs dar. Produkte, Preise, Kontaktdaten und Bestellabläufe sind Beispieldaten.</p>
+        <p>Die Produktfotos veranschaulichen das Sortiment. Ihre Herkunft und die jeweiligen Nutzungsbedingungen sind im Projekt-Repository dokumentiert. Sollen die Fotos nicht vom Betreiber selbst aufgenommen worden sein, sind die Quellen und Lizenzen vor einer kommerziellen Nutzung zu prüfen und die erforderlichen Nutzungsrechte zu klären.</p>
+        <p>Alle Bilder werden vom eigenen Server ausgeliefert. Externe Bild-CDNs, Tracking und Einbindungen Dritter sind nicht Bestandteil dieser Website.</p>
+      </section>
     </LegalDraft>
   );
 }
