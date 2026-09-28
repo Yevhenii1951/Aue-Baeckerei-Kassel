@@ -1,6 +1,6 @@
 # State
 
-Status: ABE-006 implemented locally.
+Status: ABE-007 implemented locally.
 
 Purpose: PORTFOLIO.
 
@@ -25,10 +25,12 @@ Done:
   aggregation.
 - ABE-006 implemented: public conversion sections for Kassel delivery,
   Brot-Abo, and Firmenservice.
+- ABE-007 implemented: fuller cafe section with pairings, hours, and
+  replaceable photo slots.
 
 Next:
 - Review landing/catalog visually in the browser.
-- Start ABE-007 fuller cafe content and replaceable image slots.
+- Start ABE-008 SEO/legal polish.
 
 Notes:
 - `.gitignore` excludes copied dependency/build artifacts.

@@ -79,6 +79,39 @@
     ],
     "cafeTitle": "Our cafe",
     "cafeText": "Your future interior photos belong here: coffee by the window, cakes in the display and a small pause between Karlsaue and Bebelplatz.",
+    "cafeHours": "Mon-Fri 07:00-18:00 · Sat 08:00-16:00 · Sun closed",
+    "cafePairings": [
+      {
+        "title": "Cappuccino + cinnamon bun",
+        "text": "The quick morning classic, warm, sweet and not too heavy."
+      },
+      {
+        "title": "Earl Grey + cheesecake",
+        "text": "A quiet afternoon by the window with creamy cake and bergamot."
+      },
+      {
+        "title": "Caffè Crema + brownie",
+        "text": "Strong coffee with chocolate, ideal for a small work break."
+      },
+      {
+        "title": "Mango lassi + apple almond bun",
+        "text": "Fruity, possible as a vegan choice and perfect for warm Kassel days."
+      }
+    ],
+    "cafePhotoSlots": [
+      {
+        "title": "Window seat",
+        "text": "Later this becomes your bright seating photo with coffee and a newspaper."
+      },
+      {
+        "title": "Cake display",
+        "text": "Placeholder for appetizing cakes, buns and small pastries."
+      },
+      {
+        "title": "Bakery view",
+        "text": "A photo with oven, hands and fresh bread connects cafe and craft."
+      }
+    ],
     "trustItems": [
       "Regional ingredients from North Hesse",
       "Sourdough and long dough rest",

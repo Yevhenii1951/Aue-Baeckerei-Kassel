@@ -8,6 +8,11 @@ import {
   ConversionSections,
   type ConversionCard,
 } from "@/features/content/components/ConversionSections";
+import {
+  CafeSection,
+  type CafePairing,
+  type CafePhotoSlot,
+} from "@/features/content/components/CafeSection";
 
 type PathCard = {
   title: string;
@@ -39,6 +44,8 @@ export default async function HomePage({
   const bestsellers = t.raw("bestsellers") as string[];
   const trustItems = t.raw("trustItems") as string[];
   const conversionCards = t.raw("conversionCards") as ConversionCard[];
+  const cafePairings = t.raw("cafePairings") as CafePairing[];
+  const cafePhotoSlots = t.raw("cafePhotoSlots") as CafePhotoSlot[];
 
   return (
     <div className="bg-porcelain">
@@ -167,28 +174,14 @@ export default async function HomePage({
         cards={conversionCards}
       />
 
-      <section id="cafe" className="bg-brand-deep text-cream">
-        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-14 sm:px-8 lg:grid-cols-[1fr_1fr] lg:items-center">
-          <div>
-            <h2 className="font-display text-4xl font-semibold">
-              {t("cafeTitle")}
-            </h2>
-            <p className="mt-5 max-w-xl leading-7 text-cream/75">
-              {t("cafeText")}
-            </p>
-          </div>
-          <ul className="grid gap-3">
-            {trustItems.map((item) => (
-              <li
-                key={item}
-                className="rounded-lg border border-white/10 bg-white/10 px-5 py-4"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <CafeSection
+        title={t("cafeTitle")}
+        text={t("cafeText")}
+        hours={t("cafeHours")}
+        pairings={cafePairings}
+        photoSlots={cafePhotoSlots}
+        trustItems={trustItems}
+      />
     </div>
   );
 }
