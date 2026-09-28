@@ -33,6 +33,7 @@ Done:
 
 Next:
 - Start ABE-010 cart drawer and persistent checkout path.
+- Production roadmap tickets ABE-010 through ABE-029 are created.
 
 Notes:
 - `.gitignore` excludes copied dependency/build artifacts.
