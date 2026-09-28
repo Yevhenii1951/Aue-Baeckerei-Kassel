@@ -10,7 +10,9 @@ import {
   type CheckoutFormValues,
 } from "./checkout-form";
 import { createDemoOrderNumber } from "./orderNumber";
+import { zoneForPostalCode } from "./delivery";
 import { CheckoutCustomerForm } from "./CheckoutCustomerForm";
+import { DeliveryPanel } from "./DeliveryPanel";
 import { PreorderSummary } from "./PreorderSummary";
 
 type CheckoutFlowProps = {
@@ -37,7 +39,7 @@ const EMPTY_FORM: CheckoutFormValues = {
 };
 
 export function CheckoutFlow({ locale }: CheckoutFlowProps): React.ReactElement {
-  const { items } = useCart();
+  const { items, totals } = useCart();
   const [form, setForm] = useState<CheckoutFormValues>(EMPTY_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sequence, setSequence] = useState(1);
@@ -65,6 +67,9 @@ export function CheckoutFlow({ locale }: CheckoutFlowProps): React.ReactElement 
   ): void {
     setForm((previous) => ({ ...previous, [field]: value }));
   }
+
+  const deliveryZone =
+    form.mode === "delivery" ? zoneForPostalCode(form.zip) : null;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
@@ -151,12 +156,20 @@ export function CheckoutFlow({ locale }: CheckoutFlowProps): React.ReactElement 
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_22rem]">
-      <CheckoutCustomerForm
-        values={form}
-        errors={errors}
-        onChange={updateField}
-        onSubmit={handleSubmit}
-      />
+      <div className="grid gap-6">
+        {form.mode === "delivery" ? (
+          <DeliveryPanel
+            zone={deliveryZone}
+            subtotalCents={totals.totalCents}
+          />
+        ) : null}
+        <CheckoutCustomerForm
+          values={form}
+          errors={errors}
+          onChange={updateField}
+          onSubmit={handleSubmit}
+        />
+      </div>
       <PreorderSummary />
     </div>
   );
