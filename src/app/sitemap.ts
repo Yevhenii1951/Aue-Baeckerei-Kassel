@@ -1,7 +1,20 @@
 import type { MetadataRoute } from "next";
+import { LOCAL_SEO_PAGES } from "@/features/content/localSeoPages";
 import { localizedSiteUrl, SITE_LOCALES } from "@/features/seo/site";
 
-const INDEXABLE_PATHS = ["", "/impressum", "/datenschutz"] as const;
+const STATIC_PATHS = [
+  "",
+  "/sortiment",
+  "/lieferung",
+  "/vorbestellen",
+  "/impressum",
+  "/datenschutz",
+] as const;
+
+const INDEXABLE_PATHS = [
+  ...STATIC_PATHS,
+  ...LOCAL_SEO_PAGES.map((page) => `/${page.slug}`),
+] as readonly string[];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return INDEXABLE_PATHS.flatMap((path) => {

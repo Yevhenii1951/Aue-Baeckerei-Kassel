@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import sitemap from "@/app/sitemap";
+import { LOCAL_SEO_PAGES } from "@/features/content/localSeoPages";
 import { SITE_URL } from "@/features/seo/site";
 
 describe("localized sitemap", () => {
@@ -34,5 +35,29 @@ describe("localized sitemap", () => {
     for (const locale of ["de", "en", "uk"]) {
       expect(urls).toContain(`${SITE_URL}/${locale}`);
     }
+  });
+
+  it("lists every local SEO page in every locale", () => {
+    const urls = sitemap().map((entry) => entry.url);
+
+    for (const page of LOCAL_SEO_PAGES) {
+      for (const locale of ["de", "en", "uk"]) {
+        expect(urls).toContain(`${SITE_URL}/${locale}/${page.slug}`);
+      }
+    }
+  });
+
+  it("lists the main shop routes so they are discoverable", () => {
+    const urls = sitemap().map((entry) => entry.url);
+
+    for (const path of ["/sortiment", "/lieferung", "/vorbestellen"]) {
+      expect(urls).toContain(`${SITE_URL}/de${path}`);
+    }
+  });
+
+  it("keeps one canonical entry per locale and path", () => {
+    const urls = sitemap().map((entry) => entry.url);
+
+    expect(new Set(urls).size).toBe(urls.length);
   });
 });

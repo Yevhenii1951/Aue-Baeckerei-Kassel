@@ -8,6 +8,18 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-022 local SEO pages on `feature/abe-022-local-seo-pages`: five
+  intent-focused pages (`/lieferung-kassel`, `/brot-abo-kassel`,
+  `/catering-kassel`, `/cafe-kassel`, `/sauerteigbrot-kassel`) from a new
+  `localSeoPages.ts` content module, rendered by one `src/app/[locale]/[slug]`
+  route with `generateStaticParams` (same convention as the product detail page)
+  and `notFound()` for unknown slugs. Copy reuses real facts — delivery zones
+  and fees from `DELIVERY_ZONES`, opening hours and pairings from the existing
+  `home` messages — and adds no reviews, awards or ratings. The sitemap also
+  grew: `/sortiment`, `/lieferung` and `/vorbestellen` were missing from it
+  entirely before, so the site was asking search engines to index a home page
+  and two legal pages only. 33 URLs now, each with de/en/uk + x-default.
+  11 new unit tests.
 - ABE-024 Datenschutz sections on `feature/abe-024-datenschutz-sections`: the
   two placeholder paragraphs became six sections covering technically necessary
   data, optional third-party content, order/contact data, the payment demo,
