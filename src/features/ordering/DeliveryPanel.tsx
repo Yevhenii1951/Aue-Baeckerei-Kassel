@@ -5,16 +5,19 @@ import {
   deliveryChargeCents,
   deliveryZoneInfo,
 } from "./delivery";
+import { EXPRESS_FEE_CENTS } from "./deliverySlots";
 import { formatPrice } from "./price";
 
 type DeliveryPanelProps = {
   zone: DeliveryZone | null;
   subtotalCents: number;
+  express: boolean;
 };
 
 export function DeliveryPanel({
   zone,
   subtotalCents,
+  express,
 }: DeliveryPanelProps): React.ReactElement {
   if (zone === null) {
     return (
@@ -25,7 +28,8 @@ export function DeliveryPanel({
   }
 
   const info = deliveryZoneInfo(zone);
-  const charge = deliveryChargeCents(subtotalCents, zone);
+  const charge =
+    deliveryChargeCents(subtotalCents, zone) + (express ? EXPRESS_FEE_CENTS : 0);
 
   return (
     <div className="rounded-lg border border-sage/30 bg-paper p-4">
@@ -35,6 +39,7 @@ export function DeliveryPanel({
       <p className="mt-1 text-sm text-ink/70">
         Lieferkosten {formatPrice(info.feeCents)}, ab{" "}
         {formatPrice(info.freeThresholdCents)} Warenwert frei.
+        {express ? ` Inklusive Express-Zuschlag ${formatPrice(EXPRESS_FEE_CENTS)}.` : ""}
         {charge === 0
           ? " Für diese Bestellung ist die Lieferung kostenlos."
           : ""}

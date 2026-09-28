@@ -7,6 +7,9 @@ describe("checkout form validation", () => {
     email: "anna@example.de",
     phone: "+49 561 123456",
     mode: "pickup",
+    deliveryDate: "",
+    deliverySlotId: "",
+    express: false,
     payment: "stripe",
     street: "",
     zip: "",
@@ -31,13 +34,30 @@ describe("checkout form validation", () => {
     }
   });
 
-  it("accepts a delivery order with a complete address", () => {
+  it("requires a delivery slot for a delivery order", () => {
     const result = parseCheckoutForm({
       ...base,
       mode: "delivery",
       street: "Kölnische Str. 1",
       zip: "34117",
       city: "Kassel",
+    });
+
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.fieldErrors.deliverySlotId).toBeTypeOf("string");
+    }
+  });
+
+  it("accepts a delivery order with a complete address and slot", () => {
+    const result = parseCheckoutForm({
+      ...base,
+      mode: "delivery",
+      street: "Kölnische Str. 1",
+      zip: "34117",
+      city: "Kassel",
+      deliveryDate: "2026-09-29",
+      deliverySlotId: "2026-09-29-14:00",
     });
 
     expect(result.success).toBe(true);
