@@ -1,6 +1,6 @@
 # State
 
-Status: ABE-004 implemented locally.
+Status: ABE-005 implemented locally.
 
 Purpose: PORTFOLIO.
 
@@ -21,10 +21,12 @@ Done:
   with capacity status.
 - ABE-004 implemented: cart totals, quantity updates, and breakfast bundle
   discount in integer cents.
+- ABE-005 implemented: Backliste product totals and product x slot matrix
+  aggregation.
 
 Next:
 - Review landing/catalog visually in the browser.
-- Start ABE-005 admin Backliste aggregation.
+- Start ABE-006 delivery, catering, and Brot-Abo public conversion sections.
 
 Notes:
 - `.gitignore` excludes copied dependency/build artifacts.
