@@ -1,6 +1,6 @@
 # State
 
-Status: ABE-007 implemented locally.
+Status: ABE-008 implemented locally.
 
 Purpose: PORTFOLIO.
 
@@ -27,10 +27,11 @@ Done:
   Brot-Abo, and Firmenservice.
 - ABE-007 implemented: fuller cafe section with pairings, hours, and
   replaceable photo slots.
+- ABE-008 implemented: local bakery JSON-LD and asset/source notes.
 
 Next:
 - Review landing/catalog visually in the browser.
-- Start ABE-008 SEO/legal polish.
+- Continue with a visual QA pass or begin Phase 2 routes/forms.
 
 Notes:
 - `.gitignore` excludes copied dependency/build artifacts.

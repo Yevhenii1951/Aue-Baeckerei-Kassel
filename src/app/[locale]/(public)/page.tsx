@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { buildPublicMetadata } from "@/features/seo/publicMetadata";
 import { parseSupportedLocale } from "@/features/seo/site";
+import { buildBakeryJsonLd } from "@/features/seo/bakeryJsonLd";
 import { CatalogPreview } from "@/features/catalog/components/CatalogPreview";
 import {
   ConversionSections,
@@ -38,6 +39,7 @@ export default async function HomePage({
 }: Readonly<{ params: Promise<{ locale: string }> }>) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const supportedLocale = parseSupportedLocale(locale);
   const t = await getTranslations("home");
   const paths = t.raw("paths") as PathCard[];
   const steps = t.raw("steps") as string[];
@@ -49,6 +51,12 @@ export default async function HomePage({
 
   return (
     <div className="bg-porcelain">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildBakeryJsonLd(supportedLocale)),
+        }}
+      />
       <section className="relative min-h-[calc(100svh-4rem)] overflow-hidden bg-brand-deep text-cream">
         <video
           className="absolute inset-0 h-full w-full object-cover opacity-50"
