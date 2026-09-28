@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { demoProducts } from "@/features/catalog/demoProducts";
 import {
@@ -32,8 +34,20 @@ describe("catalog product details", () => {
 
     expect(jsonLd["@type"]).toBe("Product");
     expect(jsonLd.offers.price).toBe("3.80");
+    expect(jsonLd.image).toBe("https://example.test/products/baguette.webp");
     expect(jsonLd.offers.priceCurrency).toBe("EUR");
     expect(jsonLd.offers.url).toBe("https://example.test/de/sortiment/baguette");
+  });
+
+  it("only references product images that exist in public assets", () => {
+    const imageUrls = demoProducts.flatMap((product) => product.imageUrl ?? []);
+
+    expect(imageUrls.length).toBe(63);
+    expect(
+      imageUrls.every((imageUrl) =>
+        existsSync(join(process.cwd(), "public", imageUrl)),
+      ),
+    ).toBe(true);
   });
 });
 

@@ -1,5 +1,7 @@
 import type { Product } from "./types";
 
+const productsWithoutImage = new Set(["kardamomknopf", "rosinenknoten", "schokoweck"]);
+
 export const demoProducts: Product[] = [
   product("hausbrot", "bread", "Hausbrot", 450, "750g", "Weizenmischbrot mit Dinkelsauerteig und 24 Stunden Teigführung.", ["A"], ["hausgemacht", "beliebt", "täglich"], true, false),
   product("vollkorn-saftkorn", "bread", "Vollkorn-Saftkorn", 520, "750g", "Saftiges Vollkornbrot aus Roggen und Dinkel mit Saaten.", ["A", "H", "N"], ["vollkorn", "gesund"], true, false),
@@ -86,6 +88,7 @@ function product(
     category,
     name,
     description,
+    imageUrl: productsWithoutImage.has(id) ? undefined : `/products/${id}.webp`,
     priceCents,
     unit,
     ingredients: [],
