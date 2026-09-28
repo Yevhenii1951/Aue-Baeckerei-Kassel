@@ -2,13 +2,22 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). Infra and design-system remediation in review. ABE-010
-merged on `main`. ABE-011 in review on `feature/abe-011-vorbestellung`.
+and ABE-011 merged on `main`. ABE-012 in review on
+`feature/abe-012-checkout-simulation`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
-- ABE-011 `/vorbestellen` preorder flow on `feature/abe-011-vorbestellung`:
+- ABE-012 `/kasse` demo checkout on `feature/abe-012-checkout-simulation`:
+  fulfillment switch (Abholung/Lieferung with address fields), 5 payment
+  methods (Stripe/PayPal/Klarna/Bar·EC/Rechnung, no real API), Zod validation
+  in `checkout-form.ts`, demo order number `B-2026-<seq>` (`orderNumber.ts`),
+  confirmation with pickup/delivery summary and QR placeholder. Cart-empty
+  state reuses the store. Browser-checked: address fields appear on Lieferung,
+  field errors, order `B-2026-0001`.
+- ABE-011 `/vorbestellen` preorder flow (in review on
+  `feature/abe-011-vorbestellung`):
   page reads the persistent cart store, picks a pickup date (20:00
   Europe/Berlin cutoff, earliest date via `useSyncExternalStore` — no build-time
   date baked), a 30-minute slot, and the customer form (name/email/phone/notes,

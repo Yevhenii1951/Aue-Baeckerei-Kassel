@@ -133,5 +133,10 @@
     "eyebrow": "Morgen frisch aus dem Ofen",
     "title": "Vorbestellen",
     "intro": "Wähle dein Abholdatum, den passenden Zeitraum und sende uns deine Bestellung. Nach 20 Uhr gilt die Vorbestellung für übermorgen."
+  },
+  "kasse": {
+    "eyebrow": "Der letzte Schritt",
+    "title": "Kasse",
+    "intro": "Prüfe deine Auswahl, wähle Abholung oder Lieferung und eine Zahlungsart. In dieser Demo-Strecke wird nichts real bezahlt."
   }
 }
