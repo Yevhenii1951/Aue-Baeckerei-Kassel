@@ -48,15 +48,8 @@ export default async function SiteHeader({ locale }: SiteHeaderProps) {
 
         <div className="flex items-center gap-2">
           <CartToggleButton />
-          <Link
-            href={`/${locale}/vorbestellen`}
-            className="btn-amber hidden min-h-11 px-5 py-2 text-sm sm:inline-flex"
-          >
-            {t("ctaPreorder")}
-          </Link>
           <MobileMenu
             links={links}
-            cta={{ href: `/${locale}/vorbestellen`, label: t("ctaPreorder") }}
             menuLabel={t("menuOpen")}
             closeLabel={t("menuClose")}
             brandLabel={t("brandPlaceholder")}
