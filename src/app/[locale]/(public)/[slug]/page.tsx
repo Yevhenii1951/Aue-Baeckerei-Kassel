@@ -43,7 +43,7 @@ export default async function LocalSeoPage({
   return (
     <div className="bg-cream">
       <section className="border-b border-brand-deep/10 bg-paper">
-        <div className="mx-auto w-full max-w-4xl px-4 py-14 sm:px-8">
+        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-8">
           <h1 className="font-display text-5xl font-semibold">{page.title}</h1>
           <p className="mt-5 text-lg leading-8 text-ink/72">{page.intro}</p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -60,7 +60,7 @@ export default async function LocalSeoPage({
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-8">
+      <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-8">
         <h2 className="font-display text-3xl font-semibold">Auf einen Blick</h2>
         <dl className="mt-5 grid gap-3 sm:grid-cols-3">
           {page.facts.map((fact) => (
