@@ -9,12 +9,16 @@
   Used as the video `poster` and as the reduced-motion fallback.
 - `public/products/placeholder.png` — neutral fallback shown for every
   catalogue product. The 66 original `public/products/*.webp` files were
-  removed on 2026-09-29: their EXIF named Dreamstime contributors (KABOOMPICS,
-  sergio villalba studio, oktay koseoglu, AMAPOLA, Clara Moring and others) and
-  a rights statement, i.e. paid stock with no recorded licence. Do not restore
-  them. Replace with owned or licensed photography before any public or client
-  use; `demoProducts.ts` and `companyPages.ts` point at the placeholder until
-  then.
+  removed on 2026-09-29. Their provenance was mixed and not fully known: 14
+  carried EXIF author/copyright names (KABOOMPICS/Karolina Grabowska, sergio
+  villalba studio, oktay koseoglu, AMAPOLA/Barbara Olivera, BELOUSOVA, Clara
+  Moring, Igor Ogashawara), of which KABOOMPICS is a known free source
+  (Pexels/Unsplash, kaboompics.com) while two stated an express reservation
+  ("Copyright ... All rights reserved" and the Turkish equivalent); the other 52
+  had no metadata. No reliable per-file licence was recorded for the set, so it
+  was dropped whole. Source the product photos afresh before any public or
+  client use; `demoProducts.ts` and `companyPages.ts` point at the placeholder
+  until then.
 - `public/cafe/*.webp` — 3 café photos supplied by the project owner on
   2026-09-29 (`Fensterplatz.jpg`, `Fensterplatz2.jpg`, `Backstubenblick.jpg` in
   `~/Downloads/`). All three were 1920x1280 JPEG without EXIF or GPS and are
@@ -37,13 +41,14 @@
 ## Provenance
 
 Hero files and the café photos were supplied by the project owner for this
-portfolio build. The 66 product photos were removed on 2026-09-29 because their
-EXIF identified Dreamstime contributors, so they were paid stock without a
-recorded licence (see above). The catalogue now shows `placeholder.png`. The
-four café photos are owner-supplied interior shots with clean EXIF; still record
-them here before any commercial or public client use:
+portfolio build. The 66 product photos were removed on 2026-09-29 because no
+per-file licence was recorded for them and two carried an express reservation
+of rights (see above). The catalogue now shows `placeholder.png` and the product
+photos are to be sourced afresh. The four café photos are owner-supplied
+interior shots with no third-party metadata; still record them here before any
+commercial or public client use:
 
-- Source: _café photos owner-supplied; product photos removed_
+- Source: _café photos owner-supplied; product photos removed, to be re-sourced_
 - Licence: _not yet recorded_
 - Photographer / rights holder: _not yet recorded_
 
