@@ -1,7 +1,5 @@
-import {
-  categoryLabels,
-  type ProductCategory,
-} from "@/features/catalog/types";
+import { useTranslations } from "next-intl";
+import type { ProductCategory } from "@/features/catalog/types";
 
 type CategoryTabsProps = {
   categories: ProductCategory[];
@@ -14,6 +12,8 @@ export function CategoryTabs({
   selected,
   onSelect,
 }: CategoryTabsProps): React.ReactElement {
+  const t = useTranslations("catalog");
+
   return (
     <div className="flex gap-2 overflow-x-auto pb-2">
       <button
@@ -21,7 +21,7 @@ export function CategoryTabs({
         onClick={() => onSelect("all")}
         className={tabClass(selected === "all")}
       >
-        Alle
+        {t("all")}
       </button>
       {categories.map((category) => (
         <button
@@ -30,7 +30,7 @@ export function CategoryTabs({
           onClick={() => onSelect(category)}
           className={tabClass(selected === category)}
         >
-          {categoryLabels[category]}
+          {t(`categories.${category}`)}
         </button>
       ))}
     </div>

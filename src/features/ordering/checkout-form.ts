@@ -10,12 +10,12 @@ export const PaymentMethodId = [
 
 export type PaymentMethodId = (typeof PaymentMethodId)[number];
 
-export const PAYMENT_METHODS: { id: PaymentMethodId; label: string }[] = [
-  { id: "stripe", label: "Kreditkarte (Stripe)" },
-  { id: "paypal", label: "PayPal" },
-  { id: "klarna", label: "Klarna" },
-  { id: "bar", label: "Bar / EC" },
-  { id: "rechnung", label: "Rechnung" },
+export const PAYMENT_METHODS: { id: PaymentMethodId }[] = [
+  { id: "stripe" },
+  { id: "paypal" },
+  { id: "klarna" },
+  { id: "bar" },
+  { id: "rechnung" },
 ];
 
 export type FulfillmentMode = "pickup" | "delivery";
@@ -24,43 +24,43 @@ const baseSchema = z.object({
   name: z
     .string()
     .trim()
-    .min(2, "Bitte gib deinen Namen an.")
-    .max(80, "Der Name ist zu lang."),
+    .min(2, "invalid_name")
+    .max(80, "name_too_long"),
   email: z
     .string()
     .trim()
-    .email("Bitte gib eine gültige E-Mail-Adresse an.")
-    .max(120, "Die E-Mail-Adresse ist zu lang."),
+    .email("invalid_email")
+    .max(120, "email_too_long"),
   phone: z
     .string()
     .trim()
-    .regex(/^[+0-9][0-9 /()-]{4,19}$/, "Bitte gib eine gültige Telefonnummer an."),
+    .regex(/^[+0-9][0-9 /()-]{4,19}$/, "invalid_phone"),
   mode: z.enum(["pickup", "delivery"], {
-    errorMap: () => ({ message: "Bitte wähle Abholung oder Lieferung." }),
+    errorMap: () => ({ message: "choose_mode" }),
   }),
   deliveryDate: z.string().optional().default(""),
   deliverySlotId: z.string().optional().default(""),
   express: z.boolean().optional().default(false),
   payment: z.enum(PaymentMethodId, {
-    errorMap: () => ({ message: "Bitte wähle eine Zahlungsart." }),
+    errorMap: () => ({ message: "choose_payment" }),
   }),
   street: z
     .string()
     .trim()
-    .max(120, "Die Adresse ist zu lang.")
+    .max(120, "street_too_long")
     .optional()
     .default(""),
   zip: z.string().trim().optional().default(""),
   city: z
     .string()
     .trim()
-    .max(80, "Der Ort ist zu lang.")
+    .max(80, "city_too_long")
     .optional()
     .default(""),
   notes: z
     .string()
     .trim()
-    .max(500, "Die Notiz ist zu lang.")
+    .max(500, "notes_too_long")
     .optional()
     .default(""),
 });
@@ -71,28 +71,28 @@ export const checkoutFormSchema = baseSchema.superRefine((data, context) => {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["street"],
-        message: "Bitte gib deine Straße an.",
+        message: "street_required",
       });
     }
     if (!data.zip || !/^[0-9]{5}$/.test(data.zip)) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["zip"],
-        message: "Bitte gib eine gültige PLZ an.",
+        message: "zip_invalid",
       });
     }
     if (!data.city) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["city"],
-        message: "Bitte gib deinen Ort an.",
+        message: "city_required",
       });
     }
     if (!data.deliveryDate || !data.deliverySlotId) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["deliverySlotId"],
-        message: "Bitte wähle einen Lieferzeitraum.",
+        message: "choose_slot",
       });
     }
   }

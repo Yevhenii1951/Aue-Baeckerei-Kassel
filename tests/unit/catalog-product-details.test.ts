@@ -6,6 +6,7 @@ import {
   buildProductJsonLd,
   findProductBySlug,
   relatedProducts,
+  type ProductLabels,
 } from "@/features/catalog/productDetails";
 
 describe("catalog product details", () => {
@@ -30,6 +31,7 @@ describe("catalog product details", () => {
     const jsonLd = buildProductJsonLd(
       product,
       "https://example.test/de/sortiment/baguette",
+      testLabels,
     );
 
     expect(jsonLd["@type"]).toBe("Product");
@@ -50,6 +52,15 @@ describe("catalog product details", () => {
     ).toBe(true);
   });
 });
+
+const testLabels: ProductLabels = {
+  category: (category) => `cat:${category}`,
+  allergen: (code) => `alg:${code}`,
+  onRequest: "on-request",
+  noAllergens: "no-allergens",
+  ingredients: "ingredients",
+  allergens: "allergens",
+};
 
 function requiredProduct(slug: string) {
   const product = demoProducts.find((candidate) => candidate.id === slug);

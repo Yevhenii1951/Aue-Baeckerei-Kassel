@@ -32,20 +32,13 @@ export type ProductFilter = {
 
 export type ProductSort = "beliebt" | "name-asc" | "price-asc" | "price-desc";
 
-export const categoryLabels: Record<ProductCategory, string> = {
-  bread: "Brote",
-  rolls: "Brötchen",
-  sweets: "Süßes",
-  drinks: "Getränke",
-  snacks: "Snacks",
-  fineGoods: "Feinkost",
-};
+export const PRODUCT_CATEGORIES: ProductCategory[] = [
+  "bread",
+  "rolls",
+  "sweets",
+  "drinks",
+  "snacks",
+  "fineGoods",
+];
 
-export const allergenLabels: Record<AllergenCode, string> = {
-  A: "Gluten",
-  C: "Eier",
-  F: "Senf",
-  G: "Milch",
-  H: "Schalenfrüchte",
-  N: "Sesam",
-};
+export const ALLERGEN_CODES: AllergenCode[] = ["A", "C", "F", "G", "H", "N"];

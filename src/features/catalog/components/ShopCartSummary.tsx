@@ -1,24 +1,25 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { useCart } from "@/features/ordering/cart-provider";
-import { formatPrice } from "@/features/ordering/price";
+import { formatEuroCents } from "@/lib/format";
 
 export function ShopCartSummary(): React.ReactElement {
   const { items, totals, changeQuantity, openCart } = useCart();
+  const t = useTranslations("cart");
+  const locale = useLocale();
 
   return (
     <aside className="sticky bottom-0 rounded-t-lg border border-brand-deep/10 bg-brand-deep p-4 text-cream shadow-panel lg:top-24 lg:rounded-lg">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-lg font-semibold">Warenkorb</h2>
+          <h2 className="text-lg font-semibold">{t("title")}</h2>
           <p className="mt-1 text-sm text-cream/70">
-            {items.length === 0
-              ? "Noch leer"
-              : `${items.length} Positionen ausgewählt`}
+            {items.length === 0 ? t("empty") : t("positionsSelected", { count: items.length })}
           </p>
         </div>
         <p className="font-semibold text-amber">
-          {formatPrice(totals.totalCents)}
+          {formatEuroCents(totals.totalCents, locale)}
         </p>
       </div>
 
@@ -31,7 +32,7 @@ export function ShopCartSummary(): React.ReactElement {
             <div>
               <p className="font-medium">{line.name}</p>
               <p className="text-sm text-cream/65">
-                {line.quantity} x {formatPrice(line.unitPriceCents)}
+                {line.quantity} x {formatEuroCents(line.unitPriceCents, locale)}
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -41,7 +42,7 @@ export function ShopCartSummary(): React.ReactElement {
                   changeQuantity(line.productId, line.quantity - 1)
                 }
                 className="size-8 rounded-md border border-white/20"
-                aria-label={`${line.name} reduzieren`}
+                aria-label={t("decrease", { name: line.name })}
               >
                 -
               </button>
@@ -51,7 +52,7 @@ export function ShopCartSummary(): React.ReactElement {
                   changeQuantity(line.productId, line.quantity + 1)
                 }
                 className="size-8 rounded-md border border-white/20"
-                aria-label={`${line.name} erhöhen`}
+                aria-label={t("increase", { name: line.name })}
               >
                 +
               </button>
@@ -62,7 +63,7 @@ export function ShopCartSummary(): React.ReactElement {
 
       {totals.discountCents > 0 ? (
         <p className="mt-4 text-sm text-amber">
-          Frühstücks-Bundle: -{formatPrice(totals.discountCents)}
+          {t("bundle")}: -{formatEuroCents(totals.discountCents, locale)}
         </p>
       ) : null}
 
@@ -72,7 +73,7 @@ export function ShopCartSummary(): React.ReactElement {
         disabled={items.length === 0}
         onClick={openCart}
       >
-        Zur Vorbestellung
+        {t("toPreorder")}
       </button>
     </aside>
   );

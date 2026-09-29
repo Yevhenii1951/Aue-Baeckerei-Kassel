@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import {
   getSlotStatus,
   type PickupSlot,
@@ -10,12 +11,6 @@ type PreorderSlotPickerProps = {
   slots: PickupSlot[];
   selectedId: string | null;
   onSelect: (slotId: string | null) => void;
-};
-
-const STATUS_LABELS: Record<SlotStatus, string> = {
-  available: "Noch frei",
-  limited: "Wenige Plätze",
-  full: "Ausgebucht",
 };
 
 const STATUS_CLASSES: Record<SlotStatus, string> = {
@@ -29,6 +24,8 @@ export function PreorderSlotPicker({
   selectedId,
   onSelect,
 }: PreorderSlotPickerProps): React.ReactElement {
+  const t = useTranslations("vorbestellen");
+
   return (
     <div className="grid grid-cols-2 gap-2">
       {slots.map((slot) => {
@@ -50,10 +47,10 @@ export function PreorderSlotPicker({
             }`}
           >
             <span className="font-medium">
-              {slot.startTime}–{slot.endTime} Uhr
+              {t("slotTime", { start: slot.startTime, end: slot.endTime })}
             </span>
             <span className={selected ? "text-cream/75 text-xs" : "text-xs opacity-70"}>
-              {STATUS_LABELS[status]}
+              {t(`slotStatus.${status}`)}
             </span>
           </button>
         );

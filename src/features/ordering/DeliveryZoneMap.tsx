@@ -2,6 +2,7 @@
 
 import type { Map as LeafletMap } from "leaflet";
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { DELIVERY_ZONES } from "@/features/ordering/delivery";
 import { useConsent } from "@/features/consent/consent-store";
 
@@ -12,6 +13,7 @@ const ZONE_COLORS = ["#7c1428", "#c89435", "#49684a"] as const;
 
 export function DeliveryZoneMap() {
   const { map: consent } = useConsent();
+  const t = useTranslations("lieferung");
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const [loadFailed, setLoadFailed] = useState(false);
@@ -45,7 +47,7 @@ export function DeliveryZoneMap() {
             })
             .addTo(map)
             .bindPopup(
-              `Zone ${zone.zone} · bis ${zone.distanceKm} km`,
+              t("zoneRadius", { zone: zone.zone, km: zone.distanceKm }),
             );
         });
 
@@ -70,18 +72,13 @@ export function DeliveryZoneMap() {
       mapRef.current?.remove();
       mapRef.current = null;
     };
-  }, [consent]);
+  }, [consent, t]);
 
   if (consent !== "granted") {
     return (
       <div className="rounded-lg border border-brand-deep/10 bg-paper p-5">
-        <h2 className="font-display text-2xl font-semibold">Liefergebiet als Karte</h2>
-        <p className="mt-3 leading-7 text-ink/72">
-          Die Karte zeigt die drei Lieferzonen als Ringe um die Backstube. Sie
-          kommt von OpenStreetMap und wird erst geladen, wenn Sie oben der
-          Zustimmung zugestimmt haben. Die PLZ-Prüfung und die Zonentabelle
-          funktionieren auch ohne Karte.
-        </p>
+        <h2 className="font-display text-2xl font-semibold">{t("mapTitle")}</h2>
+        <p className="mt-3 leading-7 text-ink/72">{t("mapHint")}</p>
       </div>
     );
   }
@@ -91,13 +88,12 @@ export function DeliveryZoneMap() {
       <div
         ref={containerRef}
         role="img"
-        aria-label="Karte mit den drei Lieferzonen rund um die Backstube in Kassel"
+        aria-label={t("mapLabel")}
         className="h-96 w-full rounded-lg border border-brand-deep/10"
       />
       {loadFailed ? (
         <p role="alert" className="text-sm text-ink/72">
-          Die Karte konnte nicht geladen werden. Die Zonentabelle oben zeigt
-          dieselben Angaben.
+          {t("mapFailed")}
         </p>
       ) : null}
       <ul className="flex flex-wrap gap-4 text-sm">
@@ -108,7 +104,7 @@ export function DeliveryZoneMap() {
               className="size-3 rounded-full border"
               style={{ borderColor: ZONE_COLORS[index], backgroundColor: `${ZONE_COLORS[index]}22` }}
             />
-            Zone {zone.zone} · {zone.distanceKm} km
+            {t("zoneShort", { zone: zone.zone, km: zone.distanceKm })}
           </li>
         ))}
       </ul>

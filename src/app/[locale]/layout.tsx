@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/features/seo/site";
@@ -24,12 +24,18 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: "Aue-Bäckerei Kassel",
-  description:
-    "Moderne Handwerksbäckerei in Kassel mit Vorbestellung, Café und frischem Sauerteigbrot.",
-};
+export async function generateMetadata({
+  params,
+}: Readonly<{ params: Promise<{ locale: string }> }>): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "shell" });
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: "Aue-Bäckerei Kassel",
+    description: t("metaDescription"),
+  };
+}
 
 export default async function LocaleLayout({
   children,

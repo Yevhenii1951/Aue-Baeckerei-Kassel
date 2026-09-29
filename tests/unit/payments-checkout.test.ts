@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { startCheckout, type StartCheckoutDeps } from "@/features/payments/checkout";
-import { deliveryTimeLabel } from "@/features/ordering/checkoutLabels";
+import { formatDate } from "@/features/ordering/checkoutLabels";
 import type { CreateOrderResult } from "@/features/ordering/orderService";
 import type { StripeCheckoutSessionInput } from "@/features/payments/stripeClient";
 
@@ -143,7 +143,7 @@ describe("startCheckout", () => {
       customerName: "Max Mustermann",
       customerEmail: "max@example.de",
       mode: "delivery",
-      deliveryLabel: deliveryTimeLabel(customer),
+      deliveryLabel: `${formatDate(customer.deliveryDate, "de")}, ${customer.deliverySlotId.split("-").pop()} Uhr`,
       lines: [
         { name: "Hausbrot", unitPriceCents: 450, quantity: 2, lineTotalCents: 900 },
         { name: "Caffè Crema", unitPriceCents: 350, quantity: 1, lineTotalCents: 350 },

@@ -7,7 +7,7 @@ import {
   DELIVERY_ZONES,
   type DeliveryZoneInfo,
 } from "@/features/ordering/delivery";
-import { formatPrice } from "@/features/ordering/price";
+import { formatEuroCents } from "@/lib/format";
 import { buildPublicMetadata } from "@/features/seo/publicMetadata";
 import { parseSupportedLocale } from "@/features/seo/site";
 
@@ -47,7 +47,7 @@ export default async function LieferungPage({
       <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-8">
         <div className="grid gap-4 sm:grid-cols-3">
           {DELIVERY_ZONES.map((zone) => (
-            <ZoneCard key={zone.zone} zone={zone} />
+            <ZoneCard key={zone.zone} zone={zone} t={t} locale={locale} />
           ))}
         </div>
 
@@ -61,25 +61,37 @@ export default async function LieferungPage({
   );
 }
 
-function ZoneCard({ zone }: { zone: DeliveryZoneInfo }): React.ReactElement {
+type Translator = (key: string, values?: Record<string, string | number>) => string;
+
+function ZoneCard({
+  zone,
+  t,
+  locale,
+}: {
+  zone: DeliveryZoneInfo;
+  t: Translator;
+  locale: string;
+}): React.ReactElement {
   return (
     <div className="surface p-5">
-      <p className="text-sm font-semibold text-sage">Zone {zone.zone}</p>
+      <p className="text-sm font-semibold text-sage">
+        {t("zoneLabel")} {zone.zone}
+      </p>
       <h2 className="mt-1 text-lg font-semibold text-brand-deep">
-        bis {zone.distanceKm} km
+        {t("upToKm", { km: zone.distanceKm })}
       </h2>
-      <p className="mt-2 text-sm text-ink/70">{zone.note}</p>
+      <p className="mt-2 text-sm text-ink/70">{t(`zoneNotes.zone${zone.zone}`)}</p>
       <dl className="mt-4 grid gap-1 text-sm">
         <div className="flex justify-between">
-          <dt className="text-ink/60">Lieferkosten</dt>
+          <dt className="text-ink/60">{t("deliveryFee")}</dt>
           <dd className="font-medium text-brand-deep">
-            {formatPrice(zone.feeCents)}
+            {formatEuroCents(zone.feeCents, locale)}
           </dd>
         </div>
         <div className="flex justify-between">
-          <dt className="text-ink/60">Ab Warenwert frei</dt>
+          <dt className="text-ink/60">{t("freeFromValue")}</dt>
           <dd className="font-medium text-brand-deep">
-            {formatPrice(zone.freeThresholdCents)}
+            {formatEuroCents(zone.freeThresholdCents, locale)}
           </dd>
         </div>
       </dl>

@@ -10,10 +10,13 @@ import {
   findProductBySlug,
   ingredientText,
   relatedProducts,
+  type ProductLabels,
 } from "@/features/catalog/productDetails";
-import { categoryLabels } from "@/features/catalog/types";
+import { tagLabel } from "@/features/catalog/tagLabel";
+import type { AllergenCode, ProductCategory } from "@/features/catalog/types";
 import { buildPublicMetadata } from "@/features/seo/publicMetadata";
 import { localizedSiteUrl, parseSupportedLocale } from "@/features/seo/site";
+import { formatEuroCents } from "@/lib/format";
 
 type ProductPageProps = Readonly<{
   params: Promise<{ locale: string; product: string }>;
@@ -43,7 +46,16 @@ export default async function ProductPage({ params }: ProductPageProps): Promise
   if (!product) notFound();
 
   const t = await getTranslations("sortiment");
+  const tc = await getTranslations("catalog");
   const related = relatedProducts(product);
+  const labels: ProductLabels = {
+    category: (category: ProductCategory) => tc(`categories.${category}`),
+    allergen: (code: AllergenCode) => tc(`allergens.${code}`),
+    onRequest: tc("onRequest"),
+    noAllergens: tc("noAllergens"),
+    ingredients: tc("ingredients"),
+    allergens: tc("allergensHeading"),
+  };
   const productUrl = localizedSiteUrl(parseSupportedLocale(locale), `/sortiment/${product.id}`);
 
   return (
@@ -51,7 +63,7 @@ export default async function ProductPage({ params }: ProductPageProps): Promise
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildProductJsonLd(product, productUrl)),
+          __html: JSON.stringify(buildProductJsonLd(product, productUrl, labels)),
         }}
       />
       <section className="border-b border-brand-deep/10 bg-paper">
@@ -61,7 +73,7 @@ export default async function ProductPage({ params }: ProductPageProps): Promise
               ← {t("title")}
             </Link>
             <p className="mt-6 text-sm font-semibold text-sage">
-              {categoryLabels[product.category]}
+              {labels.category(product.category)}
             </p>
             <h1 className="mt-4 font-display text-5xl font-semibold">{product.name}</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-ink/72">
@@ -69,20 +81,22 @@ export default async function ProductPage({ params }: ProductPageProps): Promise
             </p>
           </div>
           <aside className="rounded-lg border border-brand-deep/10 bg-cream p-5 shadow-card">
-            <p className="text-sm font-semibold text-sage">Preis</p>
+            <p className="text-sm font-semibold text-sage">{t("price")}</p>
             <p className="mt-2 text-3xl font-semibold text-brand-dark">
-              {formatPrice(product.priceCents)}
+              {formatEuroCents(product.priceCents, locale)}
             </p>
-            <p className="mt-1 text-sm text-ink/65">pro {product.unit}</p>
+            <p className="mt-1 text-sm text-ink/65">
+              {t("perUnit", { unit: product.unit })}
+            </p>
             <div className="mt-6 grid gap-3">
               <Link href={`/${locale}/sortiment`} className="btn-amber text-center">
-                In den Warenkorb
+                {t("addToCart")}
               </Link>
               <Link
                 href={`/${locale}/vorbestellen`}
                 className="inline-flex min-h-12 items-center justify-center rounded-lg border border-brand-deep/15 px-6 py-2.5 font-semibold text-brand-dark"
               >
-                Vorbestellen
+                {t("preorder")}
               </Link>
             </div>
           </aside>
@@ -100,12 +114,15 @@ export default async function ProductPage({ params }: ProductPageProps): Promise
             sizes="(min-width: 1024px) 44rem, 100vw"
             className="aspect-[4/3] w-full rounded-lg object-cover shadow-card"
           />
-          <InfoBlock title="Zutaten" value={ingredientText(product)} />
-          <InfoBlock title="Allergene" value={allergenText(product)} />
-          <InfoBlock title="Tags" value={product.tags.join(", ")} />
+          <InfoBlock title={labels.ingredients} value={ingredientText(product, labels)} />
+          <InfoBlock title={labels.allergens} value={allergenText(product, labels)} />
+          <InfoBlock
+            title={t("tags")}
+            value={product.tags.map((tag) => tagLabel(tc, tag)).join(", ")}
+          />
         </div>
         <div className="rounded-lg border border-brand-deep/10 bg-paper p-5">
-          <h2 className="font-display text-2xl font-semibold">Ähnliche Produkte</h2>
+          <h2 className="font-display text-2xl font-semibold">{t("related")}</h2>
           <div className="mt-5 grid gap-3">
             {related.map((candidate) => (
               <Link
@@ -114,7 +131,9 @@ export default async function ProductPage({ params }: ProductPageProps): Promise
                 className="rounded-lg border border-brand-deep/10 bg-cream p-3"
               >
                 <span className="block font-semibold">{candidate.name}</span>
-                <span className="text-sm text-ink/65">{formatPrice(candidate.priceCents)}</span>
+                <span className="text-sm text-ink/65">
+                  {formatEuroCents(candidate.priceCents, locale)}
+                </span>
               </Link>
             ))}
           </div>
@@ -131,11 +150,4 @@ function InfoBlock({ title, value }: Readonly<{ title: string; value: string }>)
       <p className="mt-3 leading-7 text-ink/72">{value}</p>
     </section>
   );
-}
-
-function formatPrice(priceCents: number): string {
-  return new Intl.NumberFormat("de-DE", {
-    style: "currency",
-    currency: "EUR",
-  }).format(priceCents / 100);
 }

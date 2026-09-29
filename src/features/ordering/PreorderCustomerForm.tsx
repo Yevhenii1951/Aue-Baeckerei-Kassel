@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import type { PreorderFormValues } from "./preorder-form";
 
 type PreorderCustomerFormProps = {
@@ -36,9 +37,12 @@ export function PreorderCustomerForm({
   onChange,
   onSubmit,
 }: PreorderCustomerFormProps): React.ReactElement {
+  const t = useTranslations("vorbestellen");
+  const tv = useTranslations("validation");
+
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-4">
-      <Field label="Name *" error={errors.name}>
+      <Field label={t("fieldName")} error={errors.name ? tv(errors.name) : undefined}>
         <input
           value={values.name}
           onChange={(event) => onChange("name", event.target.value)}
@@ -48,7 +52,7 @@ export function PreorderCustomerForm({
         />
       </Field>
 
-      <Field label="E-Mail *" error={errors.email}>
+      <Field label={t("fieldEmail")} error={errors.email ? tv(errors.email) : undefined}>
         <input
           type="email"
           value={values.email}
@@ -60,7 +64,7 @@ export function PreorderCustomerForm({
         />
       </Field>
 
-      <Field label="Telefon *" error={errors.phone}>
+      <Field label={t("fieldPhone")} error={errors.phone ? tv(errors.phone) : undefined}>
         <input
           type="tel"
           value={values.phone}
@@ -72,7 +76,7 @@ export function PreorderCustomerForm({
         />
       </Field>
 
-      <Field label="Notizen für die Bäckerei" error={errors.notes}>
+      <Field label={t("fieldNotes")} error={errors.notes ? tv(errors.notes) : undefined}>
         <textarea
           rows={3}
           value={values.notes}
@@ -86,7 +90,7 @@ export function PreorderCustomerForm({
         type="submit"
         className="min-h-11 rounded-lg bg-amber px-4 py-2 font-semibold text-brand-deep"
       >
-        Vorbestellung absenden
+        {t("submit")}
       </button>
     </form>
   );

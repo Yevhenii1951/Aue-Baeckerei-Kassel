@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type { SiteLocale } from "@/features/seo/site";
 import { useCart } from "./cart-provider";
-import {
-  PAYMENT_METHODS,
-  parseCheckoutForm,
-  type CheckoutFormValues,
-} from "./checkout-form";
+import { parseCheckoutForm, type CheckoutFormValues } from "./checkout-form";
 import { createDemoOrderNumber } from "./orderNumber";
 import { deliveryChargeCents, zoneForPostalCode } from "./delivery";
 import { EXPRESS_FEE_CENTS } from "./deliverySlots";
@@ -54,6 +51,9 @@ export function CheckoutFlow({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sequence, setSequence] = useState(1);
   const [confirmed, setConfirmed] = useState<ConfirmedOrder | null>(null);
+  const t = useTranslations("kasse");
+  const tc = useTranslations("cart");
+  const tl = useTranslations();
   const { payWithStripe, pending, error: paymentError } = useStripeCheckout({
     cart: items.map((item) => ({ productId: item.productId, quantity: item.quantity })),
     locale,
@@ -64,13 +64,13 @@ export function CheckoutFlow({
     return (
       <div className="grid place-content-center gap-4 py-20 text-center">
         <p className="max-w-md text-ink/70">
-          Dein Warenkorb ist noch leer.
+          {tc("emptyFlow")}
         </p>
         <Link
           href={`/${locale}/sortiment`}
           className="mx-auto rounded-lg bg-brand px-4 py-2 font-semibold text-cream"
         >
-          Zum Sortiment
+          {tc("toAssortment")}
         </Link>
       </div>
     );
@@ -117,9 +117,7 @@ export function CheckoutFlow({
       return;
     }
 
-    const paymentLabel =
-      PAYMENT_METHODS.find((method) => method.id === result.data.payment)
-        ?.label ?? result.data.payment;
+    const paymentLabel = t(`methodLabels.${result.data.payment}`);
 
     setConfirmed({
       orderNumber: createDemoOrderNumber(new Date().getFullYear(), sequence),
@@ -131,7 +129,7 @@ export function CheckoutFlow({
           : undefined,
       deliveryLabel:
         result.data.mode === "delivery"
-          ? deliveryTimeLabel(result.data)
+          ? deliveryTimeLabel(result.data, locale, tl)
           : undefined,
       deliveryFeeCents:
         result.data.mode === "delivery" && deliveryZone !== null

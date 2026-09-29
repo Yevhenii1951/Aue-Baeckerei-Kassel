@@ -1,9 +1,15 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 type PaymentNoticeProps = {
   cancelled: boolean;
   error: string | null;
 };
 
 export function PaymentNotice({ cancelled, error }: PaymentNoticeProps) {
+  const t = useTranslations("kasse");
+
   if (error) {
     return (
       <p
@@ -21,8 +27,7 @@ export function PaymentNotice({ cancelled, error }: PaymentNoticeProps) {
         role="status"
         className="rounded-lg border border-brand-deep/20 bg-amber-soft px-4 py-3 text-sm text-brand-deep"
       >
-        Die Zahlung wurde abgebrochen. Es wurde nichts abgebucht, dein Warenkorb
-        ist noch da.
+        {t("cancelledNotice")}
       </p>
     );
   }

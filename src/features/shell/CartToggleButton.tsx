@@ -1,9 +1,11 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useCart } from "@/features/ordering/cart-provider";
 
 export function CartToggleButton() {
   const { items, isOpen, openCart } = useCart();
+  const t = useTranslations("cart");
   const count = items.length;
 
   return (
@@ -12,7 +14,7 @@ export function CartToggleButton() {
       onClick={openCart}
       aria-haspopup="dialog"
       aria-expanded={isOpen}
-      aria-label={count > 0 ? `Warenkorb, ${count} Artikel` : "Warenkorb"}
+      aria-label={count > 0 ? t("openCount", { count }) : t("open")}
       className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-lg bg-amber px-3 py-2 font-semibold text-brand-deep sm:justify-start"
     >
       <svg
@@ -31,7 +33,7 @@ export function CartToggleButton() {
         <circle cx="10" cy="20" r="1" />
         <circle cx="18" cy="20" r="1" />
       </svg>
-      <span className="hidden sm:inline">Warenkorb</span>
+      <span className="hidden sm:inline">{t("title")}</span>
       {count > 0 ? (
         <span
           aria-hidden="true"
