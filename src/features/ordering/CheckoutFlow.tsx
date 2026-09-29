@@ -45,7 +45,7 @@ export function CheckoutFlow({
   paymentsEnabled,
   paymentCancelled,
 }: CheckoutFlowProps): React.ReactElement {
-  const { items, totals } = useCart();
+  const { items, totals, clearCart } = useCart();
   const selection = useFulfillment();
   const [form, setForm] = useState<CheckoutFormValues>(EMPTY_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -60,7 +60,9 @@ export function CheckoutFlow({
     returnPath: `/${locale}/kasse`,
   });
 
-  if (items.length === 0) {
+  // The confirmation screen owns the view once the cart is emptied, otherwise
+  // the empty-cart guard would immediately replace it.
+  if (items.length === 0 && !confirmed) {
     return (
       <div className="grid place-content-center gap-4 py-20 text-center">
         <p className="max-w-md text-ink/70">
@@ -119,8 +121,14 @@ export function CheckoutFlow({
 
     const paymentLabel = t(`methodLabels.${result.data.payment}`);
 
+    const deliveryFeeCents =
+      result.data.mode === "delivery" && deliveryZone !== null
+        ? deliveryCost
+        : undefined;
+
     setConfirmed({
       orderNumber: createDemoOrderNumber(new Date().getFullYear(), sequence),
+      totals,
       mode: result.data.mode,
       paymentLabel,
       address:
@@ -131,12 +139,10 @@ export function CheckoutFlow({
         result.data.mode === "delivery"
           ? deliveryTimeLabel(result.data, locale, tl)
           : undefined,
-      deliveryFeeCents:
-        result.data.mode === "delivery" && deliveryZone !== null
-          ? deliveryCost
-          : undefined,
+      deliveryFeeCents,
     });
     setSequence((current) => current + 1);
+    clearCart();
   }
 
   if (confirmed) {

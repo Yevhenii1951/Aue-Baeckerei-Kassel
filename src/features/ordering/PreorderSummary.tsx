@@ -3,19 +3,25 @@
 import { useLocale, useTranslations } from "next-intl";
 import { formatEuroCents } from "@/lib/format";
 import { useCart } from "./cart-provider";
+import type { CartTotals } from "./cart";
 
 type PreorderSummaryProps = {
   deliveryFeeCents?: number | null;
+  // The confirmation screen renders the order that was just submitted, while
+  // the cart is already empty, so the totals are frozen at submit time.
+  frozenTotals?: CartTotals | null;
 };
 
 export function PreorderSummary({
   deliveryFeeCents = null,
+  frozenTotals = null,
 }: PreorderSummaryProps): React.ReactElement {
   const { items, totals } = useCart();
   const tc = useTranslations("cart");
   const tv = useTranslations("vorbestellen");
   const locale = useLocale();
-  const totalCents = totals.totalCents + (deliveryFeeCents ?? 0);
+  const shown = frozenTotals ?? totals;
+  const totalCents = shown.totalCents + (deliveryFeeCents ?? 0);
 
   return (
     <aside className="rounded-lg border border-brand-deep/10 bg-paper p-5 shadow-card lg:sticky lg:top-24">
@@ -23,11 +29,11 @@ export function PreorderSummary({
         {tv("selection")}
       </h2>
       <p className="mt-1 text-sm text-ink/65">
-        {tv("itemCount", { count: items.length })}
+        {tv("itemCount", { count: frozenTotals ? shown.lines.length : items.length })}
       </p>
 
       <ul className="mt-4 grid gap-2">
-        {totals.lines.map((line) => (
+        {shown.lines.map((line) => (
           <li
             key={line.productId}
             className="flex items-baseline justify-between gap-3 text-sm"
@@ -45,12 +51,12 @@ export function PreorderSummary({
       <div className="mt-4 grid gap-1 border-t border-brand-deep/10 pt-3 text-sm text-ink/70">
         <p className="flex justify-between">
           <span>{tc("subtotal")}</span>
-          <span>{formatEuroCents(totals.subtotalCents, locale)}</span>
+          <span>{formatEuroCents(shown.subtotalCents, locale)}</span>
         </p>
-        {totals.discountCents > 0 ? (
+        {shown.discountCents > 0 ? (
           <p className="flex justify-between text-amber">
             <span>{tc("bundle")}</span>
-            <span>-{formatEuroCents(totals.discountCents, locale)}</span>
+            <span>-{formatEuroCents(shown.discountCents, locale)}</span>
           </p>
         ) : null}
         {deliveryFeeCents !== null ? (
