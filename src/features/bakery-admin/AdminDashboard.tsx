@@ -2,16 +2,16 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { useClientNow } from "@/features/ordering/useClientNow";
 import { berlinDateString } from "@/features/ordering/deliverySlots";
-import { formatPrice } from "@/features/ordering/price";
+import { formatEuroCents } from "@/lib/format";
 import { aggregateBackliste } from "./backliste";
 import {
   demoOrders,
   sumRevenueCents,
   topProducts,
   CUTOFF_TIME,
-  CUTOFF_NOTE,
   demoBacklisteOrders,
 } from "./demoDashboard";
 import { applyOrderFilters } from "./orderFilters";
@@ -20,14 +20,9 @@ import { OrderList } from "./OrderList";
 import { OrderFilters } from "./OrderFilters";
 import { BacklistePanel } from "./BacklistePanel";
 
-const KPI_LABELS = {
-  orders: "Bestellungen heute",
-  revenue: "Umsatz heute",
-  topProduct: "Top-Produkt",
-  cutoff: "Vorbestell-Cutoff",
-};
-
 export function AdminDashboard(): React.ReactElement {
+  const t = useTranslations("admin");
+  const locale = useLocale();
   const now = useClientNow();
   const [filter, setFilter] = React.useState<OrderFilterState>({
     date: "",
@@ -57,20 +52,18 @@ export function AdminDashboard(): React.ReactElement {
     <div className="grid gap-8">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold text-sage">Inhaberansicht</p>
+          <p className="text-sm font-semibold text-sage">{t("dashboard.ownerView")}</p>
           <h1 className="mt-1 font-display text-4xl font-semibold text-brand-deep">
-            Dashboard — {formatDay(day)}
+            {t("dashboard.title")} — {formatDay(day, locale)}
           </h1>
-          <p className="mt-2 text-sm text-ink/65">
-            Demo-Daten, bis die Bestell-Persistenz eingeführt ist.
-          </p>
+          <p className="mt-2 text-sm text-ink/65">{t("dashboard.demoDataNote")}</p>
         </div>
         <nav>
           <Link
-            href="/admin/login"
+            href={`/${locale}/admin/login`}
             className="rounded-lg border border-brand-deep/15 bg-white px-4 py-2 text-sm font-semibold text-brand-deep"
           >
-            Staff-Login
+            {t("dashboard.staffLogin")}
           </Link>
         </nav>
       </header>
@@ -89,24 +82,30 @@ export function AdminDashboard(): React.ReactElement {
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="text-sm font-medium text-ink/60">{KPI_LABELS.orders}</p>
+          <p className="text-sm font-medium text-ink/60">{t("dashboard.kpiOrders")}</p>
           <p className="mt-1 text-2xl font-semibold text-brand-deep">{displayedOrders.length}</p>
         </div>
         <div>
-          <p className="text-sm font-medium text-ink/60">{KPI_LABELS.revenue}</p>
-          <p className="mt-1 text-2xl font-semibold text-brand-deep">{formatPrice(revenueCents)}</p>
-        </div>
-        <div>
-          <p className="text-sm font-medium text-ink/60">{KPI_LABELS.topProduct}</p>
+          <p className="text-sm font-medium text-ink/60">{t("dashboard.kpiRevenue")}</p>
           <p className="mt-1 text-2xl font-semibold text-brand-deep">
-            {popular[0]?.name ?? "—"}
-            {popular[0] ? ` ${popular[0].quantity} Stück` : ""}
+            {formatEuroCents(revenueCents, locale)}
           </p>
         </div>
         <div>
-          <p className="text-sm font-medium text-ink/60">{KPI_LABELS.cutoff}</p>
-          <p className="mt-1 text-2xl font-semibold text-brand-deep">{CUTOFF_TIME}</p>
-          <p className="mt-1 text-xs text-ink/55">{CUTOFF_NOTE}</p>
+          <p className="text-sm font-medium text-ink/60">{t("dashboard.kpiTopProduct")}</p>
+          <p className="mt-1 text-2xl font-semibold text-brand-deep">
+            {popular[0]?.name ?? "—"}
+            {popular[0]
+              ? ` ${t("orderCard.pieces", { count: popular[0].quantity })}`
+              : ""}
+          </p>
+        </div>
+        <div>
+          <p className="text-sm font-medium text-ink/60">{t("dashboard.kpiCutoff")}</p>
+          <p className="mt-1 text-2xl font-semibold text-brand-deep">
+            {t("dashboard.cutoffTime", { time: CUTOFF_TIME })}
+          </p>
+          <p className="mt-1 text-xs text-ink/55">{t("dashboard.cutoffNote")}</p>
         </div>
       </section>
 
@@ -129,10 +128,10 @@ function addDay(date: string): string {
   return new Date(Date.UTC(year, month - 1, day + 1)).toISOString().slice(0, 10);
 }
 
-function formatDay(date: string): string {
+function formatDay(date: string, locale: string): string {
   const [year, month, day] = date.split("-").map(Number);
 
-  return new Intl.DateTimeFormat("de-DE", {
+  return new Intl.DateTimeFormat(locale, {
     weekday: "long",
     day: "2-digit",
     month: "long",

@@ -340,5 +340,116 @@
     "text": "Цей сайт за замовчуванням не завантажує сторонній контент. Карта доставки надходить з OpenStreetMap і завантажується лише після вашої згоди. Для роботи потрібна лише ця настройка; облікового запису клієнта немає.",
     "loadMap": "Завантажити карту",
     "noMap": "Без карти"
+  },
+  "admin": {
+    "meta": {
+      "dashboardTitle": "Панель адміністратора",
+      "loginTitle": "Вхід для персоналу",
+      "passwordTitle": "Встановити пароль персоналу"
+    },
+    "dashboard": {
+      "ownerView": "Перегляд власника",
+      "title": "Панель",
+      "demoDataNote": "Демо-дані, поки не впроваджено збереження замовлень.",
+      "staffLogin": "Вхід для персоналу",
+      "kpiOrders": "Замовлень сьогодні",
+      "kpiRevenue": "Виторг сьогодні",
+      "kpiTopProduct": "Топ-продукт",
+      "kpiCutoff": "Дедлайн передзамовлення",
+      "cutoffTime": "о {time}",
+      "cutoffNote": "Після 20:00 передзамовлення діє на післязавтра."
+    },
+    "filters": {
+      "title": "Фільтр",
+      "date": "Дата",
+      "today": "Сьогодні",
+      "tomorrow": "Завтра",
+      "status": "Статус",
+      "all": "Всі",
+      "fulfillment": "Виконання",
+      "pickup": "Самовивіз",
+      "delivery": "Доставка",
+      "reset": "Скинути фільтри"
+    },
+    "statuses": {
+      "new": "Новий",
+      "preparing": "Готується",
+      "ready": "Готовий",
+      "collected": "Забраний",
+      "delivered": "Доставлений"
+    },
+    "orders": {
+      "title": "Замовлення",
+      "count": "{count, plural, one {# замовлення} few {# замовлення} other {# замовлень}}",
+      "statusPathAria": "Статус замовлення"
+    },
+    "orderCard": {
+      "atTime": "о {time}",
+      "positions": "{count, plural, one {# позиція} few {# позиції} other {# позицій}}",
+      "pieces": "{count, plural, one {# шт.} few {# шт.} other {# шт.}}",
+      "details": "Деталі",
+      "total": "Сума: {price}",
+      "note": "Примітка: {note}",
+      "noNote": "Без примітки.",
+      "cancelDemo": "Скасувати (демо)",
+      "refundDemo": "Повернути (демо)",
+      "cancelAria": "Скасування — демо-дія",
+      "refundAria": "Повернення — демо-дія"
+    },
+    "backliste": {
+      "production": "Виробництво",
+      "title": "Виробничий список",
+      "forDate": "Кількість продуктів і слоти на {date}.",
+      "productionDate": "Дата виробництва",
+      "exportCsv": "Експорт CSV",
+      "print": "Друк",
+      "totals": "Загальна кількість",
+      "productSlot": "Продукт x слот",
+      "product": "Продукт",
+      "pieces": "{count, plural, one {# шт.} few {# шт.} other {# шт.}}"
+    },
+    "login": {
+      "backToSite": "На сайт",
+      "staffAccess": "Доступ персоналу",
+      "intro": "Увійдіть за обліковим записом Supabase для персоналу з вашого запрошення. Публічний сайт працює і без входу персоналу.",
+      "notConfigured": "Supabase-автентифікація персоналу ще не налаштована. Вкажіть Supabase URL, anon-ключ, service-role-ключ і URL сайту перед використанням входу.",
+      "formWillActivate": "Форма входу активується автоматично, щойно буде налаштовано Supabase-змінні середовища.",
+      "email": "Email",
+      "password": "Пароль",
+      "signingIn": "Виконується вхід",
+      "signIn": "Увійти",
+      "emailForMagicLink": "Email для магічного посилання",
+      "sendingLink": "Надсилання посилання",
+      "sendMagicLink": "Надіслати магічне посилання",
+      "resetPassword": "Скинути пароль",
+      "staffEmail": "Email персоналу",
+      "sendingReset": "Виконується скидання",
+      "sendResetEmail": "Надіслати email для скидання"
+    },
+    "password": {
+      "title": "Встановити пароль персоналу",
+      "intro": "Використовуйте цю сторінку після того, як запрошення або email для скидання відкриє сесію персоналу Supabase у цьому браузері.",
+      "notConfigured": "Supabase-автентифікація персоналу ще не налаштована.",
+      "backToLogin": "Назад до входу персоналу",
+      "newPassword": "Новий пароль",
+      "confirmPassword": "Підтвердіть пароль",
+      "saving": "Збереження пароля",
+      "save": "Зберегти пароль"
+    },
+    "auth": {
+      "invalid_credentials": "Email або пароль некоректні.",
+      "not_staff_member": "Цей Supabase-користувач не є активним співробітником.",
+      "auth_not_configured": "Supabase-автентифікація персоналу ще не налаштована.",
+      "set_url_first": "Встановіть URL сайту, перш ніж надсилати email-посилання персоналу.",
+      "magic_link_failed": "Магічне посилання не вдалося надіслати.",
+      "magic_link_sent": "Магічне посилання надіслано. Перевірте пошту персоналу.",
+      "reset_email_failed": "Email для скидання пароля не вдалося надіслати.",
+      "reset_email_sent": "Email для скидання пароля надіслано. Перевірте пошту персоналу.",
+      "password_update_failed": "Не вдалося оновити пароль.",
+      "check_fields": "Перевірте позначені поля.",
+      "invalid_email": "Вкажіть коректну email-адресу.",
+      "password_too_short": "Щонайменше 8 символів.",
+      "passwords_must_match": "Паролі не збігаються."
+    }
   }
 }

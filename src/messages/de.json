@@ -340,5 +340,116 @@
     "text": "Diese Website lädt standardmäßig keine Inhalte Dritter. Die Lieferkarte kommt von OpenStreetMap und wird erst nach Ihrer Zustimmung geladen. Notwendig für den Betrieb ist nur diese Einstellung; ein Kundenkonto gibt es nicht.",
     "loadMap": "Karte laden",
     "noMap": "Ohne Karte"
+  },
+  "admin": {
+    "meta": {
+      "dashboardTitle": "Admin-Dashboard",
+      "loginTitle": "Admin-Login",
+      "passwordTitle": "Staff-Passwort setzen"
+    },
+    "dashboard": {
+      "ownerView": "Inhaberansicht",
+      "title": "Dashboard",
+      "demoDataNote": "Demo-Daten, bis die Bestell-Persistenz eingeführt ist.",
+      "staffLogin": "Staff-Login",
+      "kpiOrders": "Bestellungen heute",
+      "kpiRevenue": "Umsatz heute",
+      "kpiTopProduct": "Top-Produkt",
+      "kpiCutoff": "Vorbestell-Cutoff",
+      "cutoffTime": "{time} Uhr",
+      "cutoffNote": "Nach 20:00 Uhr gilt die Vorbestellung für übermorgen."
+    },
+    "filters": {
+      "title": "Filter",
+      "date": "Datum",
+      "today": "Heute",
+      "tomorrow": "Morgen",
+      "status": "Status",
+      "all": "Alle",
+      "fulfillment": "Erfüllung",
+      "pickup": "Abholung",
+      "delivery": "Lieferung",
+      "reset": "Filter zurücksetzen"
+    },
+    "statuses": {
+      "new": "Neu",
+      "preparing": "In Zubereitung",
+      "ready": "Bereit",
+      "collected": "Abgeholt",
+      "delivered": "Geliefert"
+    },
+    "orders": {
+      "title": "Bestellungen",
+      "count": "{count, plural, one {# Bestellung} other {# Bestellungen}}",
+      "statusPathAria": "Bestellstatus"
+    },
+    "orderCard": {
+      "atTime": "{time} Uhr",
+      "positions": "{count, plural, one {# Position} other {# Positionen}}",
+      "pieces": "{count, plural, one {# Stück} other {# Stück}}",
+      "details": "Details",
+      "total": "Summe: {price}",
+      "note": "Notiz: {note}",
+      "noNote": "Keine Notiz.",
+      "cancelDemo": "Stornieren (Demo)",
+      "refundDemo": "Erstatten (Demo)",
+      "cancelAria": "Stornierung ist Demo-Aktion",
+      "refundAria": "Erstattung ist Demo-Aktion"
+    },
+    "backliste": {
+      "production": "Produktion",
+      "title": "Backliste",
+      "forDate": "Produktmengen und Slots für {date}.",
+      "productionDate": "Produktionsdatum",
+      "exportCsv": "CSV exportieren",
+      "print": "Drucken",
+      "totals": "Gesamtmengen",
+      "productSlot": "Produkt x Slot",
+      "product": "Produkt",
+      "pieces": "{count, plural, one {# Stück} other {# Stück}}"
+    },
+    "login": {
+      "backToSite": "Zur Website",
+      "staffAccess": "Staff-Zugang",
+      "intro": "Mit dem Supabase-Staff-Konto aus deiner Einladung anmelden. Die öffentliche Website bleibt ohne Staff-Zugang erreichbar.",
+      "notConfigured": "Supabase-Staff-Auth ist noch nicht eingerichtet. Supabase-URL, Anon-Key, Service-Role-Key und Site-URL setzen, bevor der Admin-Login genutzt wird.",
+      "formWillActivate": "Das Login-Formular aktiviert sich automatisch, sobald die Supabase-Umgebungsvariablen gesetzt sind.",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "signingIn": "Anmeldung läuft",
+      "signIn": "Anmelden",
+      "emailForMagicLink": "E-Mail für den Magic Link",
+      "sendingLink": "Link wird gesendet",
+      "sendMagicLink": "Magic Link senden",
+      "resetPassword": "Passwort zurücksetzen",
+      "staffEmail": "Staff-E-Mail",
+      "sendingReset": "Reset wird gesendet",
+      "sendResetEmail": "Reset-E-Mail senden"
+    },
+    "password": {
+      "title": "Staff-Passwort setzen",
+      "intro": "Diese Seite nutzen, wenn eine Einladungs- oder Reset-E-Mail in diesem Browser eine Supabase-Staff-Sitzung geöffnet hat.",
+      "notConfigured": "Supabase-Staff-Auth ist noch nicht eingerichtet.",
+      "backToLogin": "Zurück zum Staff-Login",
+      "newPassword": "Neues Passwort",
+      "confirmPassword": "Passwort bestätigen",
+      "saving": "Passwort wird gespeichert",
+      "save": "Passwort speichern"
+    },
+    "auth": {
+      "invalid_credentials": "E-Mail oder Passwort ist nicht korrekt.",
+      "not_staff_member": "Dieser Supabase-Benutzer ist kein aktiver Mitarbeiter.",
+      "auth_not_configured": "Supabase-Staff-Auth ist noch nicht eingerichtet.",
+      "set_url_first": "Bitte die Site-URL setzen, bevor Staff-Email-Links verschickt werden.",
+      "magic_link_failed": "Der Magic Link konnte nicht gesendet werden.",
+      "magic_link_sent": "Magic Link gesendet. Bitte das Staff-Postfach prüfen.",
+      "reset_email_failed": "Die E-Mail zum Passwort-Reset konnte nicht gesendet werden.",
+      "reset_email_sent": "E-Mail zum Passwort-Reset gesendet. Bitte das Staff-Postfach prüfen.",
+      "password_update_failed": "Das Passwort konnte nicht aktualisiert werden.",
+      "check_fields": "Bitte die markierten Felder prüfen.",
+      "invalid_email": "Bitte eine gültige E-Mail-Adresse angeben.",
+      "password_too_short": "Mindestens 8 Zeichen.",
+      "passwords_must_match": "Die Passwörter stimmen nicht überein."
+    }
   }
 }

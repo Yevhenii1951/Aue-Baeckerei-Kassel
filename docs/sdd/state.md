@@ -1,13 +1,33 @@
 # State
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
-workflow was enforced). ABE-010 through ABE-021, plus ABE-022 to ABE-028 and
-ABE-030, merged on `main`.
+workflow was enforced). ABE-010 through ABE-021, plus ABE-022 to ABE-031,
+merged on `main`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-031 admin/identity i18n on `feature/abe-031-admin-identity-i18n`: the
+  staff surface is off hardcoded language onto a new `admin` next-intl
+  namespace. `bakery-admin/*` (which was hardcoded German) and `identity/*`
+  (which was hardcoded English) now render de/en/uk chrome: dashboard KPIs,
+  order filters, status badges, the status path, order cards, the Backliste
+  panel, the login/password forms and the three admin pages (via
+  `generateMetadata`). German stays canonical; en/uk translate chrome.
+  Demo data (product/customer names, backliste rows) stays German as content.
+  `demoDashboard.ts` lost `ORDER_STATUS_LABEL` and `CUTOFF_NOTE` (status labels
+  and the "20:00 cutoff" copy now live in `admin.statuses`/`admin.dashboard`);
+  `CUTOFF_TIME` stayed a "20:00" constant and "Uhr" comes from messages.
+  Money in admin now goes through `formatEuroCents(cents, locale)` and
+  `src/features/ordering/price.ts` was deleted. Auth server actions now return
+  stable codes (zod messages too: `invalid_email`, `password_too_short`,
+  `passwords_must_match`) under `admin.auth.*`, and the client renders the
+  locale wording with a `t.has()` fallback. The stray "(Admin-Login de)"
+  suffix in `de.json` `login.notConfigured` was removed. `npm run check` green
+  (184 unit + 24 integration); `npm run build` green with `/admin` SSG in all
+  three locales; browser-verified in de/en/uk (typed demo prices agree across
+  locales, e.g. 217,20 € / €217.20).
 - ABE-030 public-path i18n on `feature/abe-030-i18n-public-path`: the public
   customer journey is off hardcoded German. All catalog/cart/preorder/
   checkout/delivery components and the `sortiment`, `lieferung`, `/kasse` and
@@ -259,10 +279,10 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
-- ABE-031: admin and identity UI are still hardcoded German (`bakery-admin/*`,
-  `identity/*`, `/admin` login). Content (`demoProducts.ts`, local SEO pages,
-  product tags) stays German in every locale by owner decision — only chrome
-  is translated.
+- ABE-031 is the last i18n ticket; nothing hardcoded remains on the surface.
+  Follow-ups if any: end-to-end auth flows against a real Supabase project
+  (the form-level codes are already localised but were not exercised with a
+  live staff session).
 - ABE-029 PWA was explicitly dropped by the owner: not in scope.
 
 ## Notes

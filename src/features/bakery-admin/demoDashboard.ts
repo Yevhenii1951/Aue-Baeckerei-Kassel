@@ -30,9 +30,7 @@ export type TopProduct = {
   revenueCents: number;
 };
 
-export const CUTOFF_TIME = "20:00 Uhr";
-export const CUTOFF_NOTE =
-  "Nach 20:00 Uhr gilt die Vorbestellung für übermorgen.";
+export const CUTOFF_TIME = "20:00";
 
 export const ORDER_STATUS_PATH: readonly AdminOrderStatus[] = [
   "new",
@@ -41,14 +39,6 @@ export const ORDER_STATUS_PATH: readonly AdminOrderStatus[] = [
   "collected",
   "delivered",
 ];
-
-export const ORDER_STATUS_LABEL: Record<AdminOrderStatus, string> = {
-  new: "Neu",
-  preparing: "In Zubereitung",
-  ready: "Bereit",
-  collected: "Abgeholt",
-  delivered: "Geliefert",
-};
 
 export function demoOrders(day: string): AdminOrder[];
 export function demoOrders(): AdminOrder[];

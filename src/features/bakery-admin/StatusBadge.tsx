@@ -1,4 +1,7 @@
-import { ORDER_STATUS_LABEL, type AdminOrderStatus } from "./demoDashboard";
+"use client";
+
+import { useTranslations } from "next-intl";
+import type { AdminOrderStatus } from "./demoDashboard";
 
 const TONE: Record<AdminOrderStatus, string> = {
   new: "border-amber/50 bg-amber/10 text-brand-deep",
@@ -13,11 +16,13 @@ export function StatusBadge({
 }: {
   status: AdminOrderStatus;
 }): React.ReactElement {
+  const t = useTranslations("admin.statuses");
+
   return (
     <span
       className={`rounded-full border px-2.5 py-1 text-xs font-medium ${TONE[status]}`}
     >
-      {ORDER_STATUS_LABEL[status]}
+      {t(status)}
     </span>
   );
 }
