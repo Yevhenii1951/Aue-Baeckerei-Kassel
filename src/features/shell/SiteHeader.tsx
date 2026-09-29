@@ -15,6 +15,7 @@ export default async function SiteHeader({ locale }: SiteHeaderProps) {
   const links = navigationLinks(locale, {
     assortment: t("navAssortment"),
     preorder: t("navPreorder"),
+    cafe: t("navCafe"),
     contact: t("navContact"),
     career: t("navCareer"),
     partner: t("navPartner"),
