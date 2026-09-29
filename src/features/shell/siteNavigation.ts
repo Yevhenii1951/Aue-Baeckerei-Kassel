@@ -18,9 +18,10 @@ export type NavLabels = {
 };
 
 /**
- * The header carries the pages a visitor needs, the footer adds the service
- * detail and the legal pages. One source of truth keeps the desktop nav, the
- * drawer and the footer from drifting apart.
+ * The header carries the catalogue, the ordering and the company pages. The
+ * café sits apart from them as a framed link next to the cart, because it is a
+ * place to visit rather than a step in the ordering flow. The footer lists
+ * every page inline plus the service area. Same labels, same hrefs.
  */
 export function navigationLinks(
   locale: SiteLocale,
@@ -29,18 +30,29 @@ export function navigationLinks(
   return [
     { href: `/${locale}/sortiment`, label: labels.assortment },
     { href: `/${locale}/vorbestellen`, label: labels.preorder },
-    { href: `/${locale}/kafe`, label: labels.cafe },
     { href: `/${locale}/kontakt`, label: labels.contact },
     { href: `/${locale}/karriere`, label: labels.career },
     { href: `/${locale}/partner`, label: labels.partner },
   ];
 }
 
+export function cafeLink(locale: SiteLocale, label: string): NavLink {
+  return { href: `/${locale}/kafe`, label };
+}
+
 export function footerNavigationLinks(
   locale: SiteLocale,
   labels: NavLabels,
 ): NavLink[] {
-  return [...navigationLinks(locale, labels), { href: `/${locale}/lieferung`, label: labels.delivery }];
+  return [
+    { href: `/${locale}/sortiment`, label: labels.assortment },
+    { href: `/${locale}/vorbestellen`, label: labels.preorder },
+    cafeLink(locale, labels.cafe),
+    { href: `/${locale}/kontakt`, label: labels.contact },
+    { href: `/${locale}/karriere`, label: labels.career },
+    { href: `/${locale}/partner`, label: labels.partner },
+    { href: `/${locale}/lieferung`, label: labels.delivery },
+  ];
 }
 
 export function legalLinks(locale: SiteLocale, labels: NavLabels): NavLink[] {

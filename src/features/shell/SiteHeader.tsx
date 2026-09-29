@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { SiteLocale } from "@/features/seo/site";
 import { CartToggleButton } from "./CartToggleButton";
 import { MobileMenu } from "./MobileMenu";
-import { navigationLinks } from "./siteNavigation";
+import { cafeLink, navigationLinks } from "./siteNavigation";
 
 type SiteHeaderProps = {
   locale: SiteLocale;
@@ -12,7 +12,7 @@ type SiteHeaderProps = {
 export default async function SiteHeader({ locale }: SiteHeaderProps) {
   const t = await getTranslations("shell");
 
-  const links = navigationLinks(locale, {
+  const labels = {
     assortment: t("navAssortment"),
     preorder: t("navPreorder"),
     cafe: t("navCafe"),
@@ -22,7 +22,9 @@ export default async function SiteHeader({ locale }: SiteHeaderProps) {
     delivery: t("navDelivery"),
     imprint: t("navImprint"),
     privacy: t("navPrivacy"),
-  });
+  };
+  const links = navigationLinks(locale, labels);
+  const cafe = cafeLink(locale, labels.cafe);
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-brand-deep/95 text-cream backdrop-blur">
@@ -47,6 +49,9 @@ export default async function SiteHeader({ locale }: SiteHeaderProps) {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Link href={cafe.href} className="nav-cafe-link">
+            {cafe.label}
+          </Link>
           <CartToggleButton />
           <MobileMenu
             links={links}
