@@ -6,7 +6,7 @@ interface LegalDraftProps {
 
 export default function LegalDraft({ title, warning, children }: LegalDraftProps): React.ReactElement {
   return (
-    <article className="max-w-3xl space-y-6">
+    <article className="mx-auto w-full max-w-3xl space-y-6 px-4 py-12 sm:px-8">
       <h1 className="font-display text-4xl font-semibold">{title}</h1>
       <p className="rounded-2xl border-2 border-brand bg-paper p-5 font-semibold">{warning}</p>
       <div className="space-y-5 text-ink/80">{children}</div>
