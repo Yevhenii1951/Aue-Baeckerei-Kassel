@@ -16,6 +16,11 @@ export type NavLabels = {
   privacy: string;
 };
 
+/** The footer adds the café, which the header deliberately does not carry. */
+export type FooterLabels = NavLabels & {
+  cafe: string;
+};
+
 /**
  * The header carries the transaction only; legal pages live in the footer.
  * One source of truth keeps the desktop nav, the drawer and the footer from
@@ -36,10 +41,11 @@ export function navigationLinks(
 
 export function footerNavigationLinks(
   locale: SiteLocale,
-  labels: NavLabels,
+  labels: FooterLabels,
 ): NavLink[] {
   return [
     ...navigationLinks(locale, labels),
+    { href: `/${locale}/kafe`, label: labels.cafe },
     { href: `/${locale}/lieferung`, label: labels.delivery },
   ];
 }
@@ -50,3 +56,14 @@ export function legalLinks(locale: SiteLocale, labels: NavLabels): NavLink[] {
     { href: `/${locale}/datenschutz`, label: labels.privacy },
   ];
 }
+
+/**
+ * Placeholder profiles: the owner has no accounts yet, so the footer shows the
+ * channels without pretending they exist. Replace the hrefs, not the markup.
+ * Brand glyphs are not drawn here — that would mean shipping other people's
+ * logos; owned SVGs belong in public/ with an entry in docs/sdd/assets.md.
+ */
+export const SOCIAL_LINKS: { label: string; href: string }[] = [
+  { label: "Instagram", href: "#" },
+  { label: "Facebook", href: "#" },
+];

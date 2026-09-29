@@ -10,6 +10,16 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-036 footer on `feature/abe-036-footer`: three columns (brand + socials,
+  navigation, legal), the link lists now come from `shell/siteNavigation.ts`,
+  which is also what the header uses, and the bottom bar carries the copyright
+  year and "Webentwicklung: Yevgenii Riabokon". Social links are placeholders.
+  lucide-react in the pinned version has no brand glyphs, so the platforms are
+  linked by name; real icons need owned SVGs in `public/`.
+- ABE-035 header on `feature/abe-035-header-navigation`: central IA
+  (Sortiment, Vorbestellen, Kontakt, Karriere, Partner werden), icon-only cart
+  with a CSS badge pop, preorder CTA in the desktop header and the drawer.
+  Verified at 1440, 1024 and 390 px without overflow.
 - ABE-034 content pages on `feature/abe-034-content-pages` (stacked on
   `feature/abe-033-sortiment-kategorien`): `/kontakt`, `/kafe`, `/karriere`
   and `/partner` render from `src/features/content/companyPages.ts` through
@@ -320,14 +330,16 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 - The owner asked for one visible pass: modern header, footer and a full
   palette change (deep green, amber, navy) with the reference direction
-  recorded in `docs/sdd/design.md`. That work is split into ABE-035 (header,
-  icon cart, CTA), ABE-036 (footer with socials and the web-development
-  credit) and ABE-037 (palette re-theme). All of it stays local until the
-  owner signs off; nothing is pushed.
+  recorded in `docs/sdd/design.md`. Header (ABE-035) and footer (ABE-036) are
+  done locally; ABE-037 re-themes the palette on top. All of it stays local
+  until the owner signs off; nothing is pushed.
 - ABE-031 and ABE-032 close the i18n and the landing surface. Follow-ups if
   any: end-to-end auth flows against a real Supabase project (form-level codes
   are localised but were not exercised with a live staff session).
 - ABE-029 PWA was explicitly dropped by the owner: not in scope.
+- `ConsentRevokeLink` still hard-codes a German label and only appears after
+  the map consent was granted. Cheap fix, but it is not part of the chrome
+  pass.
 
 ## Notes
 
