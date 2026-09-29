@@ -15,12 +15,17 @@ import { EXPRESS_FEE_CENTS } from "./deliverySlots";
 import { useFulfillment } from "./fulfillment-store";
 import { CheckoutCustomerForm } from "./CheckoutCustomerForm";
 import { CheckoutConfirmation, type ConfirmedOrder } from "./CheckoutConfirmation";
+import { deliveryTimeLabel } from "./checkoutLabels";
+import { PaymentNotice } from "./PaymentNotice";
+import { useStripeCheckout } from "./useStripeCheckout";
 import { DeliveryPanel } from "./DeliveryPanel";
 import { DeliverySchedule } from "./DeliverySchedule";
 import { PreorderSummary } from "./PreorderSummary";
 
 type CheckoutFlowProps = {
   locale: SiteLocale;
+  paymentsEnabled: boolean;
+  paymentCancelled: boolean;
 };
 
 const EMPTY_FORM: CheckoutFormValues = {
@@ -38,13 +43,22 @@ const EMPTY_FORM: CheckoutFormValues = {
   notes: "",
 };
 
-export function CheckoutFlow({ locale }: CheckoutFlowProps): React.ReactElement {
+export function CheckoutFlow({
+  locale,
+  paymentsEnabled,
+  paymentCancelled,
+}: CheckoutFlowProps): React.ReactElement {
   const { items, totals } = useCart();
   const selection = useFulfillment();
   const [form, setForm] = useState<CheckoutFormValues>(EMPTY_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sequence, setSequence] = useState(1);
   const [confirmed, setConfirmed] = useState<ConfirmedOrder | null>(null);
+  const { payWithStripe, pending, error: paymentError } = useStripeCheckout({
+    cart: items.map((item) => ({ productId: item.productId, quantity: item.quantity })),
+    locale,
+    returnPath: `/${locale}/kasse`,
+  });
 
   if (items.length === 0) {
     return (
@@ -85,7 +99,9 @@ export function CheckoutFlow({ locale }: CheckoutFlowProps): React.ReactElement 
         (selection.express ? EXPRESS_FEE_CENTS : 0)
       : 0;
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+  async function handleSubmit(
+    event: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> {
     event.preventDefault();
 
     const result = parseCheckoutForm(effectiveForm);
@@ -95,6 +111,12 @@ export function CheckoutFlow({ locale }: CheckoutFlowProps): React.ReactElement 
     }
 
     setErrors({});
+
+    if (paymentsEnabled && result.data.payment === "stripe") {
+      await payWithStripe(result.data);
+      return;
+    }
+
     const paymentLabel =
       PAYMENT_METHODS.find((method) => method.id === result.data.payment)
         ?.label ?? result.data.payment;
@@ -134,6 +156,7 @@ export function CheckoutFlow({ locale }: CheckoutFlowProps): React.ReactElement 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_22rem]">
       <div className="grid gap-6">
+        <PaymentNotice cancelled={paymentCancelled} error={paymentError} />
         <DeliverySchedule zone={deliveryZone} error={errors.deliverySlotId} />
         {selection.mode === "delivery" ? (
           <DeliveryPanel
@@ -145,6 +168,7 @@ export function CheckoutFlow({ locale }: CheckoutFlowProps): React.ReactElement 
         <CheckoutCustomerForm
           values={effectiveForm}
           errors={errors}
+          pending={pending}
           onChange={updateField}
           onSubmit={handleSubmit}
         />
@@ -156,29 +180,4 @@ export function CheckoutFlow({ locale }: CheckoutFlowProps): React.ReactElement 
       />
     </div>
   );
-}
-
-function deliveryTimeLabel(data: {
-  express: boolean;
-  deliveryDate: string;
-  deliverySlotId: string;
-}): string {
-  if (data.express) {
-    return "Express — in ca. 2 Std.";
-  }
-
-  const parts = data.deliverySlotId.split("-");
-  const time = parts[parts.length - 1];
-
-  return `${formatDate(data.deliveryDate)}, ${time} Uhr`;
-}
-
-function formatDate(date: string): string {
-  const [year, month, day] = date.split("-").map(Number);
-
-  return new Intl.DateTimeFormat("de-DE", {
-    weekday: "short",
-    day: "2-digit",
-    month: "2-digit",
-  }).format(new Date(Date.UTC(year, month - 1, day, 12)));
 }

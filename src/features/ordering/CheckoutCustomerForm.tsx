@@ -6,6 +6,7 @@ import { PAYMENT_METHODS } from "./checkout-form";
 type CheckoutCustomerFormProps = {
   values: CheckoutFormValues;
   errors: Record<string, string>;
+  pending: boolean;
   onChange: (field: keyof CheckoutFormValues, value: string) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 };
@@ -34,6 +35,7 @@ function Field({
 export function CheckoutCustomerForm({
   values,
   errors,
+  pending,
   onChange,
   onSubmit,
 }: CheckoutCustomerFormProps): React.ReactElement {
@@ -148,9 +150,11 @@ export function CheckoutCustomerForm({
 
       <button
         type="submit"
-        className="min-h-12 rounded-lg bg-amber px-4 py-2 font-semibold text-brand-deep"
+        disabled={pending}
+        aria-busy={pending}
+        className="min-h-12 rounded-lg bg-amber px-4 py-2 font-semibold text-brand-deep disabled:opacity-60"
       >
-        Bestellung abschicken
+        {pending ? "Wird geladen …" : "Bestellung abschicken"}
       </button>
     </form>
   );

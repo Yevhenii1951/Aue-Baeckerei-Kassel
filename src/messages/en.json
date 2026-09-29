@@ -140,7 +140,14 @@
   "kasse": {
     "eyebrow": "The last step",
     "title": "Checkout",
-    "intro": "Review your selection, choose pickup or delivery and a payment method. This demo flow never calls a real payment provider."
+    "intro": "Review your selection, choose pickup or delivery and a payment method. This demo flow never calls a real payment provider.",
+    "successTitle": "Payment started",
+    "successIntro": "Your order has reached us.",
+    "orderNumber": "Order number",
+    "successNext": "You will get a confirmation by email once Stripe has received the payment.",
+    "successBack": "Back to the assortment",
+    "cancelledTitle": "Payment cancelled",
+    "cancelledIntro": "You are back at the checkout and nothing was charged. Your cart is still there."
   },
   "lieferung": {
     "eyebrow": "Fresh to your street",

@@ -140,7 +140,14 @@
   "kasse": {
     "eyebrow": "Der letzte Schritt",
     "title": "Kasse",
-    "intro": "Prüfe deine Auswahl, wähle Abholung oder Lieferung und eine Zahlungsart. In dieser Demo-Strecke wird nichts real bezahlt."
+    "intro": "Prüfe deine Auswahl, wähle Abholung oder Lieferung und eine Zahlungsart. In dieser Demo-Strecke wird nichts real bezahlt.",
+    "successTitle": "Zahlung eingeleitet",
+    "successIntro": "Deine Bestellung ist bei uns angekommen.",
+    "orderNumber": "Bestellnummer",
+    "successNext": "Du erhältst eine Bestätigung per E-Mail, sobald die Zahlung bei Stripe eingegangen ist.",
+    "successBack": "Zurück zum Sortiment",
+    "cancelledTitle": "Zahlung abgebrochen",
+    "cancelledIntro": "Du bist zur Kasse zurückgekehrt und nichts wurde abgebucht. Dein Warenkorb ist noch da."
   },
   "lieferung": {
     "eyebrow": "Frisch in deine Straße",
