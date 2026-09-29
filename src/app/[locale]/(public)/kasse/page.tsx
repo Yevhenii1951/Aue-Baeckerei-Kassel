@@ -3,10 +3,16 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { CheckoutFlow } from "@/features/ordering/CheckoutFlow";
 import { buildPublicMetadata } from "@/features/seo/publicMetadata";
 import { parseSupportedLocale } from "@/features/seo/site";
+import { isEnvGroupEnabled } from "@/lib/env/groups";
+
+type KassePageProps = {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ payment?: string }>;
+};
 
 export async function generateMetadata({
   params,
-}: Readonly<{ params: Promise<{ locale: string }> }>): Promise<Metadata> {
+}: KassePageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "kasse" });
 
@@ -20,10 +26,12 @@ export async function generateMetadata({
 
 export default async function KassePage({
   params,
-}: Readonly<{ params: Promise<{ locale: string }> }>): Promise<React.ReactElement> {
+  searchParams,
+}: KassePageProps): Promise<React.ReactElement> {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("kasse");
+  const { payment } = await searchParams;
 
   return (
     <div className="bg-cream">
@@ -38,7 +46,11 @@ export default async function KassePage({
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-8">
-        <CheckoutFlow locale={parseSupportedLocale(locale)} />
+        <CheckoutFlow
+          locale={parseSupportedLocale(locale)}
+          paymentsEnabled={isEnvGroupEnabled("payments")}
+          paymentCancelled={payment === "cancelled"}
+        />
       </section>
     </div>
   );

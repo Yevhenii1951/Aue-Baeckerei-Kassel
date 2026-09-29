@@ -4,8 +4,23 @@ import { checkoutFormSchema } from "./checkout-form";
 import { resolveFulfillment } from "./orderFulfillment";
 
 export type CreateOrderResult =
-  | { ok: true; orderId: string; orderNumber: string }
+  | {
+      ok: true;
+      orderId: string;
+      orderNumber: string;
+      subtotalCents: number;
+      deliveryFeeCents: number;
+      totalCents: number;
+      lines: OrderLine[];
+    }
   | { ok: false; code: CreateOrderErrorCode; message: string };
+
+export type OrderLine = {
+  name: string;
+  unitPriceCents: number;
+  quantity: number;
+  lineTotalCents: number;
+};
 
 export type CreateOrderErrorCode =
   | "INVALID_INPUT"
@@ -126,6 +141,21 @@ async function createOrderInTransaction(
     ok: true,
     orderId: order.rows[0].id,
     orderNumber: order.rows[0].order_number,
+    subtotalCents,
+    deliveryFeeCents: fulfillment.deliveryFeeCents,
+    totalCents: subtotalCents + fulfillment.deliveryFeeCents,
+    lines: input.cart.flatMap((item) => {
+      const product = products.get(item.productId);
+      if (!product) return [];
+      return [
+        {
+          name: product.name,
+          unitPriceCents: product.price_cents,
+          quantity: item.quantity,
+          lineTotalCents: product.price_cents * item.quantity,
+        },
+      ];
+    }),
   };
 }
 

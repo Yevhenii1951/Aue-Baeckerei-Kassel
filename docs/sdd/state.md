@@ -1,13 +1,39 @@
 # State
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
-workflow was enforced). Infra and design-system remediation in review. ABE-010
-through ABE-021 merged on `main`.
+workflow was enforced). ABE-010 through ABE-021, plus ABE-022 to ABE-025 and
+ABE-028, merged on `main`. ABE-026 in review on
+`feature/abe-026-stripe-test-mode`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-026 Stripe test mode on `feature/abe-026-stripe-test-mode`: a new
+  `src/features/payments` in three layers — `stripeClient.ts` (server-only
+  `StripeCheckoutClient` behind an interface, `stripe@^22.6.2`, the version
+  Kalyna pins), `checkout.ts` (the pure `startCheckout` that is the only place
+  an order and a Stripe session are joined, and therefore the only place worth
+  testing) and `runtime.ts` (wires the real pool and key, returns `null` while
+  the group is off), plus the `startStripeCheckoutAction` server action. The
+  browser only ever sends `productId` + `quantity`; `createOrder` now also
+  returns the server-calculated `subtotalCents`/`deliveryFeeCents`/`totalCents`
+  and the priced `lines`, and those are what reach Stripe, so a tampered cart
+  cannot move the amount. Delivery fee is its own line item, and `orderId` +
+  `orderNumber` travel in `client_reference_id` and both `metadata` bags.
+  Payments stay behind the existing `ENABLE_PAYMENTS` group, so with the group
+  off (the default) `/kasse` keeps the ABE-012 demo confirmation untouched; only
+  the `stripe` method, and only when the group is on, leaves for Stripe. Added
+  the `/kasse/erfolg` thank-you page (noindex, absent from the sitemap) and
+  `?payment=cancelled` back at the checkout with a "nothing was charged" notice.
+  4 new unit tests with a mocked Stripe client.
+  Browser-verified: the demo order `B-2026-0001` still completes end to end,
+  the cancel notice renders, the thank-you page returns `noindex` with the
+  order number. A live Stripe redirect was **not** exercised — no test key is
+  configured, so `stripe.checkout.sessions.create` has never run against
+  Stripe from this repo. The request shape follows the official
+  `stripe-node` docs, and marking the order paid still needs a webhook, which
+  no ticket covers yet.
 - ABE-025 mobile polish on `feature/abe-025-mobile-polish`: the header no
   longer renders six nav links in a wrapping row that made the sticky bar 185 px
   tall on a 390 px screen; a burger + drawer below `lg` (reused from Kalyna's
@@ -196,12 +222,13 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
-- ABE-022 local SEO pages.
+- ABE-027 email confirmation (order mail behind the email group).
 - i18n of the new bakery features. `de/en/uk` message files are complete, but
   all 17 bakery components hardcode German, so `/en/sortiment` and
   `/uk/sortiment` serve German. NFR-1 permits the fallback for now. ABE-011
   added a `vorbestellen` namespace to all three files to keep the parity test
   green.
+- ABE-029 PWA was explicitly dropped by the owner: not in scope.
 
 ## Notes
 
