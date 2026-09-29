@@ -7,9 +7,14 @@
   wasteful for a decorative background; it was re-encoded to H.264 CRF 30.
 - `public/hero-oven.jpg` — still frame from the loop at 1600px wide, 117 KB.
   Used as the video `poster` and as the reduced-motion fallback.
-- `public/products/*.webp` — 66 product photos (one per catalogue product)
-  converted from project-owner supplied JPG files in `~/Downloads/`. Output
-  size is 1200x900 WebP.
+- `public/products/placeholder.png` — neutral fallback shown for every
+  catalogue product. The 66 original `public/products/*.webp` files were
+  removed on 2026-09-29: their EXIF named Dreamstime contributors (KABOOMPICS,
+  sergio villalba studio, oktay koseoglu, AMAPOLA, Clara Moring and others) and
+  a rights statement, i.e. paid stock with no recorded licence. Do not restore
+  them. Replace with owned or licensed photography before any public or client
+  use; `demoProducts.ts` and `companyPages.ts` point at the placeholder until
+  then.
 - `public/cafe/*.webp` — 3 café photos supplied by the project owner on
   2026-09-29 (`Fensterplatz.jpg`, `Fensterplatz2.jpg`, `Backstubenblick.jpg` in
   `~/Downloads/`). All three were 1920x1280 JPEG without EXIF or GPS and are
@@ -21,8 +26,8 @@
   2026-09-29 as `Cafe hero section.jpg` (1920x1278, no EXIF). Served as
   1600x1065 WebP quality 78, 69 KB, drawn at 60% opacity under a paper-to-cream
   gradient. The alt text is a neutral guess and needs the owner's eyes.
-- The "Passt dazu" section reuses existing `public/products/*.webp` shots for
-  the drink and the cake of each pairing, so it added no new files.
+- The "Passt dazu" section reuses the product placeholder for the drink and the
+  cake of each pairing, so it added no new files.
 - `src/features/shell/BrandIcon.tsx` — the Instagram and Facebook glyphs in the
   footer, inlined as SVG paths from the Simple Icons set
   (simpleicons.org, CC0-1.0, fetched from the jsDelivr copy of `simple-icons@11`).
@@ -31,14 +36,14 @@
 
 ## Provenance
 
-Hero files, product photos and the café photos were supplied by the project
-owner for this portfolio build. The owner states the product photos originate
-from openly available sources rather than from a commissioned shoot, so the
-individual rights holders are unknown until the sources are named. The three
-café photos are interior shots of the same kind of operation and are recorded
-the same way. Record them here before any commercial or public client use:
+Hero files and the café photos were supplied by the project owner for this
+portfolio build. The 66 product photos were removed on 2026-09-29 because their
+EXIF identified Dreamstime contributors, so they were paid stock without a
+recorded licence (see above). The catalogue now shows `placeholder.png`. The
+four café photos are owner-supplied interior shots with clean EXIF; still record
+them here before any commercial or public client use:
 
-- Source: _not yet recorded — owner states openly available sources_
+- Source: _café photos owner-supplied; product photos removed_
 - Licence: _not yet recorded_
 - Photographer / rights holder: _not yet recorded_
 
@@ -48,8 +53,9 @@ visitors. That note points here for the records; it does not assert a licence.
 ## Before Public Commercial Use
 
 - Add real product and cafe photography, or owned placeholders with recorded
-  licences. The product catalogue ships with 66 illustrative photos and the
-  café gallery with 3 interior photos; both still lack recorded sources.
+  licences. The product catalogue currently shows `placeholder.png` for all 66
+  products; the café gallery ships with 4 owner-supplied interior photos and
+  still lacks recorded sources.
 - Record source, license, photographer, and allowed usage for every asset.
 - Do not enable Google Reviews, Instagram, maps, analytics, or tracking embeds
   without consent handling and Datenschutz updates.
