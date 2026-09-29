@@ -34,7 +34,7 @@ export default async function PublicLayout({
       <main
         id="main"
         tabIndex={-1}
-        className="w-full flex-1"
+        className="page-enter w-full flex-1"
       >
         {children}
       </main>

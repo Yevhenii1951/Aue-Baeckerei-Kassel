@@ -1,9 +1,18 @@
+import Image from "next/image";
+import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
-import Link from "next/link";
+import {
+  ArrowRight,
+  Coffee,
+  ShoppingBag,
+  Store,
+} from "lucide-react";
 import { buildPublicMetadata } from "@/features/seo/publicMetadata";
 import { parseSupportedLocale } from "@/features/seo/site";
 import { buildBakeryJsonLd } from "@/features/seo/bakeryJsonLd";
+import { formatEuroCents } from "@/lib/format";
+import { demoProducts } from "@/features/catalog/demoProducts";
 import { CatalogPreview } from "@/features/catalog/components/CatalogPreview";
 import {
   ConversionSections,
@@ -14,12 +23,17 @@ import {
   type CafePairing,
   type CafePhotoSlot,
 } from "@/features/content/components/CafeSection";
+import { Reveal } from "@/features/content/components/Reveal";
 
 type PathCard = {
   title: string;
   text: string;
   cta: string;
 };
+
+const PATH_ICONS = [Store, ShoppingBag, Coffee];
+const PATH_HREFS = ["vorbestellen", "sortiment", "#cafe"];
+const HERO_PRODUCT_IDS = ["hausbrot", "laugenbrezel", "zimtschnecke"];
 
 export async function generateMetadata({
   params,
@@ -48,6 +62,9 @@ export default async function HomePage({
   const conversionCards = t.raw("conversionCards") as ConversionCard[];
   const cafePairings = t.raw("cafePairings") as CafePairing[];
   const cafePhotoSlots = t.raw("cafePhotoSlots") as CafePhotoSlot[];
+  const heroProducts = HERO_PRODUCT_IDS.map((id) =>
+    demoProducts.find((product) => product.id === id),
+  ).filter((product) => product !== undefined);
 
   return (
     <div className="bg-cream">
@@ -75,63 +92,119 @@ export default async function HomePage({
         >
           <source src="/hero-oven.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(23_18_14/0.92),rgb(23_18_14/0.56)_48%,rgb(23_18_14/0.18))]" />
+        <div className="hero-vignette absolute inset-0" />
         <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-6xl flex-col justify-end gap-10 px-4 py-12 sm:px-8 lg:py-16">
           <div className="max-w-3xl">
-            <p className="mb-5 text-sm font-semibold text-amber">
+            <p className="hero-rise mb-5 text-sm font-semibold text-amber">
               {t("eyebrow")}
             </p>
-            <h1 className="font-display text-5xl font-semibold leading-[0.96] sm:text-7xl lg:text-8xl">
+            <h1 className="hero-rise hero-rise-2 font-display text-5xl font-semibold leading-[0.96] sm:text-7xl lg:text-8xl">
               {t("title")}
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-cream/80 sm:text-xl">
+            <p className="hero-rise hero-rise-3 mt-6 max-w-2xl text-lg leading-8 text-cream/80 sm:text-xl">
               {t("intro")}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href={`/${locale}#vorbestellen`} className="btn-amber">
+            <div className="hero-rise hero-rise-3 mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href={`/${supportedLocale}/vorbestellen`}
+                className="btn-amber arrow-slide"
+              >
                 {t("primaryCta")}
+                <ArrowRight className="size-5" />
               </Link>
-              <Link href={`/${locale}/sortiment`} className="btn-ghost-dark">
+              <Link
+                href={`/${supportedLocale}/sortiment`}
+                className="btn-ghost-dark"
+              >
                 {t("secondaryCta")}
               </Link>
             </div>
           </div>
 
-          <div className="grid gap-3 border-t border-white/20 pt-5 text-sm text-cream/80 sm:grid-cols-[1fr_auto] sm:items-end">
-            <p>{t("heroNote")}</p>
-            <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-amber/50 bg-brand-deep/72 px-4 py-3 shadow-card">
-              <span>{t("cutoffLabel")}</span>
-              <strong className="text-amber">{t("cutoffTime")}</strong>
+          <div className="hero-rise hero-rise-4 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div className="flex flex-col gap-4">
+              <p className="border-t border-white/20 pt-5 text-sm text-cream/80">
+                {t("heroNote")}
+              </p>
+              <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-amber/50 bg-brand-deep/72 px-4 py-3 shadow-card">
+                <span>{t("cutoffLabel")}</span>
+                <strong className="text-amber">{t("cutoffTime")}</strong>
+              </div>
             </div>
+
+            <ul className="grid grid-cols-3 gap-3 sm:gap-4">
+              {heroProducts.map((product) => (
+                <li key={product.id}>
+                  <Link
+                    href={`/${supportedLocale}/sortiment`}
+                    className="group block"
+                  >
+                    <div className="overflow-hidden rounded-lg ring-1 ring-white/20">
+                      <Image
+                        src={product.imageUrl}
+                        alt={product.name}
+                        width={256}
+                        height={256}
+                        className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    <p className="mt-2 text-sm font-semibold text-cream">
+                      {product.name}
+                    </p>
+                    <p className="text-xs text-amber">
+                      {formatEuroCents(product.priceCents, supportedLocale)}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
       <section
         id="vorbestellen"
-        className="mx-auto grid w-full max-w-6xl gap-4 px-4 py-12 sm:px-8 lg:grid-cols-3"
+        className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-8"
       >
-        <div className="lg:col-span-3">
+        <Reveal>
           <h2 className="font-display text-4xl font-semibold">
             {t("pathsTitle")}
           </h2>
+        </Reveal>
+        <div className="mt-8 grid gap-4 lg:grid-cols-3">
+          {paths.map((path, index) => {
+            const Icon = PATH_ICONS[index];
+            const href = `/${supportedLocale}/${PATH_HREFS[index]}`;
+
+            return (
+              <Reveal key={path.title} delayMs={index * 120}>
+                <Link
+                  href={href}
+                  className="group flex min-h-64 flex-col justify-between gap-8 rounded-lg bg-white/75 p-7 ring-1 ring-brand-deep/5 shadow-[0_1px_2px_rgb(18_15_13/0.06)] transition-shadow duration-300 hover:shadow-card"
+                >
+                  <div>
+                    <span className="flex size-12 items-center justify-center rounded-full bg-amber-soft text-brand-deep">
+                      <Icon className="size-6" strokeWidth={1.75} />
+                    </span>
+                    <h3 className="mt-6 text-2xl font-semibold">{path.title}</h3>
+                    <p className="mt-4 leading-7 text-ink/72">{path.text}</p>
+                  </div>
+                  <p className="flex items-center gap-2 font-semibold text-brand-dark">
+                    {path.cta}
+                    <ArrowRight
+                      className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                      strokeWidth={2}
+                    />
+                  </p>
+                </Link>
+              </Reveal>
+            );
+          })}
         </div>
-        {paths.map((path) => (
-          <article
-            key={path.title}
-            className="surface flex min-h-60 flex-col justify-between gap-8 rounded-lg p-6"
-          >
-            <div>
-              <h3 className="text-2xl font-semibold">{path.title}</h3>
-              <p className="mt-4 leading-7 text-ink/72">{path.text}</p>
-            </div>
-            <p className="font-semibold text-brand-dark">{path.cta}</p>
-          </article>
-        ))}
       </section>
 
       <section className="bg-paper">
-        <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-14 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-16 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
             <h2 className="font-display text-4xl font-semibold">
               {t("stepsTitle")}
@@ -140,13 +213,13 @@ export default async function HomePage({
               {t("intro")}
             </p>
           </div>
-          <ol className="grid gap-3">
+          <ol className="max-w-2xl">
             {steps.map((step, index) => (
               <li
                 key={step}
-                className="grid grid-cols-[3rem_1fr] items-center gap-4 rounded-lg border border-brand-deep/10 bg-cream p-4"
+                className="grid grid-cols-[3.5rem_1fr] items-baseline gap-4 border-t border-brand-deep/15 py-7 first:border-t-0 first:pt-0"
               >
-                <span className="flex size-12 items-center justify-center rounded-lg bg-brand-deep font-semibold text-amber">
+                <span className="font-display text-3xl font-medium italic text-amber">
                   {index + 1}
                 </span>
                 <span className="leading-7 text-ink/78">{step}</span>
@@ -158,7 +231,7 @@ export default async function HomePage({
 
       <section
         id="sortiment"
-        className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-8"
+        className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-8"
       >
         <div>
           <h2 className="font-display text-4xl font-semibold">
@@ -175,7 +248,7 @@ export default async function HomePage({
           {bestsellers.map((item) => (
             <p
               key={item}
-              className="rounded-lg border border-brand-deep/10 bg-paper px-4 py-3 text-sm font-semibold text-sage"
+              className="rounded-lg border border-sage/20 bg-sage/5 px-4 py-3 text-sm font-semibold text-sage"
             >
               {t("bestsellersTitle")}: {item}
             </p>

@@ -1,28 +1,26 @@
 # Design Direction
 
-## Subject
-
-Aue-Baeckerei is a premium craft bakery near Karlsaue and Bebelplatz in Kassel.
-The site sells the feeling of warm bread in the morning, but the product is
-also a digital ordering system: evening preorders, pickup slots, delivery,
-subscriptions, catering, and an owner-facing baking dashboard.
-
-Primary audience: people in Kassel who want reliable fresh bread, breakfast,
-coffee, office catering, or a weekly bread subscription.
-
-Primary job: make ordering feel simpler than calling the bakery, while keeping
-the brand handmade and local.
+Subject confirmed with the owner 2026-09-29: the landing felt like a default
+Tailwind card assembly; goal is a distinctive craft-bakery landing. Direction
+chosen: editorial typography + cinematic hero + disciplined rhythm, subtle
+whole-site grain, one orchestrated load moment, small answer-the-action
+motions, a light icon set. Boldness lives in one place — the hero; everything
+after stays quiet.
 
 ## Visual Idea
 
 The memorable element is the oven video: a dark, cinematic first viewport with
-real heat, steam, hands, and crust. Everything after that becomes calmer and
-more operational: clear tabs, generous product photography, exact prices,
-allergen badges, and a visible order deadline.
+real heat, steam, hands, and crust. The page opens on that moment and does not
+compete with itself afterwards: the headline is typeset in a warm editorial
+serif, three real product photographs peek above the fold as a promise of the
+shop, and every later section stays calm, operational and legible: clear tabs,
+generous product photography, exact prices, allergen badges, and a visible
+order deadline.
 
-Avoid a generic beige bakery page. Use warmth, but pair it with baker's graphite,
-fermented amber, flour-white surfaces, and a small note of copper/green from
-Kassel parks and cafe plants.
+Avoid a generic beige bakery page. Use warmth, but pair it with baker's
+graphite, fermented amber, flour-white surfaces, and a small note of
+copper/green from Kassel parks and cafe plants. A barely-there grain across
+the whole site keeps the surfaces from looking flat without shouting.
 
 ## Palette
 
@@ -48,111 +46,124 @@ so JSX reads `bg-amber` and `text-brand-deep` rather than a colour word:
 | `--color-sage` | Aue green, local and cafe accents |
 | `--color-ink` | body text |
 
-Every token must have at least one use. A colour that no component references
-does not belong in the theme; add it in the same commit as its first use.
-Component classes are `.surface`, `.panel`, `.btn-amber`, `.btn-ghost-dark`
-and `.nav-link`. JSX uses token classes, never hardcoded brand colours.
+The palette does not change as part of this refresh — it is already
+distinctive (cream + crust-brown + amber + sage is not the generic
+cream/terracotta default). Every token must keep at least one use. A colour
+that no component references does not belong in the theme; add it in the same
+commit as its first use. Component classes are `.surface`, `.panel`,
+`.btn-amber`, `.btn-ghost-dark` and `.nav-link`. JSX uses token classes, never
+hardcoded brand colours.
+
+The whole-site background texture is not a colour token: it is a fixed grain
+overlay (see Motion). It must not creep into behaviour, focus states, or
+reduced-motion.
 
 ## Typography
 
-- Sans: keep the existing Manrope-style UI rhythm for shop, admin, filters,
-  prices, and forms.
-- Display: use the existing serif display slot for hero and editorial headings,
-  but with restrained weight and short lines.
-- Product cards use compact sans headings, visible price, and ingredient text
-  kept below 80 characters per line.
-- Avoid all-caps decorative labels. Use sentence case.
+- Sans: keep Manrope for shop, admin, filters, prices, forms, and all
+  operational text.
+- Display: switch the display slot from Cormorant Garamond to
+  **Fraunces** via `next/font/google` (keep `--font-display` as the variable;
+  drop the Cormorant import). Fraunces reads warm, characterful and bakery-
+  specific at large sizes where Cormorant reads thin and template-y. Use its
+  `opsz`/weight range: heavier at hero (600–700), lighter in section lead-ins.
+- Editorial ledes (the sentence under a heading) may be Fraunces italic at
+  a slightly larger size; never italic/bold a single word inside a headline —
+  accents must not be inline highlights.
+- No all-caps decorative labels. Eyebrows stay sentence case with restrained
+  tracking (`Morgens frisch, abends bestellt.`).
+- Product cards use compact Manrope headings, visible price, and ingredient
+  text kept below 80 characters per line. Display line lengths stay short
+  (~55–65 characters); keep generous line-height on serif text.
 
 ## Layout
 
 Public pages are mobile-first, left-aligned, and built for fast choices.
 
-Hero:
+Page rhythm (replaces same-padding repeated bands):
 
 ```text
-┌────────────────────────────────────────┐
-│ video full bleed                       │
-│ nav over video                         │
-│                                        │
-│ Morgens frisch, abends bestellt.       │
-│ [Vorbestellen] [Sortiment ansehen]     │
-│ cutoff pill: Bestellschluss 20:00      │
-│                                        │
-│ hint of product tabs below fold        │
-└────────────────────────────────────────┘
+┌ hero: oven video + grain + vignette ─┐
+│ nav over video, cream fade at bottom │
+│ Fraunces H1 (lines rise in, staged)  │
+│ [Vorbestellen] [Sortiment ansehen]   │
+│ cutoff pill · 3 product thumbs rise  │
+└──────────────────────────────────────┘
+\  cream band: paths (3 tiles, single reveal)   /
+\  paper band: steps (numbered — real sequence) /
+\  cream band: assortment + bestsellers          /
+\  ink band: conversion (café tone)              /
+\  cream band: cafe + hours + trust              /
 ```
 
-Catalogue:
-
-```text
-┌ filters / search / tabs ───────────────┐
-│ Brote | Broetchen | Suesses | Kaffee   │
-├─────────────┬─────────────┬────────────┤
-│ product     │ product     │ product    │
-│ image       │ image       │ image      │
-│ price/actions/allergens                │
-└────────────────────────────────────────┘
-```
-
-Ordering:
-
-```text
-┌ product list ─────────────┬ cart/order ┐
-│ day selector              │ cutoff     │
-│ pickup slots              │ totals     │
-│ recommendations           │ checkout   │
-└───────────────────────────┴────────────┘
-```
-
-Admin:
-
-```text
-┌ KPI strip ─────────────────────────────┐
-├ orders feed ────────┬ backliste matrix ┤
-├ inventory alerts ───┴ analytics        ┤
-└────────────────────────────────────────┘
-```
-
-Cards stay simple with radius at 8px or less. No nested cards. Page sections are
-full-width bands or unframed constrained layouts.
+- Sections are full-width bands alternating `cream` and `paper`, not identical
+  bordered boxes stacked with the same padding everywhere.
+- Decorative cards change: only surfaces that hold a distinct unit of content
+  keep a border; headings + hairline dividers carry the structure. No nested
+  cards. Radius stays ≤8px, reserved for interactive/photographic surfaces.
+- The `border-brand-deep/10 bg-paper rounded-lg` default card is a smell:
+  use it when a box is genuinely a distinct unit, not as the page's rhythm.
+- Hero miniatures: three real product photos (`/products/<id>.webp`) tucked
+  into the bottom of the hero fold — a promise of the shop, linking to
+  `/sortiment`. This fulfils the old "hint of product tabs below fold" note.
 
 ## Components
 
 - Sticky mobile bottom action: `Jetzt vorbestellen`.
 - Cutoff countdown: persistent small status module, never a modal.
-- Product cards: image, title, short description, price, tags, allergens, two
-  actions where relevant: `In den Warenkorb` and `Vorbestellen`.
-- Product tabs: Brote, Broetchen, Suesses, Getraenke, Snacks, Feinkost.
+- Product cards: photo, title, short description, price, tags, allergens, two
+  actions where relevant (`In den Warenkorb`, `Vorbestellen`). Photo scales
+  1.03 on hover — image is the rich moment, the card stays real.
+- Paths/steps tiles: icon (lucide) + heading + one line + CTA arrow that
+  slides on hover for the paths; the steps block keeps its numbered markers
+  because it is a real ordered process.
+- Icons: `lucide-react`, used only where an icon carries information — opening
+  hours (Clock), order/pickup (Store), delivery PLZ (MapPin), local (Leaf),
+  oven/fresh (Flame). Drop-in, tree-shaken, no icon bundle.
 - Cafe tab/page: coffee, pastry, seating, and a future photo gallery.
 - Slot picker: 30-minute pickup slots with capacity state.
 - Delivery zone checker: PLZ input first, map later behind consent.
-- Admin backliste: product totals plus product x slot matrix.
+- Admin backliste: unchanged by this refresh.
 
 ## Image Direction
 
 The hero loop is `public/hero-oven.mp4` with `public/hero-oven.jpg` as its
-poster frame. `prefers-reduced-motion` swaps the video for the still, so the
-first viewport never depends on motion.
+poster. `prefers-reduced-motion` swaps the video for the still.
 
-Product cards currently render no photograph. Product imagery is a known gap
-and is not covered by an existing ticket — see `docs/sdd/state.md`. Until owned
-photos exist, a product card is text, price, allergens and actions only.
-
-Long-term asset plan: replace placeholders with owned bakery photos before any
-commercial or public client use.
+66 real product photos exist at `/products/<id>.webp` and are already wired to
+catalogue cards and detail pages. The landing hero reuses three of them as
+miniatures; the assortment section may reuse `CatalogPreview`. No new imagery
+is invented; the photo provenance rules in `docs/sdd/assets.md` still apply.
 
 ## Motion
 
-- Hero video autoplay muted loop, with readable overlay.
-- `prefers-reduced-motion` gets the poster frame instead of the loop.
-- No Framer Motion. No scroll-reveal animation exists; if one is added it
-  needs its own IntersectionObserver hook, because a bare CSS class that hides
-  content until a script reveals it will hide it forever if the script is
-  missing.
+- **Grain.** A fixed, barely-visible grain overlay across the whole site
+  (single overhead `body::before` with a tiny inline SVG `feTurbulence`
+  texture, pointer-events none, opacity ~0.04, multiplied on `cream`/`paper`).
+  On the hero the same idea goes stronger as vignette + noise so the video
+  layer has body instead of reading as a flat gradient.
+- **Page enter.** One global CSS mount animation on route change
+  (`fade + 10px rise`, ~300–350ms) applied to the routed `<main>`. Because
+  Next.js remounts the page per navigation, no JS is needed; it never hides
+  content if animations are disabled.
+- **Hero load sequence.** A single orchestrated moment: eyebrow → headline
+  lines → CTA → bottom strip/thumbnails, each fading up with a small delay
+  (CSS keyframes, not a library). No other section gets a scroll reveal by
+  default.
+- **One reveal.** A single `Reveal` component (IntersectionObserver, fade +
+  16px) is reserved for the first content moment after the fold — the three
+  path tiles. It is the exception, not the rule. A CIS fallback must render
+  the content visible if the observer or JS is missing; `prefers-reduced-motion`
+  disables it entirely.
+- **Answer-the-action.** Hover/active transitions that show what changed:
+  photo scale on product cards, CTA arrow slide, step-tile number shift,
+  nav underline. No scroll-jacking, no marquees, no custom cursors.
+- No Framer Motion. No scroll-reveal animation belongs on every section —
+  scattered fade-and-slide is the generated look this refresh is removing.
 
 ## Copy Voice
 
-German is canonical. The voice is warm but direct:
+German is canonical. The voice is warm but direct, unchanged:
 
 - `Morgens frisch, abends bestellt.`
 - `Bis 20:00 bestellen, morgen abholen.`
@@ -160,16 +171,22 @@ German is canonical. The voice is warm but direct:
 - `Passt gut dazu.`
 - `Brotzeit fuer das Buero anfragen.`
 
-Avoid exaggerated luxury language. The bakery feels premium because the details
-are concrete: local flour, long dough rest, sourdough, pickup slots, clear
-allergen information.
+Avoid exaggerated luxury language. The bakery feels premium because the
+details are concrete: local flour, long dough rest, sourdough, pickup slots,
+clear allergen information.
 
 ## Self-Critique
 
-Potential generic risk: warm cream plus brown can become a default bakery
-template. The counterweight is the dark oven-video first viewport, operational
-shop structure, visible cutoff logic, and restrained cafe/local green accent.
+Template risk this refresh guards against:
 
-Potential scope risk: the brief contains enough features for a production
-platform. Phase 1 must prove the core portfolio story: landing, catalogue,
-preorder logic, cart, and baking-list admin.
+- Fraunces + warm cream + amber can read as "artisan bistro" — the
+  counterweights are the dark oven-video first viewport, the operational
+  Manrope chrome, sentence-case voices, and the tension of the ink
+  conversion band.
+- A whole-site grain layer can look like a filter — so it stays barely
+  visible (~4%) and is disabled under `prefers-reduced-motion`.
+- Icons can soften a shop into decoration — so they are used only where they
+  carry information, and the paths tiles keep a restrained, editorial tone.
+- The old trap was every block as a bordered card; the new one is rustic
+  over-grain and italic everywhere. Keep 80% Manrope / clean structure and
+  spend serif and motion only in the hero and section lead-ins.
