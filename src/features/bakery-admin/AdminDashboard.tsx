@@ -52,7 +52,7 @@ export function AdminDashboard(): React.ReactElement {
     <div className="grid gap-8">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold text-sage">{t("dashboard.ownerView")}</p>
+          <p className="text-sm font-semibold text-brand">{t("dashboard.ownerView")}</p>
           <h1 className="mt-1 font-display text-4xl font-semibold text-brand-deep">
             {t("dashboard.title")} — {formatDay(day, locale)}
           </h1>

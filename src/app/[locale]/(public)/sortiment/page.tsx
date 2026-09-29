@@ -30,7 +30,7 @@ export default async function SortimentPage({
     <div className="bg-cream">
       <section className="border-b border-brand-deep/10 bg-paper">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-8">
-          <p className="text-sm font-semibold text-sage">{t("eyebrow")}</p>
+          <p className="text-sm font-semibold text-brand">{t("eyebrow")}</p>
           <h1 className="mt-4 font-display text-5xl font-semibold">
             {t("title")}
           </h1>

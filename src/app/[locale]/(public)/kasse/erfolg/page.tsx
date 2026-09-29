@@ -39,7 +39,7 @@ export default async function CheckoutSuccessPage({
   return (
     <div className="bg-cream">
       <section className="mx-auto w-full max-w-2xl px-4 py-20 sm:px-8">
-        <p className="text-sm font-semibold text-sage">{t("eyebrow")}</p>
+        <p className="text-sm font-semibold text-brand">{t("eyebrow")}</p>
         <h1 className="mt-4 font-display text-4xl font-semibold text-brand-deep">
           {t("successTitle")}
         </h1>

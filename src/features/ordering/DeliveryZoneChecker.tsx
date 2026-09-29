@@ -49,7 +49,7 @@ export function DeliveryZoneChecker({
       </label>
 
       {result ? (
-        <div className="mt-4 rounded-lg border border-sage/30 bg-paper p-4">
+        <div className="mt-4 rounded-lg border border-brand/30 bg-paper p-4">
           <p className="font-semibold text-brand-deep">
             {t("checkServed", { zone: result.info.zone })}
           </p>
@@ -60,7 +60,7 @@ export function DeliveryZoneChecker({
             })}
           </p>
           {result.charge === 0 ? (
-            <p className="mt-1 text-sm font-medium text-sage">
+            <p className="mt-1 text-sm font-medium text-brand">
               {t("freeNow")}
             </p>
           ) : null}

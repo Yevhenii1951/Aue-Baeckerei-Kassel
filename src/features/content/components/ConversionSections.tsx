@@ -30,7 +30,7 @@ export function ConversionSections({
               className="flex min-h-72 flex-col justify-between rounded-lg border border-brand-deep/10 bg-cream p-6 shadow-card"
             >
               <div>
-                <p className="text-sm font-semibold text-sage">{card.meta}</p>
+                <p className="text-sm font-semibold text-brand">{card.meta}</p>
                 <h3 className="mt-3 text-2xl font-semibold">{card.title}</h3>
                 <p className="mt-4 leading-7 text-ink/72">{card.text}</p>
               </div>

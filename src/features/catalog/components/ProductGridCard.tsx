@@ -35,7 +35,7 @@ export function ProductGridCard({
           />
         </Link>
         <div className="flex items-start justify-between gap-4 px-5 pt-5">
-          <p className="text-sm font-medium text-sage">
+          <p className="text-sm font-medium text-brand">
             {t(`categories.${product.category}`)}
           </p>
           <p className="font-semibold text-brand-dark">

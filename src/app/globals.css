@@ -9,18 +9,17 @@
   /* Palette roles, named after the bakery rather than the material colour.
      Every value is used by at least one component; adding a token means
      adding a use. See docs/sdd/design.md for the rationale. */
-  --color-brand: #7a3f22; /* crust brown, primary action */
-  --color-brand-dark: #512813; /* crust brown, hover/secondary */
-  --color-brand-deep: #17120e; /* oven black, dark surfaces and text */
-  --color-amber: #d79a43; /* ferment amber, freshness and cutoff */
-  --color-amber-soft: #f2d59b; /* amber tint for badges */
-  --color-cream: #fff9ef; /* flour paper, light page surface */
-  --color-paper: #fffdf8; /* card surface, a step lighter than cream */
-  --color-sage: #315c45; /* Aue green, local and cafe accents */
-  --color-ink: #1f1712; /* body text */
+  --color-brand: #17453e; /* Aue green, primary action and eyebrows */
+  --color-brand-dark: #0f332c; /* green in shadow, hover and secondary */
+  --color-brand-deep: #0f0f2d; /* oven night, dark surfaces and text */
+  --color-amber: #fae462; /* ferment amber, freshness and cutoff */
+  --color-amber-soft: #fbf1c1; /* amber tint for badges and hover */
+  --color-cream: #f7f4ec; /* flour paper, light page surface */
+  --color-paper: #fdfcf7; /* card surface, a step lighter than cream */
+  --color-ink: #22222c; /* body text */
 
-  --shadow-panel: 0 22px 70px rgb(18 15 13 / 0.12);
-  --shadow-card: 0 12px 34px rgb(18 15 13 / 0.08);
+  --shadow-panel: 0 22px 70px color-mix(in srgb, var(--color-brand-deep) 12%, transparent);
+  --shadow-card: 0 12px 34px color-mix(in srgb, var(--color-brand-deep) 8%, transparent);
 }
 
 @layer base {
@@ -34,7 +33,7 @@
     overflow-x: clip;
     background:
       linear-gradient(90deg, color-mix(in srgb, var(--color-brand) 3.5%, transparent) 1px, transparent 1px),
-      linear-gradient(180deg, color-mix(in srgb, var(--color-sage) 3.5%, transparent) 1px, transparent 1px),
+      linear-gradient(180deg, color-mix(in srgb, var(--color-brand) 3.5%, transparent) 1px, transparent 1px),
       var(--color-cream);
     background-size: 42px 42px;
     color: var(--color-ink);
@@ -144,7 +143,7 @@
   ul.rounded-md,
   ul.rounded-lg,
   ul.rounded-2xl {
-    border-color: rgb(18 15 13 / 0.1);
+    border-color: color-mix(in srgb, var(--color-ink) 10%, transparent);
   }
 }
 
@@ -222,11 +221,12 @@
   }
 
   /* Deepens the hero video with a vignette and a bottom fade into cream,
-     replacing the flat single gradient. */
+     replacing the flat single gradient. The tones mix from the token so the
+     overlay follows the palette. */
   .hero-vignette {
     background:
-      radial-gradient(120% 120% at 50% 18%, transparent 46%, rgb(23 18 14 / 0.5) 100%),
-      linear-gradient(180deg, rgb(23 18 14 / 0.38) 0%, transparent 34%, transparent 58%, var(--color-brand-deep) 100%);
+      radial-gradient(120% 120% at 50% 18%, transparent 46%, color-mix(in srgb, var(--color-brand-deep) 50%, transparent) 100%),
+      linear-gradient(180deg, color-mix(in srgb, var(--color-brand-deep) 38%, transparent) 0%, transparent 34%, transparent 58%, var(--color-brand-deep) 100%);
   }
 
   /* Tailwind v4 does not emit a shadow utility for a custom --shadow-* token,

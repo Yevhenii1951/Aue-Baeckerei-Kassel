@@ -132,7 +132,7 @@ export default async function HomePage({
               <Reveal key={path.title} delayMs={index * 120}>
                 <Link
                   href={href}
-                  className="group flex min-h-64 flex-col justify-between gap-8 rounded-lg bg-white/75 p-7 ring-1 ring-brand-deep/5 shadow-[0_1px_2px_rgb(18_15_13/0.06)] transition-shadow duration-300 hover:shadow-card"
+                  className="group flex min-h-64 flex-col justify-between gap-8 rounded-lg bg-white/75 p-7 ring-1 ring-brand-deep/5 transition-shadow duration-300 hover:shadow-card"
                 >
                   <div>
                     <span className="flex size-12 items-center justify-center rounded-full bg-amber-soft text-brand-deep">

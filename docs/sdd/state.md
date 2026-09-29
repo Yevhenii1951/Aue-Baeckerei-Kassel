@@ -10,6 +10,13 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-037 palette re-theme on `feature/abe-037-palette-retheme`: the tokens are
+  now deep green `#17453e` / `#0f332c`, amber `#fae462` and a navy
+  `#0f0f2d` for the dark surfaces. `sage` is retired and every former use
+  points at `brand`; the hero vignette, body grid, focus ring, borders and
+  shadows mix from the tokens, so no raw colour literal is left in
+  `globals.css` or JSX. Worst measured text pair is 9.76:1, so the new
+  contrast is better than the old one. Fonts stay Alegreya + Manrope.
 - ABE-036 footer on `feature/abe-036-footer`: three columns (brand + socials,
   navigation, legal), the link lists now come from `shell/siteNavigation.ts`,
   which is also what the header uses, and the bottom bar carries the copyright
@@ -328,11 +335,11 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
-- The owner asked for one visible pass: modern header, footer and a full
-  palette change (deep green, amber, navy) with the reference direction
-  recorded in `docs/sdd/design.md`. Header (ABE-035) and footer (ABE-036) are
-  done locally; ABE-037 re-themes the palette on top. All of it stays local
-  until the owner signs off; nothing is pushed.
+- The chrome pass (ABE-035 header, ABE-036 footer, ABE-037 palette) is done
+  locally, stacked on ABE-033/034. Nothing is pushed: the owner reviews the
+  result on the dev server first. Open decisions from that review are the
+  café photos, the real social profile URLs, and whether the brand glyphs for
+  Instagram/Facebook should be added as owned SVGs.
 - ABE-031 and ABE-032 close the i18n and the landing surface. Follow-ups if
   any: end-to-end auth flows against a real Supabase project (form-level codes
   are localised but were not exercised with a live staff session).

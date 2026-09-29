@@ -69,10 +69,10 @@ export default async function ProductPage({ params }: ProductPageProps): Promise
       <section className="border-b border-brand-deep/10 bg-paper">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:px-8 lg:grid-cols-[1fr_22rem]">
           <div>
-            <Link href={`/${locale}/sortiment`} className="text-sm font-semibold text-sage">
+            <Link href={`/${locale}/sortiment`} className="text-sm font-semibold text-brand">
               ← {t("title")}
             </Link>
-            <p className="mt-6 text-sm font-semibold text-sage">
+            <p className="mt-6 text-sm font-semibold text-brand">
               {labels.category(product.category)}
             </p>
             <h1 className="mt-4 font-display text-5xl font-semibold">{product.name}</h1>
@@ -81,7 +81,7 @@ export default async function ProductPage({ params }: ProductPageProps): Promise
             </p>
           </div>
           <aside className="rounded-lg border border-brand-deep/10 bg-cream p-5 shadow-card">
-            <p className="text-sm font-semibold text-sage">{t("price")}</p>
+            <p className="text-sm font-semibold text-brand">{t("price")}</p>
             <p className="mt-2 text-3xl font-semibold text-brand-dark">
               {formatEuroCents(product.priceCents, locale)}
             </p>

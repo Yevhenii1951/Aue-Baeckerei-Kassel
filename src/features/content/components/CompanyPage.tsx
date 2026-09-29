@@ -43,7 +43,7 @@ export function CompanyPage({
               key={fact.label}
               className="rounded-lg border border-brand-deep/10 bg-paper p-5 shadow-card"
             >
-              <dt className="text-sm font-semibold text-sage">{fact.label}</dt>
+              <dt className="text-sm font-semibold text-brand">{fact.label}</dt>
               <dd className="mt-2 text-sm leading-6 text-ink/75">{fact.value}</dd>
             </div>
           ))}

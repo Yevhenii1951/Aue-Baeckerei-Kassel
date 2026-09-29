@@ -51,7 +51,7 @@ export default async function CategoryPage({ params }: CategoryPageProps): Promi
     <div className="bg-cream">
       <section className="border-b border-brand-deep/10 bg-paper">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-8">
-          <Link href={`/${locale}/sortiment`} className="text-sm font-semibold text-sage">
+          <Link href={`/${locale}/sortiment`} className="text-sm font-semibold text-brand">
             {"\u2190"} {ts("title")}
           </Link>
           <h1 className="mt-4 font-display text-5xl font-semibold">
