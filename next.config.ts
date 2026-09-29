@@ -5,6 +5,17 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: import.meta.dirname,
   },
+  // The café got its own page (ABE-034). The local-SEO slug keeps the link
+  // equity instead of competing with it as duplicate content.
+  async redirects() {
+    return [
+      {
+        source: "/:locale/cafe-kassel",
+        destination: "/:locale/kafe",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     const securityHeaders = [
       {

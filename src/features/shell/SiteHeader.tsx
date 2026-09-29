@@ -2,7 +2,8 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { SiteLocale } from "@/features/seo/site";
 import { CartToggleButton } from "./CartToggleButton";
-import { MobileMenu, type MobileMenuLink } from "./MobileMenu";
+import { MobileMenu } from "./MobileMenu";
+import { cafeLink, navigationLinks } from "./siteNavigation";
 
 type SiteHeaderProps = {
   locale: SiteLocale;
@@ -11,14 +12,19 @@ type SiteHeaderProps = {
 export default async function SiteHeader({ locale }: SiteHeaderProps) {
   const t = await getTranslations("shell");
 
-  const links: MobileMenuLink[] = [
-    { href: `/${locale}`, label: t("navHome") },
-    { href: `/${locale}/sortiment`, label: t("navAssortment") },
-    { href: `/${locale}#vorbestellen`, label: t("navPreorder") },
-    { href: `/${locale}#cafe`, label: t("navCafe") },
-    { href: `/${locale}/impressum`, label: t("navImprint") },
-    { href: `/${locale}/datenschutz`, label: t("navPrivacy") },
-  ];
+  const labels = {
+    assortment: t("navAssortment"),
+    preorder: t("navPreorder"),
+    cafe: t("navCafe"),
+    contact: t("navContact"),
+    career: t("navCareer"),
+    partner: t("navPartner"),
+    delivery: t("navDelivery"),
+    imprint: t("navImprint"),
+    privacy: t("navPrivacy"),
+  };
+  const links = navigationLinks(locale, labels);
+  const cafe = cafeLink(locale, labels.cafe);
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-brand-deep/95 text-cream backdrop-blur">
@@ -29,19 +35,24 @@ export default async function SiteHeader({ locale }: SiteHeaderProps) {
         >
           {t("brandPlaceholder")}
         </Link>
-        <div className="flex items-center gap-1 sm:gap-2">
+
+        <nav aria-label={t("primaryNav")} className="hidden lg:block">
+          <ul className="flex items-center gap-x-6 text-sm">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="nav-link">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <Link href={cafe.href} className="nav-cafe-link">
+            {cafe.label}
+          </Link>
           <CartToggleButton />
-          <nav aria-label={t("primaryNav")} className="hidden lg:block">
-            <ul className="flex items-center gap-x-6 text-sm">
-              {links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="nav-link">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
           <MobileMenu
             links={links}
             menuLabel={t("menuOpen")}

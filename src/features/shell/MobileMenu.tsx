@@ -2,14 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import type { NavLink } from "./siteNavigation";
 
-export type MobileMenuLink = {
-  href: string;
-  label: string;
-};
+export type { NavLink } from "./siteNavigation";
 
 type MobileMenuProps = {
-  links: MobileMenuLink[];
+  links: NavLink[];
   menuLabel: string;
   closeLabel: string;
   brandLabel: string;

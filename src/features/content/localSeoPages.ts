@@ -102,36 +102,6 @@ export const LOCAL_SEO_PAGES: LocalSeoPage[] = [
     secondaryCta: { label: "Lieferzone prüfen", href: "/lieferung" },
   },
   {
-    slug: "cafe-kassel",
-    title: "Café in Kassel",
-    metaTitle: "Café Kassel | Kaffee und Kuchen zum Mitnehmen | Aue Bäckerei",
-    description:
-      "Café in Kassel zwischen Karlsaue und Bebelplatz: Kaffee aus der Region, Kuchen aus der Vitrine und Brot zum Mitnehmen. Öffnungszeiten Mo bis Sa.",
-    intro:
-      "Das Café ist die ruhige Seite der Backstube: Kaffee am Fenster, Kuchen in der Vitrine und eine Pause zwischen Karlsaue und Bebelplatz. Sie können auch Brot für unterwegs mitnehmen.",
-    facts: [
-      { label: "Öffnungszeiten", value: "Mo–Fr 07:00–18:00 · Sa 08:00–16:00 · So Ruhetag" },
-      { label: "Kaffee", value: "Cappuccino, Caffè Crema, Earl Grey, Mango Lassi" },
-      { label: "Kuchen", value: "Zimtschnecke, Käsekuchen, Brownie, Streuselkuchen" },
-    ],
-    highlights: [
-      {
-        title: "Kombinationen, die funktionieren",
-        text: "Cappuccino und Zimtschnecke für den schnellen Morgen, Earl Grey mit Käsekuchen für den ruhigen Nachmittag.",
-      },
-      {
-        title: "Kuchen aus der eigenen Backstube",
-        text: "Was in der Vitrine liegt, wurde hier gebacken — nicht von einem Lieferanten zugeliefert.",
-      },
-      {
-        title: "Brot zum Mitnehmen",
-        text: "Ohne Termin vorbeikommen, ein Sauerteigbrot mitnehmen und weitergehen.",
-      },
-    ],
-    cta: { label: "Sortiment ansehen", href: "/sortiment" },
-    secondaryCta: { label: "Abholung vorbestellen", href: "/vorbestellen" },
-  },
-  {
     slug: "sauerteigbrot-kassel",
     title: "Sauerteigbrot aus Kassel",
     metaTitle: "Sauerteigbrot Kassel | Lange Teigführung | Aue Bäckerei",

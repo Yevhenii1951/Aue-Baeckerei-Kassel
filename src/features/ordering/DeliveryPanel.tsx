@@ -33,7 +33,7 @@ export function DeliveryPanel({
     deliveryChargeCents(subtotalCents, zone) + (express ? EXPRESS_FEE_CENTS : 0);
 
   return (
-    <div className="rounded-lg border border-sage/30 bg-paper p-4">
+    <div className="rounded-lg border border-brand/30 bg-paper p-4">
       <p className="font-semibold text-brand-deep">
         {t("checkServed", { zone })}
       </p>

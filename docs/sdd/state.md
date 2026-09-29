@@ -2,11 +2,45 @@
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
 workflow was enforced). ABE-010 through ABE-032 merged on `main`.
+ABE-033 (sortiment categories) and ABE-034 (content pages) are on local
+branches, not pushed: the owner wants the new look reviewed before anything
+reaches the remote.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-037 palette re-theme on `feature/abe-037-palette-retheme`: the tokens are
+  now deep green `#17453e` / `#0f332c`, amber `#fae462` and a navy
+  `#0f0f2d` for the dark surfaces. `sage` is retired and every former use
+  points at `brand`; the hero vignette, body grid, focus ring, borders and
+  shadows mix from the tokens, so no raw colour literal is left in
+  `globals.css` or JSX. Worst measured text pair is 9.76:1, so the new
+  contrast is better than the old one. Fonts stay Alegreya + Manrope.
+- ABE-036 footer on `feature/abe-036-footer`: three columns (brand + socials,
+  navigation, legal), the link lists now come from `shell/siteNavigation.ts`,
+  which is also what the header uses, and the bottom bar carries the copyright
+  year and "Webentwicklung: Yevgenii Riabokon". Social links are placeholders.
+  lucide-react in the pinned version has no brand glyphs, so the platforms are
+  linked by name; real icons need owned SVGs in `public/`.
+- ABE-035 header on `feature/abe-035-header-navigation`: central IA
+  (Sortiment, Vorbestellen, Kontakt, Karriere, Partner werden), icon-only cart
+  with a CSS badge pop, preorder CTA in the desktop header and the drawer.
+  Verified at 1440, 1024 and 390 px without overflow.
+- ABE-034 content pages on `feature/abe-034-content-pages` (stacked on
+  `feature/abe-033-sortiment-kategorien`): `/kontakt`, `/kafe`, `/karriere`
+  and `/partner` render from `src/features/content/companyPages.ts` through
+  one `CompanyPage` component, German copy like the local-SEO pages. The café
+  block leaves the landing, its path card and the header/footer café link point
+  to `/kafe`, and the duplicate local-SEO page `/cafe-kassel` is now a 308
+  redirect. Conversion cards moved out of the messages into the same module so
+  `/partner` and the landing share one source. Contact data is not invented —
+  a unit test holds address and hours against `bakeryJsonLd`.
+- ABE-033 sortiment categories on `feature/abe-033-sortiment-kategorien`:
+  landing category cards, `/sortiment/kategorie/<category>` pages, and two
+  catalogue UI fixes on top (`0960577` hides the empty cart summary,
+  `8f88929` warms the cart panel and drops the letter allergen codes from the
+  product tiles).
 - ABE-032 landing refresh on `feature/abe-032-landing-refresh` (PR #25):
   direction was agreed with the owner first and recorded in `docs/sdd/design.md`
   (typography + hero + rhythm, micro-interactions, lucide icons, grain over the
@@ -301,13 +335,27 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
+- The chrome pass (ABE-035 header, ABE-036 footer, ABE-037 palette) is done
+  locally, stacked on ABE-033/034. Nothing is pushed: the owner reviews the
+  result on the dev server first. Open decisions from that review are the
+  café photos, the real social profile URLs, and whether the brand glyphs for
+  Instagram/Facebook should be added as owned SVGs.
 - ABE-031 and ABE-032 close the i18n and the landing surface. Follow-ups if
   any: end-to-end auth flows against a real Supabase project (form-level codes
   are localised but were not exercised with a live staff session).
 - ABE-029 PWA was explicitly dropped by the owner: not in scope.
+- `ConsentRevokeLink` still hard-codes a German label and only appears after
+  the map consent was granted. Cheap fix, but it is not part of the chrome
+  pass.
 
 ## Notes
 
+- The café page (/kafe) is the single café surface now. If the owner sends the
+  interior photos, they replace the three dashed `photoSlots` frames in
+  `companyPages.ts`; the frames exist so the page is not empty before then.
+- The old header/footer link set (Start, Impressum, Datenschutz, Café) is
+  replaced in ABE-035/036. Until then the footer still shows the pre-ABE-035
+  link list.
 - Supabase is not configured and is not needed for the public site, the demo
   catalogue or the demo checkout/delivery/admin-dashboard (ABE-015 uses demo
   data). It becomes required when orders/pickup persistence arrives (ABE-020+).

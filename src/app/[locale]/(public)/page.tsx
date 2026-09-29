@@ -10,16 +10,9 @@ import {
 import { buildPublicMetadata } from "@/features/seo/publicMetadata";
 import { parseSupportedLocale } from "@/features/seo/site";
 import { buildBakeryJsonLd } from "@/features/seo/bakeryJsonLd";
-import { CatalogPreview } from "@/features/catalog/components/CatalogPreview";
-import {
-  ConversionSections,
-  type ConversionCard,
-} from "@/features/content/components/ConversionSections";
-import {
-  CafeSection,
-  type CafePairing,
-  type CafePhotoSlot,
-} from "@/features/content/components/CafeSection";
+import { CategoryGallery } from "@/features/catalog/components/CategoryGallery";
+import { CONVERSION } from "@/features/content/companyPages";
+import { ConversionSections } from "@/features/content/components/ConversionSections";
 import { Reveal } from "@/features/content/components/Reveal";
 
 type PathCard = {
@@ -29,7 +22,7 @@ type PathCard = {
 };
 
 const PATH_ICONS = [Store, ShoppingBag, Coffee];
-const PATH_HREFS = ["vorbestellen", "sortiment", "#cafe"];
+const PATH_HREFS = ["vorbestellen", "sortiment", "kafe"];
 
 export async function generateMetadata({
   params,
@@ -53,11 +46,6 @@ export default async function HomePage({
   const t = await getTranslations("home");
   const paths = t.raw("paths") as PathCard[];
   const steps = t.raw("steps") as string[];
-  const bestsellers = t.raw("bestsellers") as string[];
-  const trustItems = t.raw("trustItems") as string[];
-  const conversionCards = t.raw("conversionCards") as ConversionCard[];
-  const cafePairings = t.raw("cafePairings") as CafePairing[];
-  const cafePhotoSlots = t.raw("cafePhotoSlots") as CafePhotoSlot[];
 
   return (
     <div className="bg-cream">
@@ -144,7 +132,7 @@ export default async function HomePage({
               <Reveal key={path.title} delayMs={index * 120}>
                 <Link
                   href={href}
-                  className="group flex min-h-64 flex-col justify-between gap-8 rounded-lg bg-white/75 p-7 ring-1 ring-brand-deep/5 shadow-[0_1px_2px_rgb(18_15_13/0.06)] transition-shadow duration-300 hover:shadow-card"
+                  className="group flex min-h-64 flex-col justify-between gap-8 rounded-lg bg-white/75 p-7 ring-1 ring-brand-deep/5 transition-shadow duration-300 hover:shadow-card"
                 >
                   <div>
                     <span className="flex size-12 items-center justify-center rounded-full bg-amber-soft text-brand-deep">
@@ -206,33 +194,14 @@ export default async function HomePage({
           </p>
         </div>
         <div className="mt-8">
-          <CatalogPreview />
-        </div>
-        <div className="mt-8 grid gap-3 sm:grid-cols-3">
-          {bestsellers.map((item) => (
-            <p
-              key={item}
-              className="rounded-lg border border-sage/20 bg-sage/5 px-4 py-3 text-sm font-semibold text-sage"
-            >
-              {t("bestsellersTitle")}: {item}
-            </p>
-          ))}
+          <CategoryGallery />
         </div>
       </section>
 
       <ConversionSections
-        title={t("conversionTitle")}
-        text={t("conversionText")}
-        cards={conversionCards}
-      />
-
-      <CafeSection
-        title={t("cafeTitle")}
-        text={t("cafeText")}
-        hours={t("cafeHours")}
-        pairings={cafePairings}
-        photoSlots={cafePhotoSlots}
-        trustItems={trustItems}
+        title={CONVERSION.title}
+        text={CONVERSION.text}
+        cards={CONVERSION.cards}
       />
     </div>
   );

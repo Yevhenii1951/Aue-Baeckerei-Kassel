@@ -36,7 +36,7 @@ export default async function LieferungPage({
     <div className="bg-cream">
       <section className="border-b border-brand-deep/10 bg-paper">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-8">
-          <p className="text-sm font-semibold text-sage">{t("eyebrow")}</p>
+          <p className="text-sm font-semibold text-brand">{t("eyebrow")}</p>
           <h1 className="mt-4 font-display text-5xl font-semibold">
             {t("title")}
           </h1>
@@ -74,7 +74,7 @@ function ZoneCard({
 }): React.ReactElement {
   return (
     <div className="surface p-5">
-      <p className="text-sm font-semibold text-sage">
+      <p className="text-sm font-semibold text-brand">
         {t("zoneLabel")} {zone.zone}
       </p>
       <h2 className="mt-1 text-lg font-semibold text-brand-deep">

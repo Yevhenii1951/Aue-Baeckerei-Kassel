@@ -30,7 +30,7 @@ export function CheckoutConfirmation({
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_22rem]">
-      <section className="rounded-lg border border-sage/30 bg-paper p-6 shadow-card">
+      <section className="rounded-lg border border-brand/30 bg-paper p-6 shadow-card">
         <h2 className="font-display text-3xl font-semibold text-brand-deep">
           {t("thanks", { firstName: firstName ? `, ${firstName}` : "" })}
         </h2>

@@ -7,14 +7,18 @@ import {
 const INTERNAL_HREFS = ["/sortiment", "/lieferung", "/vorbestellen", "/kasse"];
 
 describe("local SEO pages", () => {
-  it("covers the five sales intents ABE-022 lists", () => {
+  it("covers the sales intents ABE-022 lists", () => {
     expect(LOCAL_SEO_PAGES.map((page) => page.slug)).toEqual([
       "lieferung-kassel",
       "brot-abo-kassel",
       "catering-kassel",
-      "cafe-kassel",
       "sauerteigbrot-kassel",
     ]);
+  });
+
+  it("leaves the café to its own page so the two cannot compete", () => {
+    expect(findLocalSeoPage("cafe-kassel")).toBeUndefined();
+    expect(LOCAL_SEO_PAGES.map((page) => page.slug)).not.toContain("cafe-kassel");
   });
 
   it("gives every page unique metadata", () => {
@@ -65,7 +69,7 @@ describe("local SEO pages", () => {
   });
 
   it("finds a page by slug and returns undefined otherwise", () => {
-    expect(findLocalSeoPage("cafe-kassel")?.title).toBe("Café in Kassel");
+    expect(findLocalSeoPage("lieferung-kassel")?.title).toBe("Brotlieferung in Kassel");
     expect(findLocalSeoPage("gibt-es-nicht")).toBeUndefined();
   });
 });

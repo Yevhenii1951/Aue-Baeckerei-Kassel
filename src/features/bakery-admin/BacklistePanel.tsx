@@ -29,7 +29,7 @@ export function BacklistePanel({
     >
       <div className="flex flex-wrap items-start justify-between gap-4 print:block">
         <div>
-          <p className="text-sm font-semibold text-sage print:text-ink">{t("production")}</p>
+          <p className="text-sm font-semibold text-brand print:text-ink">{t("production")}</p>
           <h2 className="mt-1 text-lg font-semibold text-brand-deep">{t("title")}</h2>
           <p className="mt-1 text-sm text-ink/60">
             {t("forDate", { date: formatDate(selectedDate, locale) })}
