@@ -12,7 +12,10 @@
     "navCafe": "Cafe",
     "navImprint": "Legal notice",
     "navPrivacy": "Privacy policy",
-    "footerNote": "Portfolio demo for a modern craft bakery in Kassel. Legal copy must be reviewed before a real launch."
+    "footerNote": "Portfolio demo for a modern craft bakery in Kassel. Legal copy must be reviewed before a real launch.",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "mobileNav": "Mobile navigation"
   },
   "home": {
     "eyebrow": "Craft bakery near Karlsaue",

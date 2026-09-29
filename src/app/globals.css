@@ -88,13 +88,13 @@
 
   /* Nav link for dark surfaces, sliding gold underline */
   .nav-link {
-    @apply relative text-sm font-semibold text-white/82 transition-colors duration-300 hover:text-amber;
+    @apply relative inline-flex min-h-11 items-center text-sm font-semibold text-white/82 transition-colors duration-300 hover:text-amber;
   }
   .nav-link::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -4px;
+    bottom: 2px;
     height: 2px;
     width: 100%;
     transform: scaleX(0);

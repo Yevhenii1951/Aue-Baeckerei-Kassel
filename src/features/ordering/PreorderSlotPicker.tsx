@@ -43,7 +43,7 @@ export function PreorderSlotPicker({
             disabled={full}
             aria-pressed={selected}
             onClick={() => onSelect(selected ? null : slot.id)}
-            className={`flex flex-col items-start gap-0.5 rounded-lg border px-3 py-2 text-left ${
+            className={`flex min-h-11 flex-col items-start gap-0.5 rounded-lg border px-3 py-2 text-left ${
               selected
                 ? "border-brand bg-brand text-cream"
                 : STATUS_CLASSES[status]
