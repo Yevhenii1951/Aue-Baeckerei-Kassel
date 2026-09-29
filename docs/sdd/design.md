@@ -46,13 +46,39 @@ so JSX reads `bg-amber` and `text-brand-deep` rather than a colour word:
 | `--color-sage` | Aue green, local and cafe accents |
 | `--color-ink` | body text |
 
-The palette does not change as part of this refresh — it is already
-distinctive (cream + crust-brown + amber + sage is not the generic
-cream/terracotta default). Every token must keep at least one use. A colour
-that no component references does not belong in the theme; add it in the same
-commit as its first use. Component classes are `.surface`, `.panel`,
-`.btn-amber`, `.btn-ghost-dark` and `.nav-link`. JSX uses token classes, never
-hardcoded brand colours.
+Every token must keep at least one use. A colour that no component references
+does not belong in the theme; add it in the same commit as its first use.
+Component classes are `.surface`, `.panel`, `.btn-amber`, `.btn-ghost-dark` and
+`.nav-link`. JSX uses token classes, never hardcoded brand colours.
+
+### Re-theme (agreed 2026-09-29, ABE-036)
+
+The owner asked for a different colour scheme after reviewing the landing, so
+the palette above is retired. The new direction keeps the bakery warmth in the
+light surfaces and moves the weight into a deep green with a warm yellow
+accent and ink-navy text, following the structure the owner picked out:
+
+| Token | Role | Value |
+| --- | --- | --- |
+| `--color-brand` | deep green, primary action and brand surface | `#17453E` |
+| `--color-brand-dark` | deep green, hover/secondary action | `#0F332C` |
+| `--color-brand-deep` | ink navy, dark bands, focus ring, strong text | `#0F0F2D` |
+| `--color-amber` | warm yellow, CTA on dark surfaces, freshness | `#FAE462` |
+| `--color-amber-soft` | yellow tint for badges | `#FBF1C1` |
+| `--color-cream` | flour paper, light page surface | `#F7F4EC` |
+| `--color-paper` | card surface, one step lighter | `#FDFCF7` |
+| `--color-ink` | body text | `#22222C` |
+
+Crust brown and the old `sage` green are gone: two greens next to each other
+read as a mistake, and the old brown only existed as the primary. Every token
+above keeps at least one use, and every component that referenced a retired
+token is updated in the same ticket. Warm-yellow is an accent, never a text
+colour and never a large surface — it carries CTAs, the preorder cutoff, the
+cart badge and the "a new item was added" pop.
+
+Type stays: Alegreya for display, Manrope for everything operational. The
+geometry and motion of a modern bakery site were borrowed; the serif is what
+keeps it a bakery rather than a chain.
 
 The whole-site background texture is not a colour token: it is a fixed grain
 overlay (see Motion). It must not creep into behaviour, focus states, or
@@ -106,6 +132,31 @@ Page rhythm (replaces same-padding repeated bands):
 - Hero miniatures: three real product photos (`/products/<id>.webp`) tucked
   into the bottom of the hero fold — a promise of the shop, linking to
   `/sortiment`. This fulfils the old "hint of product tabs below fold" note.
+
+## Site Chrome (agreed 2026-09-29, ABE-034/035)
+
+The chrome was reorganised around how a bakery site is actually used: browse
+or order, and nothing else needs to be one click away from the top.
+
+- **Header nav** is the transaction: `Sortiment`, `Vorbestellen`, `Kontakt`,
+  `Karriere`, `Partner werden`. `Start` is the logo (a start link in a header
+  is a 2020 habit), and `Impressum`/`Datenschutz` move to the footer, which is
+  where a German visitor looks for them anyway.
+- **Header layout** is three zones: logo left, navigation centre, actions
+  right. The actions are the cart icon and one amber `Vorbestellen` CTA —
+  a single obvious next step instead of six equal-weight links.
+- **Cart is an icon** (lucide `ShoppingCart`) with a count badge at every
+  width. The word `Warenkorb` on an amber pill is a button-shaped label for an
+  action; the drawer heading still carries the word, where it belongs.
+- **Footer** is three columns on desktop, one on mobile: brand line plus
+  social icons, navigation, legal. `Consent-Einstellungen` stays where it is,
+  under the legal column.
+- **Social links are placeholders** until the bakery has real accounts. They
+  live in one constants module so adding a real URL is a one-line change, and
+  the credit line (`Webentwicklung: …`) sits at the very bottom.
+- **Café leaves the landing.** It is a page with its own content and its own
+  photographs (`/kafe`); a landing band with no photographs is a placeholder,
+  and a placeholder band is worse than a link.
 
 ## Components
 

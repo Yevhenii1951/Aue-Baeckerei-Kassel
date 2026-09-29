@@ -1,5 +1,6 @@
 "use client";
 
+import { ShoppingCart } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCart } from "@/features/ordering/cart-provider";
 
@@ -15,29 +16,14 @@ export function CartToggleButton() {
       aria-haspopup="dialog"
       aria-expanded={isOpen}
       aria-label={count > 0 ? t("openCount", { count }) : t("open")}
-      className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-lg bg-amber px-3 py-2 font-semibold text-brand-deep sm:justify-start"
+      className="relative inline-flex size-11 items-center justify-center rounded-lg border border-white/20 text-cream transition-colors duration-300 hover:border-amber hover:text-amber"
     >
-      <svg
-        aria-hidden="true"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="sm:hidden"
-      >
-        <path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6" />
-        <circle cx="10" cy="20" r="1" />
-        <circle cx="18" cy="20" r="1" />
-      </svg>
-      <span className="hidden sm:inline">{t("title")}</span>
+      <ShoppingCart className="size-5" strokeWidth={1.75} aria-hidden="true" />
       {count > 0 ? (
         <span
+          key={count}
           aria-hidden="true"
-          className="inline-grid size-5 place-items-center rounded-full bg-brand-deep text-xs leading-5 text-cream"
+          className="cart-badge-pop absolute -right-1.5 -top-1.5 inline-grid size-5 place-items-center rounded-full bg-amber text-xs font-bold leading-5 text-brand-deep"
         >
           {count}
         </span>

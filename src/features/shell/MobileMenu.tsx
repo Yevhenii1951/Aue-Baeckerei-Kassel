@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import type { NavLink } from "./siteNavigation";
 
-export type MobileMenuLink = {
-  href: string;
-  label: string;
-};
+export type { NavLink } from "./siteNavigation";
 
 type MobileMenuProps = {
-  links: MobileMenuLink[];
+  links: NavLink[];
+  cta: NavLink;
   menuLabel: string;
   closeLabel: string;
   brandLabel: string;
@@ -17,6 +16,7 @@ type MobileMenuProps = {
 
 export function MobileMenu({
   links,
+  cta,
   menuLabel,
   closeLabel,
   brandLabel,
@@ -117,6 +117,13 @@ export function MobileMenu({
                 </li>
               ))}
             </ul>
+            <Link
+              href={cta.href}
+              onClick={() => setOpen(false)}
+              className="btn-amber mt-4 w-full"
+            >
+              {cta.label}
+            </Link>
           </nav>
         </div>
       </div>

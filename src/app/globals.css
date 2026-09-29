@@ -196,6 +196,22 @@
     animation-delay: 0.36s;
   }
 
+  /* The cart count is a keyframe on a keyed element: every new item replays
+     the pop, so "was in something added?" is answered without a library. */
+  @keyframes cart-badge-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .cart-badge-pop {
+    animation: cart-badge-pop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
   /* CTA arrows answer the hover with a small slide. */
   .arrow-slide svg {
     transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
