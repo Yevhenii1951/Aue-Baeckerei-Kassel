@@ -10,7 +10,7 @@ export function ShopCartSummary(): React.ReactElement {
   const locale = useLocale();
 
   return (
-    <aside className="sticky bottom-0 rounded-t-lg border border-brand-deep/10 bg-brand-deep p-4 text-cream shadow-panel lg:top-24 lg:rounded-lg">
+    <aside className="sticky bottom-0 rounded-t-lg border border-cream/10 bg-brand-dark p-4 text-cream shadow-panel lg:top-24 lg:rounded-lg">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold">{t("title")}</h2>

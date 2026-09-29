@@ -54,15 +54,6 @@ export function ProductGridCard({
 
       <div className="mt-5 grid gap-4 p-5 pt-0">
         <div className="flex flex-wrap gap-2">
-          {product.allergens.map((code) => (
-            <span
-              key={code}
-              title={t(`allergens.${code}`)}
-              className="rounded-md border border-brand-deep/10 px-2 py-1 text-xs font-semibold text-ink/70"
-            >
-              {code}
-            </span>
-          ))}
           {product.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
