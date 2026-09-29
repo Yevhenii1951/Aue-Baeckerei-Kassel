@@ -10,7 +10,7 @@ import {
 import { buildPublicMetadata } from "@/features/seo/publicMetadata";
 import { parseSupportedLocale } from "@/features/seo/site";
 import { buildBakeryJsonLd } from "@/features/seo/bakeryJsonLd";
-import { CatalogPreview } from "@/features/catalog/components/CatalogPreview";
+import { CategoryGallery } from "@/features/catalog/components/CategoryGallery";
 import {
   ConversionSections,
   type ConversionCard,
@@ -53,7 +53,6 @@ export default async function HomePage({
   const t = await getTranslations("home");
   const paths = t.raw("paths") as PathCard[];
   const steps = t.raw("steps") as string[];
-  const bestsellers = t.raw("bestsellers") as string[];
   const trustItems = t.raw("trustItems") as string[];
   const conversionCards = t.raw("conversionCards") as ConversionCard[];
   const cafePairings = t.raw("cafePairings") as CafePairing[];
@@ -206,17 +205,7 @@ export default async function HomePage({
           </p>
         </div>
         <div className="mt-8">
-          <CatalogPreview />
-        </div>
-        <div className="mt-8 grid gap-3 sm:grid-cols-3">
-          {bestsellers.map((item) => (
-            <p
-              key={item}
-              className="rounded-lg border border-sage/20 bg-sage/5 px-4 py-3 text-sm font-semibold text-sage"
-            >
-              {t("bestsellersTitle")}: {item}
-            </p>
-          ))}
+          <CategoryGallery />
         </div>
       </section>
 

@@ -55,14 +55,8 @@
       "Reserve pickup day and 30-minute slot.",
       "Show order number and take fresh baked goods."
     ],
-    "bestsellersTitle": "Fresh from the oven",
-    "bestsellers": [
-      "House bread with spelt sourdough",
-      "Hand-shaped pretzel",
-      "Cinnamon bun with cinnamon butter"
-    ],
     "assortmentTitle": "Assortment for breakfast, breaks and office",
-    "assortmentText": "Breads, rolls, sweets, drinks, snacks and fine goods will become a filterable catalogue in the next step.",
+    "assortmentText": "Breads, rolls, sweets, drinks, snacks and fine goods – each category leads straight to its own assortment.",
     "conversionTitle": "More than a bakery bag",
     "conversionText": "For Kassel, families and offices: delivery, bread subscriptions and catering stay as simple inquiry or demo flows until real payment and delivery integrations follow.",
     "conversionCards": [

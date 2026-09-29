@@ -19,6 +19,7 @@ import { ShopCartSummary } from "./ShopCartSummary";
 type CatalogShopProps = {
   products: Product[];
   locale: string;
+  initialCategory?: ProductCategory | "all";
 };
 
 const categories = PRODUCT_CATEGORIES;
@@ -34,8 +35,12 @@ const tagFilters = [
 const allergenFilters = ALLERGEN_CODES;
 const PRODUCT_SORTS: ProductSort[] = ["beliebt", "name-asc", "price-asc", "price-desc"];
 
-export function CatalogShop({ products, locale }: CatalogShopProps): React.ReactElement {
-  const [category, setCategory] = useState<ProductCategory | "all">("all");
+export function CatalogShop({
+  products,
+  locale,
+  initialCategory = "all",
+}: CatalogShopProps): React.ReactElement {
+  const [category, setCategory] = useState<ProductCategory | "all">(initialCategory);
   const [query, setQuery] = useState("");
   const [tag, setTag] = useState("");
   const [allergen, setAllergen] = useState<AllergenCode | "">("");
