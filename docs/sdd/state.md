@@ -3,8 +3,8 @@
 Status: ABE-001 through ABE-032 merged on `main` earlier. ABE-033 through
 ABE-044 shipped as one squash PR #26 (`b4e44a5`), because the twelve tickets
 formed a single linear chain of chrome work that only makes sense together.
-ABE-045 (empty the cart after a submitted order) is on
-`feature/abe-045-clear-cart-after-order`, not pushed yet.
+ABE-045 (empty the cart after a submitted order) is merged on `main`
+(`bdc6b34`, PR #27).
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
