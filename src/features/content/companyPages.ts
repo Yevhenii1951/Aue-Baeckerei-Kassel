@@ -1,5 +1,10 @@
 export type CompanySlug = "kontakt" | "kafe" | "karriere" | "partner";
 
+export type PageImage = {
+  src: string;
+  alt: string;
+};
+
 export type CompanyPage = {
   slug: CompanySlug;
   path: string;
@@ -8,8 +13,10 @@ export type CompanyPage = {
   description: string;
   intro: string;
   notice: string;
+  hero?: PageImage & { name: string };
   facts: { label: string; value: string }[];
-  highlights: { title: string; text: string }[];
+  highlights?: { title: string; text: string }[];
+  pairings?: { title: string; text: string; drink: PageImage; cake: PageImage }[];
   photoSlots?: { title: string; text: string; image: string; alt: string }[];
   cta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
@@ -75,6 +82,11 @@ const CAFE_PAGE: CompanyPage = {
     "Unser Café ist die ruhige Hälfte der Backstube: Plätze am Fenster, ein Tresen und eine Vitrine, die nur zeigt, was der Ofen am selben Morgen hervorgebracht hat. Kein festes Menüprogramm — der Teig entscheidet, und die Preise stehen an der Vitrine.",
   notice:
     "Die Aufnahmen stammen aus dem laufenden Betrieb. Für den Livegang sind Quelle und Lizenz der Fotos noch zu dokumentieren.",
+  hero: {
+    src: "/cafe/hero.webp",
+    alt: "Innenraum des Cafés an der Backstube",
+    name: "Café",
+  },
   facts: [
     {
       label: "Öffnungszeiten",
@@ -84,22 +96,54 @@ const CAFE_PAGE: CompanyPage = {
     { label: "Plätze", value: "Fensterplätze und Tresen" },
     { label: "Küche", value: "Filter und Espresso, Kuchen aus der Vitrine" },
   ],
-  highlights: [
+  pairings: [
     {
       title: "Cappuccino + Zimtschnecke",
       text: "Der schnelle Klassiker für den Vormittag, warm, süß und nicht zu schwer.",
+      drink: {
+        src: "/products/cappuccino.webp",
+        alt: "Cappuccino",
+      },
+      cake: {
+        src: "/products/zimtschnecke.webp",
+        alt: "Zimtschnecke",
+      },
     },
     {
       title: "Earl Grey + Käsekuchen",
       text: "Ruhiger Nachmittag am Fenster mit cremigem Kuchen und Bergamotte.",
+      drink: {
+        src: "/products/earl-grey.webp",
+        alt: "Earl Grey",
+      },
+      cake: {
+        src: "/products/kaesekuchen.webp",
+        alt: "Käsekuchen",
+      },
     },
     {
       title: "Caffè Crema + Brownie",
       text: "Kräftiger Kaffee zu Schokolade, ideal für die kleine Arbeitspause.",
+      drink: {
+        src: "/products/caffe-crema.webp",
+        alt: "Caffè Crema",
+      },
+      cake: {
+        src: "/products/brownie.webp",
+        alt: "Brownie",
+      },
     },
     {
       title: "Mango Lassi + Apfel-Mandel-Schnecke",
       text: "Fruchtig, vegan möglich und perfekt für warme Kasseler Tage.",
+      drink: {
+        src: "/products/mango-lassi.webp",
+        alt: "Mango Lassi",
+      },
+      cake: {
+        src: "/products/apfel-mandel-schnecke.webp",
+        alt: "Apfel-Mandel-Schnecke",
+      },
     },
   ],
   photoSlots: [

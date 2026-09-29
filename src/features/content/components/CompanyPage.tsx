@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CompanyPage as CompanyPageData } from "@/features/content/companyPages";
+import { PairingCards } from "./PairingCards";
 
 /**
  * One renderer for the four content pages. The copy is German on purpose (see
@@ -35,6 +36,25 @@ export function CompanyPage({
         </div>
       </section>
 
+      {page.hero ? (
+        <section aria-label={page.hero.name} className="relative isolate">
+          <div className="relative h-[46vh] min-h-72 max-h-[34rem] w-full overflow-hidden bg-brand-deep/10">
+            <Image
+              src={page.hero.src}
+              alt={page.hero.alt}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover opacity-60"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-b from-paper via-paper/20 to-cream"
+            />
+          </div>
+        </section>
+      ) : null}
+
       <section className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-8">
         <h2 className="font-display text-3xl font-semibold">Auf einen Blick</h2>
         <dl className="mt-5 grid gap-3 sm:grid-cols-3">
@@ -50,19 +70,23 @@ export function CompanyPage({
         </dl>
 
         <h2 className="mt-12 font-display text-3xl font-semibold">
-          {page.photoSlots ? "Passt dazu" : "Was Sie wissen sollten"}
+          {page.pairings || page.photoSlots ? "Passt dazu" : "Was Sie wissen sollten"}
         </h2>
-        <div className="mt-5 grid gap-4">
-          {page.highlights.map((highlight) => (
-            <article
-              key={highlight.title}
-              className="rounded-lg border border-brand-deep/10 bg-cream p-5"
-            >
-              <h3 className="font-semibold">{highlight.title}</h3>
-              <p className="mt-2 leading-7 text-ink/72">{highlight.text}</p>
-            </article>
-          ))}
-        </div>
+        {page.pairings ? (
+          <PairingCards pairings={page.pairings} />
+        ) : (
+          <div className="mt-5 grid gap-4">
+            {page.highlights?.map((highlight) => (
+              <article
+                key={highlight.title}
+                className="rounded-lg border border-brand-deep/10 bg-cream p-5"
+              >
+                <h3 className="font-semibold">{highlight.title}</h3>
+                <p className="mt-2 leading-7 text-ink/72">{highlight.text}</p>
+              </article>
+            ))}
+          </div>
+        )}
 
         {page.photoSlots ? (
           <div className="mt-12">

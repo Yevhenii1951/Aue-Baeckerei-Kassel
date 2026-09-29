@@ -17,6 +17,12 @@
   gallery on `/kafe`; the second file is a second window-seat shot, so the
   "Kuchenvitrine" slot from ABE-034 is gone. Alt texts follow the file names and
   are to be confirmed by the owner against the real photos.
+- `public/cafe/hero.webp` — the café hero, supplied by the project owner on
+  2026-09-29 as `Cafe hero section.jpg` (1920x1278, no EXIF). Served as
+  1600x1065 WebP quality 78, 69 KB, drawn at 60% opacity under a paper-to-cream
+  gradient. The alt text is a neutral guess and needs the owner's eyes.
+- The "Passt dazu" section reuses existing `public/products/*.webp` shots for
+  the drink and the cake of each pairing, so it added no new files.
 
 ## Provenance
 

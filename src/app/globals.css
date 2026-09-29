@@ -124,6 +124,22 @@
     @apply inline-flex min-h-9 items-center rounded-full border border-amber/55 px-3.5 text-sm font-semibold text-amber transition-colors duration-300 hover:bg-amber hover:text-brand-deep;
   }
 
+  /* Pairing card: the caption arrives on hover, and stays visible where hover
+     does not exist (touch) so the text is never locked away. */
+  .pairing-caption {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .group:hover > .pairing-caption,
+  .group:focus-within > .pairing-caption {
+    opacity: 1;
+  }
+  @media (hover: none) {
+    .pairing-caption {
+      opacity: 1;
+    }
+  }
+
   form:not([class*="contents"]) input:not([type="checkbox"]):not([type="radio"]),
   form textarea,
   form select {
