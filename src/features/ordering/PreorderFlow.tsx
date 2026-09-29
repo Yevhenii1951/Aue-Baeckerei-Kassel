@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { SiteLocale } from "@/features/seo/site";
 import { useCart } from "./cart-provider";
 import { earliestPreorderDate, nextNDates } from "./preorder";
+import { useTranslations } from "next-intl";
 import { demoPickupSlots } from "./demoSlots";
 import {
   parsePreorderForm,
@@ -37,6 +38,8 @@ function subscribeNothing(): () => void {
 
 export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement {
   const { items } = useCart();
+  const t = useTranslations("vorbestellen");
+  const tval = useTranslations("validation");
   const firstDate = useSyncExternalStore(
     subscribeNothing,
     () => earliestPreorderDate(new Date()),
@@ -59,7 +62,7 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
     return (
       <div className="grid place-content-center gap-4 py-20 text-center">
         <p className="max-w-md text-ink/70">
-          Dein Warenkorb ist noch leer. Wähle zuerst aus dem Sortiment.
+          {t("emptyCart")}
         </p>
         <Link
           href={`/${locale}/sortiment`}
@@ -89,7 +92,7 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
     event.preventDefault();
 
     if (!selectedSlotId) {
-      setErrors({ slot: "Bitte wähle einen Abholzeitraum." });
+      setErrors({ slot: "choose_slot" });
       return;
     }
 
@@ -108,22 +111,21 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
       <div className="grid gap-8 lg:grid-cols-[1fr_22rem]">
         <section className="rounded-lg border border-sage/30 bg-paper p-6 shadow-card">
           <h2 className="font-display text-3xl font-semibold text-brand-deep">
-            Vielen Dank{form.name ? `, ${form.name.split(" ")[0]}` : ""}!
+            {t("thanks", {
+              firstName: form.name ? `, ${form.name.split(" ")[0]}` : "",
+            })}
           </h2>
           <p className="mt-3 text-ink/70">
-            Deine Vorbestellung ist als Demo bei uns eingegangen. Abholung am{" "}
-            <strong className="text-brand-deep">{formatDate(effectiveDate)}</strong>{" "}
-            um{" "}
-            <strong className="text-brand-deep">
-              {selectedSlot?.startTime}–{selectedSlot?.endTime} Uhr
-            </strong>
-            .
+            {t("demoReceived", {
+              date: formatDate(effectiveDate, locale),
+              time: `${selectedSlot?.startTime}–${selectedSlot?.endTime}`,
+            })}
           </p>
           <Link
             href={`/${locale}/sortiment`}
             className="mt-6 inline-block rounded-lg bg-brand px-4 py-2 font-semibold text-cream"
           >
-            Zurück zum Sortiment
+            {t("backToAssortment")}
           </Link>
         </section>
         <PreorderSummary />
@@ -136,10 +138,10 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
       <div className="grid gap-8">
         <section className="grid gap-3">
           <h2 className="text-lg font-semibold text-brand-deep">
-            Wann möchtest du abholen?
+            {t("pickupHeading")}
           </h2>
           <p className="text-sm text-ink/65">
-            Nach 20 Uhr gilt die Vorbestellung für übermorgen.
+            {t("cutoffNote")}
           </p>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {dates.map((candidate) => {
@@ -156,19 +158,19 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
                       : "border-brand-deep/15 bg-white text-brand-deep"
                   }`}
                 >
-                  {formatDate(candidate)}
+                  {formatDate(candidate, locale)}
                 </button>
               );
             })}
           </div>
           {errors.slot ? (
-            <p className="text-sm text-red-700">{errors.slot}</p>
+            <p className="text-sm text-red-700">{tval(errors.slot)}</p>
           ) : null}
         </section>
 
         <section className="grid gap-3">
           <h2 className="text-lg font-semibold text-brand-deep">
-            Abholzeitraum
+            {t("slotHeading")}
           </h2>
           <PreorderSlotPicker
             slots={demoPickupSlots(effectiveDate)}
@@ -197,9 +199,9 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
   );
 }
 
-function formatDate(date: string): string {
+function formatDate(date: string, locale: string): string {
   const [year, month, day] = date.split("-").map(Number);
-  return new Intl.DateTimeFormat("de-DE", {
+  return new Intl.DateTimeFormat(locale, {
     weekday: "short",
     day: "2-digit",
     month: "2-digit",

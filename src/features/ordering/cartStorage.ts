@@ -1,13 +1,10 @@
 import { z } from "zod";
-import {
-  categoryLabels,
-  type ProductCategory,
-} from "@/features/catalog/types";
+import { PRODUCT_CATEGORIES, type ProductCategory } from "@/features/catalog/types";
 import type { CartItemInput } from "./cart";
 
 export const CART_STORAGE_KEY = "aue.cart.v1";
 
-const categoryValues = Object.keys(categoryLabels) as [
+const categoryValues = PRODUCT_CATEGORIES as [
   ProductCategory,
   ...ProductCategory[],
 ];

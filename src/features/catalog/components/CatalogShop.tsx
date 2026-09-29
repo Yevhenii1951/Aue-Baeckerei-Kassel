@@ -1,8 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { filterProducts, sortProducts } from "@/features/catalog/filters";
 import {
+  ALLERGEN_CODES,
+  PRODUCT_CATEGORIES,
   type AllergenCode,
   type Product,
   type ProductCategory,
@@ -18,16 +21,18 @@ type CatalogShopProps = {
   locale: string;
 };
 
-const categories: ProductCategory[] = [
-  "bread",
-  "rolls",
-  "sweets",
-  "drinks",
-  "snacks",
-  "fineGoods",
-];
-const tagFilters = ["vegan", "dinkel", "beliebt", "premium", "mittag"];
-const allergenFilters: AllergenCode[] = ["A", "C", "F", "G", "H", "N"];
+const categories = PRODUCT_CATEGORIES;
+const tagFilters = [
+  "vegan",
+  "dinkel",
+  "beliebt",
+  "proteinreich",
+  "geschenk",
+  "premium",
+  "mittag",
+] as const;
+const allergenFilters = ALLERGEN_CODES;
+const PRODUCT_SORTS: ProductSort[] = ["beliebt", "name-asc", "price-asc", "price-desc"];
 
 export function CatalogShop({ products, locale }: CatalogShopProps): React.ReactElement {
   const [category, setCategory] = useState<ProductCategory | "all">("all");
@@ -36,6 +41,7 @@ export function CatalogShop({ products, locale }: CatalogShopProps): React.React
   const [allergen, setAllergen] = useState<AllergenCode | "">("");
   const [sort, setSort] = useState<ProductSort>("beliebt");
   const { items, totals, addToCart } = useCart();
+  const t = useTranslations("catalog");
 
   const visibleProducts = useMemo(() => {
     const filtered = filterProducts(products, {
@@ -61,7 +67,7 @@ export function CatalogShop({ products, locale }: CatalogShopProps): React.React
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Suchen: Brot, Kaffee, vegan..."
+            placeholder={t("searchPlaceholder")}
             className="min-h-11 rounded-lg border border-brand-deep/15 bg-white px-3"
           />
           <select
@@ -69,10 +75,10 @@ export function CatalogShop({ products, locale }: CatalogShopProps): React.React
             onChange={(event) => setTag(event.target.value)}
             className="min-h-11 rounded-lg border border-brand-deep/15 bg-white px-3"
           >
-            <option value="">Alle Tags</option>
+            <option value="">{t("allTags")}</option>
             {tagFilters.map((candidate) => (
               <option key={candidate} value={candidate}>
-                {candidate}
+                {t(`tags.${candidate}`)}
               </option>
             ))}
           </select>
@@ -81,10 +87,10 @@ export function CatalogShop({ products, locale }: CatalogShopProps): React.React
             onChange={(event) => setAllergen(event.target.value as AllergenCode)}
             className="min-h-11 rounded-lg border border-brand-deep/15 bg-white px-3"
           >
-            <option value="">Allergene erlauben</option>
+            <option value="">{t("excludeAllergen")}</option>
             {allergenFilters.map((candidate) => (
               <option key={candidate} value={candidate}>
-                Ohne {candidate}
+                {t("without", { code: t(`allergens.${candidate}`) })}
               </option>
             ))}
           </select>
@@ -93,15 +99,19 @@ export function CatalogShop({ products, locale }: CatalogShopProps): React.React
             onChange={(event) => setSort(event.target.value as ProductSort)}
             className="min-h-11 rounded-lg border border-brand-deep/15 bg-white px-3"
           >
-            <option value="beliebt">Beliebt</option>
-            <option value="name-asc">Name</option>
-            <option value="price-asc">Preis aufsteigend</option>
-            <option value="price-desc">Preis absteigend</option>
+            {PRODUCT_SORTS.map((candidate) => (
+              <option key={candidate} value={candidate}>
+                {t(`sorts.${candidate}`)}
+              </option>
+            ))}
           </select>
         </div>
 
         <p className="text-sm font-medium text-ink/65">
-          {visibleProducts.length} Produkte · Warenkorb {totals.lines.length}
+          {t("summary", {
+            count: visibleProducts.length,
+            cartCount: totals.lines.length,
+          })}
         </p>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">

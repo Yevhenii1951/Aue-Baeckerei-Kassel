@@ -15,7 +15,12 @@
     "footerNote": "Portfolio-Demo für eine moderne Handwerksbäckerei in Kassel. Rechtstexte vor einem echten Livegang prüfen lassen.",
     "menuOpen": "Menü öffnen",
     "menuClose": "Menü schließen",
-    "mobileNav": "Mobile Navigation"
+    "retryHeading": "Kleine Panne",
+    "retryText": "Dieser Abschnitt konnte nicht geladen werden. Bitte versuche es erneut.",
+    "retry": "Erneut versuchen",
+    "metaDescription": "Moderne Handwerksbäckerei in Kassel mit Vorbestellung, Café und frischem Sauerteigbrot.",
+    "ogTagline": "Morgens frisch, abends bestellt.",
+    "ogPlace": "Handwerksbäckerei in Kassel"
   },
   "home": {
     "eyebrow": "Handwerksbäckerei an der Karlsaue",
@@ -125,7 +130,13 @@
   "sortiment": {
     "eyebrow": "Online bestellen oder für morgen sichern",
     "title": "Sortiment",
-    "intro": "Brote, Brötchen, Süßes, Getränke, Snacks und Feinkost mit Filtern, Allergenen und Warenkorb. Die Bestellung läuft als Demo-Flow, die Preislogik arbeitet bereits in Cent."
+    "intro": "Brote, Brötchen, Süßes, Getränke, Snacks und Feinkost mit Filtern, Allergenen und Warenkorb. Die Bestellung läuft als Demo-Flow, die Preislogik arbeitet bereits in Cent.",
+    "price": "Preis",
+    "perUnit": "pro {unit}",
+    "addToCart": "In den Warenkorb",
+    "preorder": "Vorbestellen",
+    "tags": "Tags",
+    "related": "Ähnliche Produkte"
   },
   "contactLegal": {
     "imprintTitle": "Impressum",
@@ -135,7 +146,31 @@
   "vorbestellen": {
     "eyebrow": "Morgen frisch aus dem Ofen",
     "title": "Vorbestellen",
-    "intro": "Wähle dein Abholdatum, den passenden Zeitraum und sende uns deine Bestellung. Nach 20 Uhr gilt die Vorbestellung für übermorgen."
+    "intro": "Wähle dein Abholdatum, den passenden Zeitraum und sende uns deine Bestellung. Nach 20 Uhr gilt die Vorbestellung für übermorgen.",
+    "selection": "Deine Auswahl",
+    "itemCount": "{count, plural, one {{count} Position} other {{count} Positionen}}",
+    "slotStatus": {
+      "available": "Noch frei",
+      "limited": "Wenige Plätze",
+      "full": "Ausgebucht"
+    },
+    "slotTime": "{start}–{end} Uhr",
+    "fieldName": "Name *",
+    "fieldEmail": "E-Mail *",
+    "fieldPhone": "Telefon *",
+    "fieldNotes": "Notizen für die Bäckerei",
+    "submit": "Vorbestellung absenden",
+    "pickupHeading": "Wann möchtest du abholen?",
+    "cutoffNote": "Nach 20 Uhr gilt die Vorbestellung für übermorgen.",
+    "backToAssortment": "Zurück zum Sortiment",
+    "slotHeading": "Abholzeitraum",
+    "thanks": "Vielen Dank{firstName}!",
+    "demoReceived": "Deine Vorbestellung ist als Demo bei uns eingegangen. Abholung am {date} um {time}.",
+    "emptyCart": "Dein Warenkorb ist noch leer. Wähle zuerst aus dem Sortiment.",
+    "mode": {
+      "pickup": "Abholung",
+      "delivery": "Lieferung"
+    }
   },
   "kasse": {
     "eyebrow": "Der letzte Schritt",
@@ -146,12 +181,164 @@
     "orderNumber": "Bestellnummer",
     "successNext": "Du erhältst eine Bestätigung per E-Mail, sobald die Zahlung bei Stripe eingegangen ist.",
     "successBack": "Zurück zum Sortiment",
-    "cancelledTitle": "Zahlung abgebrochen",
-    "cancelledIntro": "Du bist zur Kasse zurückgekehrt und nichts wurde abgebucht. Dein Warenkorb ist noch da."
+    "contactLegend": "Deine Kontaktdaten",
+    "fieldName": "Name *",
+    "fieldEmail": "E-Mail *",
+    "fieldPhone": "Telefon *",
+    "fieldStreet": "Straße und Hausnummer *",
+    "fieldZip": "PLZ *",
+    "fieldCity": "Ort *",
+    "fieldNotes": "Notizen für die Bäckerei",
+    "paymentLegend": "Zahlungsart",
+    "methodLabels": {
+      "stripe": "Kreditkarte",
+      "paypal": "PayPal",
+      "klarna": "Klarna",
+      "bar": "Bar bei Abholung",
+      "rechnung": "Rechnung"
+    },
+    "submit": "Bestellung abschicken",
+    "submitting": "Wird geladen …",
+    "cancelledNotice": "Die Zahlung wurde abgebrochen. Es wurde nichts abgebucht, dein Warenkorb ist noch da.",
+    "thanks": "Vielen Dank{firstName}!",
+    "demoNotice": "Demo-Strecke ohne echte Zahlung",
+    "fulfilment": "Erfüllung",
+    "mode": {
+      "pickup": "Abholung",
+      "delivery": "Lieferung"
+    },
+    "deliveryTime": "Lieferzeit",
+    "deliveryAddress": "Lieferadresse",
+    "paymentLabel": "Zahlung",
+    "deliveryFee": "Lieferkosten",
+    "qrLabel": "QR-Code Platzhalter für die Abholung",
+    "qrCaption": "Abhol-QR (Demo)",
+    "backToAssortment": "Zurück zum Sortiment"
   },
   "lieferung": {
     "eyebrow": "Frisch in deine Straße",
     "title": "Lieferung",
-    "intro": "Wir liefern in drei Zonen rund um die Bäckerei. Prüfe hier, ob deine PLZ dabei ist und was die Lieferung kostet."
+    "intro": "Wir liefern in drei Zonen rund um die Bäckerei. Prüfe hier, ob deine PLZ dabei ist und was die Lieferung kostet.",
+    "checkTitle": "Liefergebiet prüfen",
+    "checkPlaceholder": "PLZ, z. B. 34117",
+    "checkServed": "Wir liefern in Zone {zone}.",
+    "checkNotServed": "In {plz} liefern wir leider nicht.",
+    "checkFee": "Lieferkosten {fee}, ab {threshold} Warenwert frei.",
+    "zoneLabel": "Zone",
+    "zoneRadius": "Zone {zone} · bis {km} km",
+    "modeLegend": "Abholung oder Lieferung",
+    "freeNow": "Dein aktueller Warenwert: Lieferung kostenlos.",
+    "orderFree": "Für diese Bestellung ist die Lieferung kostenlos.",
+    "expressIncluded": "Inklusive Express-Zuschlag {fee}.",
+    "expressOption": "Express — in ca. 2 Std. (+{fee})",
+    "mapLabel": "Karte mit den drei Lieferzonen rund um die Backstube in Kassel",
+    "zoneNotes": {
+      "zone1": "Erste Innenstadt, PLZ 34117 und 34119.",
+      "zone2": "PLZ 34121, 34123, 34125 und 34128.",
+      "zone3": "PLZ 34127, 34130, 34131, 34132 und 34134."
+    },
+    "upToKm": "bis {km} km",
+    "deliveryFee": "Lieferkosten",
+    "freeFromValue": "Ab Warenwert frei",
+    "zoneShort": "Zone {zone} · {km} km",
+    "mapHint": "Die Karte zeigt die drei Lieferzonen als Ringe um die Backstube. Sie kommt von OpenStreetMap und wird erst geladen, wenn Sie oben der Zustimmung zugestimmt haben. Die PLZ-Prüfung und die Zonentabelle funktionieren ohne die Karte.",
+    "mapFailed": "Die Karte konnte nicht geladen werden. Die Zonentabelle oben zeigt dieselben Angaben.",
+    "mapTitle": "Liefergebiet als Karte"
+  },
+  "catalog": {
+    "categories": {
+      "bread": "Brote",
+      "rolls": "Brötchen",
+      "sweets": "Süßes",
+      "drinks": "Getränke",
+      "snacks": "Snacks",
+      "fineGoods": "Feinkost"
+    },
+    "allergens": {
+      "A": "Gluten",
+      "C": "Eier",
+      "F": "Senf",
+      "G": "Milch",
+      "H": "Schalenfrüchte",
+      "N": "Sesam"
+    },
+    "tags": {
+      "vegan": "vegan",
+      "dinkel": "Dinkel",
+      "beliebt": "beliebt",
+      "proteinreich": "proteinreich",
+      "geschenk": "Geschenk",
+      "premium": "Premium",
+      "mittag": "Mittag"
+    },
+    "productCount": "{count, plural, one {1 Produkt} other {{count} Produkte}}",
+    "addToCart": "In den Warenkorb",
+    "inCart": "Im Warenkorb: {count}",
+    "preorder": "Vorbestellen",
+    "shopItem": "Shop-Artikel",
+    "all": "Alle",
+    "onRequest": "Auf Anfrage in der Filiale.",
+    "noAllergens": "Keine deklarationspflichtigen Allergene.",
+    "ingredients": "Zutaten",
+    "searchPlaceholder": "Suchen: Brot, Kaffee, vegan...",
+    "allTags": "Alle Tags",
+    "excludeAllergen": "Allergene erlauben",
+    "without": "Ohne {code}",
+    "summary": "{count} Produkte · Warenkorb {cartCount}",
+    "sorts": {
+      "beliebt": "Beliebt",
+      "name-asc": "Name",
+      "price-asc": "Preis aufsteigend",
+      "price-desc": "Preis absteigend"
+    },
+    "allergensHeading": "Allergene"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "empty": "Noch leer",
+    "positionsSelected": "{count, plural, one {1 Position ausgewählt} other {{count} Positionen ausgewählt}}",
+    "decrease": "{name} reduzieren",
+    "increase": "{name} erhöhen",
+    "bundle": "Frühstücks-Bundle",
+    "toPreorder": "Zur Vorbestellung",
+    "subtotal": "Zwischensumme",
+    "delivery": "Lieferung",
+    "free": "kostenlos",
+    "total": "Gesamt",
+    "emptyCart": "Dein Warenkorb ist noch leer.",
+    "toAssortment": "Zum Sortiment",
+    "open": "Warenkorb",
+    "openCount": "Warenkorb, {count} Artikel",
+    "close": "Warenkorb schließen",
+    "emptyFlow": "Dein Warenkorb ist noch leer."
+  },
+  "validation": {
+    "invalid_name": "Bitte gib deinen Namen an.",
+    "name_too_long": "Der Name ist zu lang.",
+    "invalid_email": "Bitte gib eine gültige E-Mail-Adresse an.",
+    "email_too_long": "Die E-Mail-Adresse ist zu lang.",
+    "invalid_phone": "Bitte gib eine gültige Telefonnummer an.",
+    "choose_mode": "Bitte wähle Abholung oder Lieferung.",
+    "choose_payment": "Bitte wähle eine Zahlungsart.",
+    "street_required": "Bitte gib deine Straße an.",
+    "street_too_long": "Die Adresse ist zu lang.",
+    "zip_invalid": "Bitte gib eine gültige PLZ an.",
+    "city_required": "Bitte gib deinen Ort an.",
+    "city_too_long": "Der Ort ist zu lang.",
+    "notes_too_long": "Die Notiz ist zu lang.",
+    "choose_slot": "Bitte wähle einen Lieferzeitraum.",
+    "order_invalid_input": "Bitte prüfe deine Bestelldaten.",
+    "product_unavailable": "Ein Produkt ist nicht verfügbar.",
+    "cart_empty": "Der Warenkorb ist leer.",
+    "full_slot": "Dieser Lieferzeitraum ist leider ausgebucht.",
+    "checkout_failed": "Der Bezahlvorgang konnte nicht gestartet werden.",
+    "payments_disabled": "Online-Zahlung ist gerade nicht aktiviert.",
+    "payments_unavailable": "Online-Zahlung ist gerade nicht verfügbar."
+  },
+  "consent": {
+    "ariaLabel": "Einstellungen für externe Inhalte",
+    "text": "Diese Website lädt standardmäßig keine Inhalte Dritter. Die Lieferkarte kommt von OpenStreetMap und wird erst nach Ihrer Zustimmung geladen. Notwendig für den Betrieb ist nur diese Einstellung; ein Kundenkonto gibt es nicht.",
+    "loadMap": "Karte laden",
+    "noMap": "Ohne Karte"
   }
 }

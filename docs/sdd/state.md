@@ -1,13 +1,29 @@
 # State
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
-workflow was enforced). ABE-010 through ABE-021, plus ABE-022 to ABE-028, merged on
-`main`. ABE-027 in review on `feature/abe-027-email-confirmation`.
+workflow was enforced). ABE-010 through ABE-021, plus ABE-022 to ABE-028 and
+ABE-030, merged on `main`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-030 public-path i18n on `feature/abe-030-i18n-public-path`: the public
+  customer journey is off hardcoded German. All catalog/cart/preorder/
+  checkout/delivery components and the `sortiment`, `lieferung`, `/kasse` and
+  preorder pages render through `useTranslations`/`getTranslations`;
+  Zod validation surfaces stable codes via a new `validation` namespace;
+  `catalog.types` now exports `PRODUCT_CATEGORIES`/`ALLERGEN_CODES` so the
+  enum and the messages cannot drift (a parity test pins them together).
+  `tagLabel` falls back to the raw German tag instead of leaking a key.
+  Site chrome is localised too: `ConsentBanner`, root `error.tsx`,
+  `layout.tsx` `generateMetadata` and the Open Graph image. Hardcoded
+  `de-DE` remains only where it is intentional: Impressum/Datenschutz, the
+  server email, local SEO content and `demoProducts.ts` — catalogue content
+  stays German in every locale by owner decision (NFR-1 fallback now covers
+  content, not chrome). Money stays `formatEuroCents`. `npm run check` green
+  (184 unit + 24 integration, incl. the rewritten `i18n-messages.test.ts`);
+  `npm run build` green with all three locales SSG; browser-verified in de/en/uk.
 - ABE-027 order confirmation email on `feature/abe-027-email-confirmation`: a
   new `src/features/notifications` with `domain.ts` (the `EmailAdapter`
   contract), `brevo.ts` (the provider adapter, ported from Kalyna with bakery
@@ -243,11 +259,10 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
-- i18n of the new bakery features. `de/en/uk` message files are complete, but
-  all 17 bakery components hardcode German, so `/en/sortiment` and
-  `/uk/sortiment` serve German. NFR-1 permits the fallback for now. ABE-011
-  added a `vorbestellen` namespace to all three files to keep the parity test
-  green.
+- ABE-031: admin and identity UI are still hardcoded German (`bakery-admin/*`,
+  `identity/*`, `/admin` login). Content (`demoProducts.ts`, local SEO pages,
+  product tags) stays German in every locale by owner decision — only chrome
+  is translated.
 - ABE-029 PWA was explicitly dropped by the owner: not in scope.
 
 ## Notes

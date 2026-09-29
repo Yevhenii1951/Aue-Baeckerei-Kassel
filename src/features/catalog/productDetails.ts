@@ -1,5 +1,14 @@
 import { demoProducts } from "./demoProducts";
-import { allergenLabels, categoryLabels, type Product } from "./types";
+import type { AllergenCode, Product, ProductCategory } from "./types";
+
+export type ProductLabels = {
+  category: (category: ProductCategory) => string;
+  allergen: (code: AllergenCode) => string;
+  onRequest: string;
+  noAllergens: string;
+  ingredients: string;
+  allergens: string;
+};
 
 export type ProductJsonLd = {
   "@context": "https://schema.org";
@@ -38,24 +47,30 @@ export function relatedProducts(product: Product, limit = 3): Product[] {
   return scored.slice(0, limit).map((candidate) => candidate.product);
 }
 
-export function ingredientText(product: Product): string {
+export function ingredientText(product: Product, labels: ProductLabels): string {
   if (product.ingredients.length > 0) return product.ingredients.join(", ");
-  return "Auf Anfrage in der Filiale.";
+  return labels.onRequest;
 }
 
-export function allergenText(product: Product): string {
-  if (product.allergens.length === 0) return "Keine deklarationspflichtigen Allergene.";
-  return product.allergens.map((code) => `${code} (${allergenLabels[code]})`).join(", ");
+export function allergenText(product: Product, labels: ProductLabels): string {
+  if (product.allergens.length === 0) return labels.noAllergens;
+  return product.allergens
+    .map((code) => `${code} (${labels.allergen(code)})`)
+    .join(", ");
 }
 
-export function buildProductJsonLd(product: Product, url: string): ProductJsonLd {
+export function buildProductJsonLd(
+  product: Product,
+  url: string,
+  labels: ProductLabels,
+): ProductJsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.description,
     image: `${new URL(url).origin}${product.imageUrl}`,
-    category: categoryLabels[product.category],
+    category: labels.category(product.category),
     sku: product.id,
     offers: {
       "@type": "Offer",

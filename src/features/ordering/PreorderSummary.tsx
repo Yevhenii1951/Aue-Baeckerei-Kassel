@@ -1,7 +1,8 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
+import { formatEuroCents } from "@/lib/format";
 import { useCart } from "./cart-provider";
-import { formatPrice } from "./price";
 
 type PreorderSummaryProps = {
   deliveryFeeCents?: number | null;
@@ -11,15 +12,18 @@ export function PreorderSummary({
   deliveryFeeCents = null,
 }: PreorderSummaryProps): React.ReactElement {
   const { items, totals } = useCart();
+  const tc = useTranslations("cart");
+  const tv = useTranslations("vorbestellen");
+  const locale = useLocale();
   const totalCents = totals.totalCents + (deliveryFeeCents ?? 0);
 
   return (
     <aside className="rounded-lg border border-brand-deep/10 bg-paper p-5 shadow-card lg:sticky lg:top-24">
       <h2 className="text-lg font-semibold text-brand-deep">
-        Deine Auswahl
+        {tv("selection")}
       </h2>
       <p className="mt-1 text-sm text-ink/65">
-        {items.length} {items.length === 1 ? "Position" : "Positionen"}
+        {tv("itemCount", { count: items.length })}
       </p>
 
       <ul className="mt-4 grid gap-2">
@@ -32,7 +36,7 @@ export function PreorderSummary({
               {line.quantity} × {line.name}
             </span>
             <span className="font-medium text-brand-deep">
-              {formatPrice(line.lineTotalCents)}
+              {formatEuroCents(line.lineTotalCents, locale)}
             </span>
           </li>
         ))}
@@ -40,28 +44,28 @@ export function PreorderSummary({
 
       <div className="mt-4 grid gap-1 border-t border-brand-deep/10 pt-3 text-sm text-ink/70">
         <p className="flex justify-between">
-          <span>Zwischensumme</span>
-          <span>{formatPrice(totals.subtotalCents)}</span>
+          <span>{tc("subtotal")}</span>
+          <span>{formatEuroCents(totals.subtotalCents, locale)}</span>
         </p>
         {totals.discountCents > 0 ? (
           <p className="flex justify-between text-amber">
-            <span>Frühstücks-Bundle</span>
-            <span>-{formatPrice(totals.discountCents)}</span>
+            <span>{tc("bundle")}</span>
+            <span>-{formatEuroCents(totals.discountCents, locale)}</span>
           </p>
         ) : null}
         {deliveryFeeCents !== null ? (
           <p className="flex justify-between">
-            <span>Lieferung</span>
+            <span>{tc("delivery")}</span>
             <span>
               {deliveryFeeCents === 0
-                ? "kostenlos"
-                : formatPrice(deliveryFeeCents)}
+                ? tc("free")
+                : formatEuroCents(deliveryFeeCents, locale)}
             </span>
           </p>
         ) : null}
         <p className="flex justify-between pt-2 text-base font-semibold text-brand-deep">
-          <span>Gesamt</span>
-          <span>{formatPrice(totalCents)}</span>
+          <span>{tc("total")}</span>
+          <span>{formatEuroCents(totalCents, locale)}</span>
         </p>
       </div>
     </aside>

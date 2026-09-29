@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { getTranslations } from "next-intl/server";
 import { SITE_NAME } from "@/features/seo/site";
 
 export const alt = SITE_NAME;
@@ -24,12 +25,17 @@ const titleStyle = { color: "#7a3f22", fontSize: 108, fontWeight: 700 };
 const taglineStyle = { fontSize: 40, marginTop: 24 };
 const placeStyle = { color: "#315c45", fontSize: 30, marginTop: 40 };
 
-export default function OpenGraphImage(): ImageResponse {
+export default async function OpenGraphImage({
+  params,
+}: Readonly<{ params: Promise<{ locale: string }> }>): Promise<ImageResponse> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "shell" });
+
   return new ImageResponse(
     <div style={imageStyle}>
       <div style={titleStyle}>{SITE_NAME}</div>
-      <div style={taglineStyle}>Morgens frisch, abends bestellt.</div>
-      <div style={placeStyle}>Handwerksbäckerei in Kassel</div>
+      <div style={taglineStyle}>{t("ogTagline")}</div>
+      <div style={placeStyle}>{t("ogPlace")}</div>
     </div>,
     size,
   );

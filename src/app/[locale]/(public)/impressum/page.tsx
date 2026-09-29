@@ -10,6 +10,10 @@ export async function generateMetadata({ params }: Readonly<{ params: Promise<{ 
   return buildPublicMetadata({ locale: parseSupportedLocale(locale), path: "/impressum", title: translations("imprintTitle"), description: translations("legalWarning") });
 }
 
+// Impressum and Datenschutz stay German in every locale on purpose: German law
+// requires the German wording, and a translated version would not be legally
+// equivalent. ABE-030 therefore leaves this page out of the i18n scope.
+
 export default async function ImprintPage({ params }: Readonly<{ params: Promise<{ locale: string }> }>): Promise<React.ReactElement> {
   const { locale } = await params;
   setRequestLocale(locale);

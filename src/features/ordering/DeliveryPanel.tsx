@@ -1,12 +1,10 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
+import { formatEuroCents } from "@/lib/format";
 import type { DeliveryZone } from "./delivery";
-import {
-  deliveryChargeCents,
-  deliveryZoneInfo,
-} from "./delivery";
+import { deliveryChargeCents, deliveryZoneInfo } from "./delivery";
 import { EXPRESS_FEE_CENTS } from "./deliverySlots";
-import { formatPrice } from "./price";
 
 type DeliveryPanelProps = {
   zone: DeliveryZone | null;
@@ -19,10 +17,13 @@ export function DeliveryPanel({
   subtotalCents,
   express,
 }: DeliveryPanelProps): React.ReactElement {
+  const t = useTranslations("lieferung");
+  const locale = useLocale();
+
   if (zone === null) {
     return (
       <p className="rounded-lg border border-brand-deep/10 bg-paper p-4 text-sm text-ink/70">
-        Gib deine PLZ an, um Lieferkosten und Liefergebiet zu sehen.
+        {t("enterPlz")}
       </p>
     );
   }
@@ -34,15 +35,19 @@ export function DeliveryPanel({
   return (
     <div className="rounded-lg border border-sage/30 bg-paper p-4">
       <p className="font-semibold text-brand-deep">
-        Zone {zone} — wir liefern zu dir.
+        {t("checkServed", { zone })}
       </p>
       <p className="mt-1 text-sm text-ink/70">
-        Lieferkosten {formatPrice(info.feeCents)}, ab{" "}
-        {formatPrice(info.freeThresholdCents)} Warenwert frei.
-        {express ? ` Inklusive Express-Zuschlag ${formatPrice(EXPRESS_FEE_CENTS)}.` : ""}
-        {charge === 0
-          ? " Für diese Bestellung ist die Lieferung kostenlos."
+        {t("checkFee", {
+          fee: formatEuroCents(info.feeCents, locale),
+          threshold: formatEuroCents(info.freeThresholdCents, locale),
+        })}
+        {express
+          ? ` ${t("expressIncluded", {
+              fee: formatEuroCents(EXPRESS_FEE_CENTS, locale),
+            })}`
           : ""}
+        {charge === 0 ? ` ${t("orderFree")}` : ""}
       </p>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import type { CheckoutFormValues } from "./checkout-form";
 import { PAYMENT_METHODS } from "./checkout-form";
 
@@ -39,13 +40,16 @@ export function CheckoutCustomerForm({
   onChange,
   onSubmit,
 }: CheckoutCustomerFormProps): React.ReactElement {
+  const t = useTranslations("kasse");
+  const tv = useTranslations("validation");
+
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-5">
       <fieldset className="grid gap-4">
         <legend className="text-sm font-medium text-brand-deep">
-          Deine Kontaktdaten
+          {t("contactLegend")}
         </legend>
-        <Field label="Name *" error={errors.name}>
+        <Field label={t("fieldName")} error={errors.name ? tv(errors.name) : undefined}>
           <input
             value={values.name}
             onChange={(event) => onChange("name", event.target.value)}
@@ -54,7 +58,7 @@ export function CheckoutCustomerForm({
             aria-invalid={Boolean(errors.name)}
           />
         </Field>
-        <Field label="E-Mail *" error={errors.email}>
+        <Field label={t("fieldEmail")} error={errors.email ? tv(errors.email) : undefined}>
           <input
             type="email"
             value={values.email}
@@ -65,7 +69,7 @@ export function CheckoutCustomerForm({
             aria-invalid={Boolean(errors.email)}
           />
         </Field>
-        <Field label="Telefon *" error={errors.phone}>
+        <Field label={t("fieldPhone")} error={errors.phone ? tv(errors.phone) : undefined}>
           <input
             type="tel"
             value={values.phone}
@@ -79,7 +83,10 @@ export function CheckoutCustomerForm({
 
         {values.mode === "delivery" ? (
           <>
-            <Field label="Straße und Hausnummer" error={errors.street}>
+            <Field
+              label={t("fieldStreet")}
+              error={errors.street ? tv(errors.street) : undefined}
+            >
               <input
                 value={values.street}
                 onChange={(event) => onChange("street", event.target.value)}
@@ -89,7 +96,10 @@ export function CheckoutCustomerForm({
               />
             </Field>
             <div className="grid grid-cols-2 gap-4">
-              <Field label="PLZ" error={errors.zip}>
+              <Field
+                label={t("fieldZip")}
+                error={errors.zip ? tv(errors.zip) : undefined}
+              >
                 <input
                   value={values.zip}
                   onChange={(event) => onChange("zip", event.target.value)}
@@ -99,7 +109,10 @@ export function CheckoutCustomerForm({
                   aria-invalid={Boolean(errors.zip)}
                 />
               </Field>
-              <Field label="Ort" error={errors.city}>
+              <Field
+                label={t("fieldCity")}
+                error={errors.city ? tv(errors.city) : undefined}
+              >
                 <input
                   value={values.city}
                   onChange={(event) => onChange("city", event.target.value)}
@@ -115,7 +128,7 @@ export function CheckoutCustomerForm({
 
       <fieldset className="grid gap-2">
         <legend className="text-sm font-medium text-brand-deep">
-          Zahlungsart
+          {t("paymentLegend")}
         </legend>
         <div className="grid gap-2 sm:grid-cols-2">
           {PAYMENT_METHODS.map((method) => (
@@ -128,17 +141,22 @@ export function CheckoutCustomerForm({
                   checked={values.payment === method.id}
                   onChange={() => onChange("payment", method.id)}
                 />
-                <span className="text-sm font-medium">{method.label}</span>
+                <span className="text-sm font-medium">
+                  {t(`methodLabels.${method.id}`)}
+                </span>
               </label>
             </div>
           ))}
         </div>
         {errors.payment ? (
-          <p className="text-sm text-red-700">{errors.payment}</p>
+          <p className="text-sm text-red-700">{tv(errors.payment)}</p>
         ) : null}
       </fieldset>
 
-      <Field label="Notizen für die Bäckerei" error={errors.notes}>
+      <Field
+        label={t("fieldNotes")}
+        error={errors.notes ? tv(errors.notes) : undefined}
+      >
         <textarea
           rows={3}
           value={values.notes}
@@ -154,7 +172,7 @@ export function CheckoutCustomerForm({
         aria-busy={pending}
         className="min-h-12 rounded-lg bg-amber px-4 py-2 font-semibold text-brand-deep disabled:opacity-60"
       >
-        {pending ? "Wird geladen …" : "Bestellung abschicken"}
+        {pending ? t("submitting") : t("submit")}
       </button>
     </form>
   );

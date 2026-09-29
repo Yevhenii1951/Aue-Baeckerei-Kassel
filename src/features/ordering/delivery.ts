@@ -5,7 +5,6 @@ export type DeliveryZoneInfo = {
   distanceKm: number;
   feeCents: number;
   freeThresholdCents: number;
-  note: string;
 };
 
 export const DELIVERY_ZONES: DeliveryZoneInfo[] = [
@@ -14,21 +13,18 @@ export const DELIVERY_ZONES: DeliveryZoneInfo[] = [
     distanceKm: 2,
     feeCents: 250,
     freeThresholdCents: 2000,
-    note: "Erste Innenstadt, PLZ 34117 und 34119.",
   },
   {
     zone: 2,
     distanceKm: 5,
     feeCents: 450,
     freeThresholdCents: 3000,
-    note: "PLZ 34121, 34123, 34125 und 34128.",
   },
   {
     zone: 3,
     distanceKm: 8,
     feeCents: 650,
     freeThresholdCents: 4000,
-    note: "PLZ 34127, 34130, 34131, 34132 und 34134.",
   },
 ];
 

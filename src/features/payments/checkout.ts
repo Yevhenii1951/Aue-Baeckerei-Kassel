@@ -1,6 +1,6 @@
 import type { CheckoutFormValues } from "@/features/ordering/checkout-form";
 import type { CreateOrderResult } from "@/features/ordering/orderService";
-import { deliveryTimeLabel } from "@/features/ordering/checkoutLabels";
+import { formatDate, type DeliveryTimeData } from "@/features/ordering/checkoutLabels";
 import type { OrderConfirmationData } from "@/features/notifications/orderConfirmation";
 import type { StripeCheckoutClient } from "./stripeClient";
 
@@ -82,7 +82,8 @@ async function notifyOrderConfirmed(
       customerName: customer.name,
       customerEmail: customer.email,
       mode: customer.mode,
-      deliveryLabel: customer.mode === "delivery" ? deliveryTimeLabel(customer) : null,
+      deliveryLabel:
+        customer.mode === "delivery" ? germanDeliveryTimeLabel(customer) : null,
       lines: order.lines,
       subtotalCents: order.subtotalCents,
       deliveryFeeCents: order.deliveryFeeCents,
@@ -92,4 +93,17 @@ async function notifyOrderConfirmed(
     // The order is already stored and the customer is already at Stripe.
     // A failed confirmation must not undo either.
   }
+}
+
+// The confirmation email is a German business notification, so it formats the
+// delivery window in German regardless of the locale the customer ordered in.
+function germanDeliveryTimeLabel(data: DeliveryTimeData): string {
+  if (data.express) {
+    return "Express — in ca. 2 Std.";
+  }
+
+  const parts = data.deliverySlotId.split("-");
+  const time = parts[parts.length - 1];
+
+  return `${formatDate(data.deliveryDate, "de")}, ${time} Uhr`;
 }

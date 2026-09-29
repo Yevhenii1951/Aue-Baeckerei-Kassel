@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
+import { formatEuroCents } from "@/lib/format";
 import type { DeliveryZone } from "./delivery";
 import {
   EXPRESS_FEE_CENTS,
@@ -7,7 +9,6 @@ import {
   buildDeliverySlots,
   isExpressAvailable,
 } from "./deliverySlots";
-import { formatPrice } from "./price";
 import { nextNDates } from "./preorder";
 import {
   setDeliveryDate,
@@ -30,6 +31,10 @@ export function DeliverySchedule({
 }: DeliveryScheduleProps): React.ReactElement {
   const selection = useFulfillment();
   const now = useClientNow();
+  const t = useTranslations("lieferung");
+  const tv = useTranslations("vorbestellen");
+  const tval = useTranslations("validation");
+  const locale = useLocale();
 
   if (now === null) {
     return <div className="grid gap-3" />;
@@ -48,7 +53,7 @@ export function DeliverySchedule({
     <section className="grid gap-3">
       <fieldset className="grid gap-2">
         <legend className="text-sm font-medium text-brand-deep">
-          Abholung oder Lieferung
+          {t("modeLegend")}
         </legend>
         <div className="grid grid-cols-2 gap-2">
           {(["pickup", "delivery"] as const).map((mode) => (
@@ -62,7 +67,7 @@ export function DeliverySchedule({
                   onChange={() => setFulfillmentMode(mode)}
                 />
                 <span className="text-sm font-medium">
-                  {mode === "pickup" ? "Abholung" : "Lieferung"}
+                  {tv(`mode.${mode}`)}
                 </span>
               </label>
             </div>
@@ -88,7 +93,7 @@ export function DeliverySchedule({
                       : "border-brand-deep/15 bg-white text-brand-deep"
                   }`}
                 >
-                  {formatDate(date)}
+                  {formatDate(date, locale)}
                 </button>
               );
             })}
@@ -110,7 +115,7 @@ export function DeliverySchedule({
                       : "border-brand-deep/15 bg-white text-brand-deep"
                   }`}
                 >
-                  {slot.startTime}–{slot.endTime} Uhr
+                  {tv("slotTime", { start: slot.startTime, end: slot.endTime })}
                 </button>
               );
             })}
@@ -129,22 +134,26 @@ export function DeliverySchedule({
                     : "border-amber/40 bg-paper text-brand-deep"
                 }`}
               >
-                Express — in ca. 2 Std. (+{formatPrice(EXPRESS_FEE_CENTS)})
+                {t("expressOption", {
+                  fee: formatEuroCents(EXPRESS_FEE_CENTS, locale),
+                })}
               </button>
             ) : null}
           </div>
         </>
       ) : null}
 
-      {error ? <p className="text-sm text-red-700">{error}</p> : null}
+      {error ? (
+        <p className="text-sm text-red-700">{tval(error)}</p>
+      ) : null}
     </section>
   );
 }
 
-function formatDate(date: string): string {
+function formatDate(date: string, locale: string): string {
   const [year, month, day] = date.split("-").map(Number);
 
-  return new Intl.DateTimeFormat("de-DE", {
+  return new Intl.DateTimeFormat(locale, {
     weekday: "short",
     day: "2-digit",
     month: "2-digit",

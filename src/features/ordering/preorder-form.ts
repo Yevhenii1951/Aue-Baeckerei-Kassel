@@ -4,24 +4,24 @@ export const preorderFormSchema = z.object({
   name: z
     .string()
     .trim()
-    .min(2, "Bitte gib deinen Namen an.")
-    .max(80, "Der Name ist zu lang."),
+    .min(2, "invalid_name")
+    .max(80, "name_too_long"),
   email: z
     .string()
     .trim()
-    .email("Bitte gib eine gültige E-Mail-Adresse an.")
-    .max(120, "Die E-Mail-Adresse ist zu lang."),
+    .email("invalid_email")
+    .max(120, "email_too_long"),
   phone: z
     .string()
     .trim()
     .regex(
       /^[+0-9][0-9 /()-]{4,19}$/,
-      "Bitte gib eine gültige Telefonnummer an.",
+      "invalid_phone",
     ),
   notes: z
     .string()
     .trim()
-    .max(500, "Die Notiz ist zu lang.")
+    .max(500, "notes_too_long")
     .optional()
     .default(""),
 });

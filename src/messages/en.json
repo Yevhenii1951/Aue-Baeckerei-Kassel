@@ -15,7 +15,12 @@
     "footerNote": "Portfolio demo for a modern craft bakery in Kassel. Legal copy must be reviewed before a real launch.",
     "menuOpen": "Open menu",
     "menuClose": "Close menu",
-    "mobileNav": "Mobile navigation"
+    "retryHeading": "Something went wrong",
+    "retryText": "This section could not be loaded. Please try again.",
+    "retry": "Try again",
+    "metaDescription": "Modern craft bakery in Kassel with pre-ordering, café and fresh sourdough bread.",
+    "ogTagline": "Fresh in the morning, ordered in the evening.",
+    "ogPlace": "Craft bakery in Kassel"
   },
   "home": {
     "eyebrow": "Craft bakery near Karlsaue",
@@ -125,7 +130,13 @@
   "sortiment": {
     "eyebrow": "Order online or reserve for tomorrow",
     "title": "Assortment",
-    "intro": "Breads, rolls, sweets, drinks, snacks and fine goods with filters, allergens and cart. Ordering runs as a demo flow, while price logic already uses cents."
+    "intro": "Breads, rolls, sweets, drinks, snacks and fine goods with filters, allergens and cart. Ordering runs as a demo flow, while price logic already uses cents.",
+    "price": "Price",
+    "perUnit": "per {unit}",
+    "addToCart": "Add to cart",
+    "preorder": "Preorder",
+    "tags": "Tags",
+    "related": "Related products"
   },
   "contactLegal": {
     "imprintTitle": "Legal notice",
@@ -135,7 +146,31 @@
   "vorbestellen": {
     "eyebrow": "Fresh from the oven tomorrow",
     "title": "Pre-order",
-    "intro": "Choose your pickup date, the right time window and send us your order. After 8 pm your pre-order counts for the day after tomorrow."
+    "intro": "Choose your pickup date, the right time window and send us your order. After 8 pm your pre-order counts for the day after tomorrow.",
+    "selection": "Your selection",
+    "itemCount": "{count, plural, one {{count} item} other {{count} items}}",
+    "slotStatus": {
+      "available": "Available",
+      "limited": "Almost full",
+      "full": "Sold out"
+    },
+    "slotTime": "{start}–{end}",
+    "fieldName": "Name *",
+    "fieldEmail": "Email *",
+    "fieldPhone": "Phone *",
+    "fieldNotes": "Notes for the bakery",
+    "submit": "Send preorder",
+    "pickupHeading": "When would you like to pick up?",
+    "cutoffNote": "After 8 pm your pre-order counts for the day after tomorrow.",
+    "backToAssortment": "Back to the assortment",
+    "slotHeading": "Pickup time window",
+    "thanks": "Thank you{firstName}!",
+    "demoReceived": "Your pre-order has arrived as a demo. Pickup on {date} at {time}.",
+    "emptyCart": "Your cart is still empty. Choose something from the assortment first.",
+    "mode": {
+      "pickup": "Pickup",
+      "delivery": "Delivery"
+    }
   },
   "kasse": {
     "eyebrow": "The last step",
@@ -146,12 +181,164 @@
     "orderNumber": "Order number",
     "successNext": "You will get a confirmation by email once Stripe has received the payment.",
     "successBack": "Back to the assortment",
-    "cancelledTitle": "Payment cancelled",
-    "cancelledIntro": "You are back at the checkout and nothing was charged. Your cart is still there."
+    "contactLegend": "Your contact details",
+    "fieldName": "Name *",
+    "fieldEmail": "Email *",
+    "fieldPhone": "Phone *",
+    "fieldStreet": "Street and number *",
+    "fieldZip": "Postcode *",
+    "fieldCity": "City *",
+    "fieldNotes": "Notes for the bakery",
+    "paymentLegend": "Payment method",
+    "methodLabels": {
+      "stripe": "Credit card",
+      "paypal": "PayPal",
+      "klarna": "Klarna",
+      "bar": "Cash on pickup",
+      "rechnung": "Invoice"
+    },
+    "submit": "Place order",
+    "submitting": "Loading …",
+    "cancelledNotice": "Payment was cancelled. Nothing was charged, your cart is still there.",
+    "thanks": "Thank you{firstName}!",
+    "demoNotice": "Demo flow, no real payment",
+    "fulfilment": "Fulfilment",
+    "mode": {
+      "pickup": "Pickup",
+      "delivery": "Delivery"
+    },
+    "deliveryTime": "Delivery time",
+    "deliveryAddress": "Delivery address",
+    "paymentLabel": "Payment",
+    "deliveryFee": "Delivery fee",
+    "qrLabel": "QR code placeholder for pickup",
+    "qrCaption": "Pickup QR (demo)",
+    "backToAssortment": "Back to the assortment"
   },
   "lieferung": {
     "eyebrow": "Fresh to your street",
     "title": "Delivery",
-    "intro": "We deliver in three zones around the bakery. Check whether your postal code is covered and what delivery costs."
+    "intro": "We deliver in three zones around the bakery. Check whether your postal code is covered and what delivery costs.",
+    "checkTitle": "Check delivery area",
+    "checkPlaceholder": "Postcode, e.g. 34117",
+    "checkServed": "We deliver in zone {zone}.",
+    "checkNotServed": "Unfortunately we do not deliver to {plz}.",
+    "checkFee": "Delivery fee {fee}, free from {threshold} of goods.",
+    "zoneLabel": "Zone",
+    "zoneRadius": "Zone {zone} · up to {km} km",
+    "modeLegend": "Pickup or delivery",
+    "freeNow": "Your current order value: delivery is free.",
+    "orderFree": "Delivery is free for this order.",
+    "expressIncluded": "Includes express surcharge {fee}.",
+    "expressOption": "Express — in about 2 hours (+{fee})",
+    "mapLabel": "Map of the three delivery zones around the bakery in Kassel",
+    "zoneNotes": {
+      "zone1": "Inner city centre, postcodes 34117 and 34119.",
+      "zone2": "Postcodes 34121, 34123, 34125 and 34128.",
+      "zone3": "Postcodes 34127, 34130, 34131, 34132 and 34134."
+    },
+    "upToKm": "up to {km} km",
+    "deliveryFee": "Delivery fee",
+    "freeFromValue": "Free from order value",
+    "zoneShort": "Zone {zone} · {km} km",
+    "mapHint": "The map shows the three delivery zones as rings around the bakery. It comes from OpenStreetMap and is only loaded once you give consent above. The postcode check and the zone table work without the map.",
+    "mapFailed": "The map could not be loaded. The zone table above shows the same details.",
+    "mapTitle": "Delivery area as a map"
+  },
+  "catalog": {
+    "categories": {
+      "bread": "Bread",
+      "rolls": "Rolls",
+      "sweets": "Sweets",
+      "drinks": "Drinks",
+      "snacks": "Snacks",
+      "fineGoods": "Delicatessen"
+    },
+    "allergens": {
+      "A": "Gluten",
+      "C": "Eggs",
+      "F": "Mustard",
+      "G": "Milk",
+      "H": "Tree nuts",
+      "N": "Sesame"
+    },
+    "tags": {
+      "vegan": "vegan",
+      "dinkel": "spelt",
+      "beliebt": "popular",
+      "proteinreich": "high protein",
+      "geschenk": "gift",
+      "premium": "Premium",
+      "mittag": "Lunch"
+    },
+    "productCount": "{count, plural, one {1 product} other {{count} products}}",
+    "addToCart": "Add to cart",
+    "inCart": "In cart: {count}",
+    "preorder": "Preorder",
+    "shopItem": "In-store item",
+    "all": "All",
+    "onRequest": "Available on request in the shop.",
+    "noAllergens": "No declarable allergens.",
+    "ingredients": "Ingredients",
+    "searchPlaceholder": "Search: bread, coffee, vegan...",
+    "allTags": "All tags",
+    "excludeAllergen": "Allow allergens",
+    "without": "Without {code}",
+    "summary": "{count} products · cart {cartCount}",
+    "sorts": {
+      "beliebt": "Popular",
+      "name-asc": "Name",
+      "price-asc": "Price ascending",
+      "price-desc": "Price descending"
+    },
+    "allergensHeading": "Allergens"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Still empty",
+    "positionsSelected": "{count, plural, one {1 item selected} other {{count} items selected}}",
+    "decrease": "Reduce {name}",
+    "increase": "Increase {name}",
+    "bundle": "Breakfast bundle",
+    "toPreorder": "Go to preorder",
+    "subtotal": "Subtotal",
+    "delivery": "Delivery",
+    "free": "free",
+    "total": "Total",
+    "emptyCart": "Your cart is still empty.",
+    "toAssortment": "To the assortment",
+    "open": "Cart",
+    "openCount": "Cart, {count} items",
+    "close": "Close cart",
+    "emptyFlow": "Your cart is still empty."
+  },
+  "validation": {
+    "invalid_name": "Please enter your name.",
+    "name_too_long": "The name is too long.",
+    "invalid_email": "Please enter a valid email address.",
+    "email_too_long": "The email address is too long.",
+    "invalid_phone": "Please enter a valid phone number.",
+    "choose_mode": "Please choose pickup or delivery.",
+    "choose_payment": "Please choose a payment method.",
+    "street_required": "Please enter your street.",
+    "street_too_long": "The address is too long.",
+    "zip_invalid": "Please enter a valid postcode.",
+    "city_required": "Please enter your city.",
+    "city_too_long": "The city is too long.",
+    "notes_too_long": "The note is too long.",
+    "choose_slot": "Please choose a delivery time slot.",
+    "order_invalid_input": "Please check your order details.",
+    "product_unavailable": "A product is not available.",
+    "cart_empty": "The cart is empty.",
+    "full_slot": "Unfortunately this delivery slot is fully booked.",
+    "checkout_failed": "The payment process could not be started.",
+    "payments_disabled": "Online payment is not enabled at the moment.",
+    "payments_unavailable": "Online payment is not available at the moment."
+  },
+  "consent": {
+    "ariaLabel": "Settings for external content",
+    "text": "This website does not load third-party content by default. The delivery map comes from OpenStreetMap and is only loaded after your consent. Only this setting is necessary for the site to work; there is no customer account.",
+    "loadMap": "Load map",
+    "noMap": "Without map"
   }
 }
