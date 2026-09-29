@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
@@ -11,8 +10,6 @@ import {
 import { buildPublicMetadata } from "@/features/seo/publicMetadata";
 import { parseSupportedLocale } from "@/features/seo/site";
 import { buildBakeryJsonLd } from "@/features/seo/bakeryJsonLd";
-import { formatEuroCents } from "@/lib/format";
-import { demoProducts } from "@/features/catalog/demoProducts";
 import { CatalogPreview } from "@/features/catalog/components/CatalogPreview";
 import {
   ConversionSections,
@@ -33,7 +30,6 @@ type PathCard = {
 
 const PATH_ICONS = [Store, ShoppingBag, Coffee];
 const PATH_HREFS = ["vorbestellen", "sortiment", "#cafe"];
-const HERO_PRODUCT_IDS = ["hausbrot", "laugenbrezel", "zimtschnecke"];
 
 export async function generateMetadata({
   params,
@@ -62,9 +58,6 @@ export default async function HomePage({
   const conversionCards = t.raw("conversionCards") as ConversionCard[];
   const cafePairings = t.raw("cafePairings") as CafePairing[];
   const cafePhotoSlots = t.raw("cafePhotoSlots") as CafePhotoSlot[];
-  const heroProducts = HERO_PRODUCT_IDS.map((id) =>
-    demoProducts.find((product) => product.id === id),
-  ).filter((product) => product !== undefined);
 
   return (
     <div className="bg-cream">
@@ -121,43 +114,14 @@ export default async function HomePage({
             </div>
           </div>
 
-          <div className="hero-rise hero-rise-4 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div className="flex flex-col gap-4">
-              <p className="border-t border-white/20 pt-5 text-sm text-cream/80">
-                {t("heroNote")}
-              </p>
-              <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-amber/50 bg-brand-deep/72 px-4 py-3 shadow-card">
-                <span>{t("cutoffLabel")}</span>
-                <strong className="text-amber">{t("cutoffTime")}</strong>
-              </div>
+          <div className="hero-rise hero-rise-4 flex flex-col gap-4">
+            <p className="border-t border-white/20 pt-5 text-sm text-cream/80">
+              {t("heroNote")}
+            </p>
+            <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-amber/50 bg-brand-deep/72 px-4 py-3 shadow-card">
+              <span>{t("cutoffLabel")}</span>
+              <strong className="text-amber">{t("cutoffTime")}</strong>
             </div>
-
-            <ul className="grid grid-cols-3 gap-3 sm:gap-4">
-              {heroProducts.map((product) => (
-                <li key={product.id}>
-                  <Link
-                    href={`/${supportedLocale}/sortiment`}
-                    className="group block"
-                  >
-                    <div className="overflow-hidden rounded-lg ring-1 ring-white/20">
-                      <Image
-                        src={product.imageUrl}
-                        alt={product.name}
-                        width={256}
-                        height={256}
-                        className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    <p className="mt-2 text-sm font-semibold text-cream">
-                      {product.name}
-                    </p>
-                    <p className="text-xs text-amber">
-                      {formatEuroCents(product.priceCents, supportedLocale)}
-                    </p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
