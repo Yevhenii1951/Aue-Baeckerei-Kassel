@@ -10,16 +10,22 @@
 - `public/products/*.webp` — 66 product photos (one per catalogue product)
   converted from project-owner supplied JPG files in `~/Downloads/`. Output
   size is 1200x900 WebP.
-- Cafe visuals: no photograph exists yet. See "Before Public Commercial Use"
-  below.
+- `public/cafe/*.webp` — 3 café photos supplied by the project owner on
+  2026-09-29 (`Fensterplatz.jpg`, `Fensterplatz2.jpg`, `Backstubenblick.jpg` in
+  `~/Downloads/`). All three were 1920x1280 JPEG without EXIF or GPS and are
+  served as 1200x800 WebP quality 80: 75 KB, 46 KB, 35 KB. They fill the
+  gallery on `/kafe`; the second file is a second window-seat shot, so the
+  "Kuchenvitrine" slot from ABE-034 is gone. Alt texts follow the file names and
+  are to be confirmed by the owner against the real photos.
 
 ## Provenance
 
-Hero files and product photos were supplied by the project owner for this
-portfolio build. The owner states the product photos originate from openly
-available sources rather than from a commissioned shoot, so the individual
-rights holders are unknown until the sources are named. Record them here before
-any commercial or public client use:
+Hero files, product photos and the café photos were supplied by the project
+owner for this portfolio build. The owner states the product photos originate
+from openly available sources rather than from a commissioned shoot, so the
+individual rights holders are unknown until the sources are named. The three
+café photos are interior shots of the same kind of operation and are recorded
+the same way. Record them here before any commercial or public client use:
 
 - Source: _not yet recorded — owner states openly available sources_
 - Licence: _not yet recorded_
@@ -31,8 +37,8 @@ visitors. That note points here for the records; it does not assert a licence.
 ## Before Public Commercial Use
 
 - Add real product and cafe photography, or owned placeholders with recorded
-  licences. The product catalogue now ships with 66 illustrative photos; the cafe
-  still has no photography at all.
+  licences. The product catalogue ships with 66 illustrative photos and the
+  café gallery with 3 interior photos; both still lack recorded sources.
 - Record source, license, photographer, and allowed usage for every asset.
 - Do not enable Google Reviews, Instagram, maps, analytics, or tracking embeds
   without consent handling and Datenschutz updates.

@@ -10,7 +10,7 @@ export type CompanyPage = {
   notice: string;
   facts: { label: string; value: string }[];
   highlights: { title: string; text: string }[];
-  photoSlots?: { title: string; text: string }[];
+  photoSlots?: { title: string; text: string; image: string; alt: string }[];
   cta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
 };
@@ -74,7 +74,7 @@ const CAFE_PAGE: CompanyPage = {
   intro:
     "Unser Café ist die ruhige Hälfte der Backstube: Plätze am Fenster, ein Tresen und eine Vitrine, die nur zeigt, was der Ofen am selben Morgen hervorgebracht hat. Kein festes Menüprogramm — der Teig entscheidet, und die Preise stehen an der Vitrine.",
   notice:
-    "Die Fotostrecken dieser Seite sind vorbereitet. Die Aufnahmen folgen, sobald die Innenraumfotos vorliegen.",
+    "Die Aufnahmen stammen aus dem laufenden Betrieb. Für den Livegang sind Quelle und Lizenz der Fotos noch zu dokumentieren.",
   facts: [
     {
       label: "Öffnungszeiten",
@@ -106,14 +106,20 @@ const CAFE_PAGE: CompanyPage = {
     {
       title: "Fensterplatz",
       text: "Der helle Sitzbereich am Fenster mit Kaffee und Zeitung — der Platz, den Stammgäste zuerst besetzen.",
+      image: "/cafe/fensterplatz-1.webp",
+      alt: "Sitzbereich am Fenster des Cafés mit Kaffee und Zeitung",
     },
     {
-      title: "Kuchenvitrine",
-      text: "Kuchen, Schnecken und kleine Törtchen: was an diesem Morgen in der Schublade liegt.",
+      title: "Fensterplatz II",
+      text: "Die zweite Perspektive vom Fensterplatz, mit Blick in den Gastraum.",
+      image: "/cafe/fensterplatz-2.webp",
+      alt: "Zweite Perspektive vom Fensterplatz des Cafés",
     },
     {
       title: "Backstubenblick",
       text: "Ofen, Hände und frisches Brot — die Verbindung zwischen Café und Handwerk.",
+      image: "/cafe/backstubenblick.webp",
+      alt: "Blick in die Backstube mit Ofen und frischem Brot",
     },
   ],
   cta: { label: "Sortiment ansehen", href: "/sortiment" },

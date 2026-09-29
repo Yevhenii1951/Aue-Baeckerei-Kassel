@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Camera } from "lucide-react";
 import type { CompanyPage as CompanyPageData } from "@/features/content/companyPages";
 
 /**
@@ -68,20 +68,31 @@ export function CompanyPage({
           <div className="mt-12">
             <h2 className="font-display text-3xl font-semibold">Die Galerie</h2>
             <p className="mt-3 max-w-2xl leading-7 text-ink/72">
-              Drei Motive, die den Charakter des Cafés erzählen. Die Bilder
-              folgen, sobald die Aufnahmen vorliegen.
+              Drei Motive, die den Charakter des Cafés erzählen: der
+              Fensterplatz, eine zweite Perspektive darauf und der Blick in die
+              Backstube.
             </p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            <div className="mt-6 grid gap-6 sm:grid-cols-3">
               {page.photoSlots.map((slot) => (
                 <figure
                   key={slot.title}
-                  className="flex flex-col rounded-lg border border-dashed border-brand-deep/25 bg-paper p-5"
+                  className="flex flex-col overflow-hidden rounded-lg border border-brand-deep/10 bg-paper shadow-card"
                 >
-                  <span className="grid size-11 place-items-center rounded-full bg-amber/25 text-brand-dark">
-                    <Camera className="size-5" strokeWidth={1.75} aria-hidden="true" />
-                  </span>
-                  <figcaption className="mt-4 font-semibold">{slot.title}</figcaption>
-                  <p className="mt-2 text-sm leading-6 text-ink/70">{slot.text}</p>
+                  <div className="relative aspect-[3/2]">
+                    <Image
+                      src={slot.image}
+                      alt={slot.alt}
+                      fill
+                      sizes="(min-width: 640px) 20rem, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <figcaption className="flex flex-col gap-2 p-5">
+                    <span className="font-semibold">{slot.title}</span>
+                    <span className="text-sm leading-6 text-ink/70">
+                      {slot.text}
+                    </span>
+                  </figcaption>
                 </figure>
               ))}
             </div>
