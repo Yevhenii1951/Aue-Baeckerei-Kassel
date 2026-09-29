@@ -26,7 +26,7 @@ export default async function SiteFooter({ locale }: SiteFooterProps) {
               </Link>
             </li>
             <li>
-              <Link href={`/${locale}#cafe`} className="nav-link">
+              <Link href={`/${locale}/kafe`} className="nav-link">
                 {t("navCafe")}
               </Link>
             </li>

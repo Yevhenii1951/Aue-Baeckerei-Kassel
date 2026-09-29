@@ -15,7 +15,7 @@ export default async function SiteHeader({ locale }: SiteHeaderProps) {
     { href: `/${locale}`, label: t("navHome") },
     { href: `/${locale}/sortiment`, label: t("navAssortment") },
     { href: `/${locale}#vorbestellen`, label: t("navPreorder") },
-    { href: `/${locale}#cafe`, label: t("navCafe") },
+    { href: `/${locale}/kafe`, label: t("navCafe") },
     { href: `/${locale}/impressum`, label: t("navImprint") },
     { href: `/${locale}/datenschutz`, label: t("navPrivacy") },
   ];

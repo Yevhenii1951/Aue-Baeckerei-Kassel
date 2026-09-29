@@ -56,70 +56,7 @@
       "Bestellnummer zeigen und frisch gebackene Ware mitnehmen."
     ],
     "assortmentTitle": "Sortiment für Frühstück, Pause und Büro",
-    "assortmentText": "Brote, Brötchen, Süßes, Getränke, Snacks und Feinkost – jede Kategorie führt direkt zu ihrem Sortiment.",
-    "conversionTitle": "Mehr als eine Bäckertüte",
-    "conversionText": "Für Kassel, Familien und Büros: Lieferung, Brot-Abo und Catering bleiben bewusst einfache Anfrage- oder Demo-Flows, bis echte Zahlungs- und Lieferintegrationen folgen.",
-    "conversionCards": [
-      {
-        "title": "Lieferung in Kassel",
-        "text": "Innenstadt frei ab 20 €, weitere Stadtteile mit fairer Lieferpauschale. PLZ-Prüfung und Karte folgen als consent-sicherer Schritt.",
-        "meta": "Zone 1-3",
-        "cta": "Liefergebiet prüfen"
-      },
-      {
-        "title": "Brot-Abo",
-        "text": "Single, Familie oder Flex: wöchentlich frisches Brot und Brötchen, mit Urlaubspause und Abholung oder Lieferung.",
-        "meta": "ab 12,90 € pro Woche",
-        "cta": "Abo vormerken"
-      },
-      {
-        "title": "Firmenservice",
-        "text": "Brotzeit-Boxen, Frühstück im Büro und Konferenzverpflegung für Teams in Kassel.",
-        "meta": "B2B auf Rechnung",
-        "cta": "Anfrage vorbereiten"
-      }
-    ],
-    "cafeTitle": "Unser Café",
-    "cafeText": "Für die Galerie sind später deine Innenraumfotos vorgesehen: Kaffee am Fenster, Kuchen in der Vitrine und die kleine Pause zwischen Karlsaue und Bebelplatz.",
-    "cafeHours": "Mo-Fr 07:00-18:00 · Sa 08:00-16:00 · So Ruhetag",
-    "cafePairings": [
-      {
-        "title": "Cappuccino + Zimtschnecke",
-        "text": "Der schnelle Klassiker für den Vormittag, warm, süß und nicht zu schwer."
-      },
-      {
-        "title": "Earl Grey + Käsekuchen",
-        "text": "Ruhiger Nachmittag am Fenster mit cremigem Kuchen und Bergamotte."
-      },
-      {
-        "title": "Caffè Crema + Brownie",
-        "text": "Kräftiger Kaffee zu Schokolade, ideal für die kleine Arbeitspause."
-      },
-      {
-        "title": "Mango Lassi + Apfel-Mandel-Schnecke",
-        "text": "Fruchtig, vegan möglich und perfekt für warme Kasseler Tage."
-      }
-    ],
-    "cafePhotoSlots": [
-      {
-        "title": "Fensterplatz",
-        "text": "Hier kommt später dein Foto vom hellen Sitzbereich mit Kaffee und Zeitung."
-      },
-      {
-        "title": "Kuchenvitrine",
-        "text": "Platzhalter für appetitliche Kuchen, Schnecken und kleine Törtchen."
-      },
-      {
-        "title": "Backstubenblick",
-        "text": "Ein Bild mit Ofen, Händen und frischem Brot verbindet Café und Handwerk."
-      }
-    ],
-    "trustItems": [
-      "Regionale Zutaten aus Nordhessen",
-      "Sauerteig und lange Teigführung",
-      "Allergene klar gekennzeichnet",
-      "Admin-Backliste für die Produktion"
-    ]
+    "assortmentText": "Brote, Brötchen, Süßes, Getränke, Snacks und Feinkost – jede Kategorie führt direkt zu ihrem Sortiment."
   },
   "sortiment": {
     "eyebrow": "Online bestellen oder für morgen sichern",

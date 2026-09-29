@@ -11,15 +11,8 @@ import { buildPublicMetadata } from "@/features/seo/publicMetadata";
 import { parseSupportedLocale } from "@/features/seo/site";
 import { buildBakeryJsonLd } from "@/features/seo/bakeryJsonLd";
 import { CategoryGallery } from "@/features/catalog/components/CategoryGallery";
-import {
-  ConversionSections,
-  type ConversionCard,
-} from "@/features/content/components/ConversionSections";
-import {
-  CafeSection,
-  type CafePairing,
-  type CafePhotoSlot,
-} from "@/features/content/components/CafeSection";
+import { CONVERSION } from "@/features/content/companyPages";
+import { ConversionSections } from "@/features/content/components/ConversionSections";
 import { Reveal } from "@/features/content/components/Reveal";
 
 type PathCard = {
@@ -29,7 +22,7 @@ type PathCard = {
 };
 
 const PATH_ICONS = [Store, ShoppingBag, Coffee];
-const PATH_HREFS = ["vorbestellen", "sortiment", "#cafe"];
+const PATH_HREFS = ["vorbestellen", "sortiment", "kafe"];
 
 export async function generateMetadata({
   params,
@@ -53,10 +46,6 @@ export default async function HomePage({
   const t = await getTranslations("home");
   const paths = t.raw("paths") as PathCard[];
   const steps = t.raw("steps") as string[];
-  const trustItems = t.raw("trustItems") as string[];
-  const conversionCards = t.raw("conversionCards") as ConversionCard[];
-  const cafePairings = t.raw("cafePairings") as CafePairing[];
-  const cafePhotoSlots = t.raw("cafePhotoSlots") as CafePhotoSlot[];
 
   return (
     <div className="bg-cream">
@@ -210,18 +199,9 @@ export default async function HomePage({
       </section>
 
       <ConversionSections
-        title={t("conversionTitle")}
-        text={t("conversionText")}
-        cards={conversionCards}
-      />
-
-      <CafeSection
-        title={t("cafeTitle")}
-        text={t("cafeText")}
-        hours={t("cafeHours")}
-        pairings={cafePairings}
-        photoSlots={cafePhotoSlots}
-        trustItems={trustItems}
+        title={CONVERSION.title}
+        text={CONVERSION.text}
+        cards={CONVERSION.cards}
       />
     </div>
   );

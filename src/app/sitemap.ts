@@ -7,6 +7,10 @@ const STATIC_PATHS = [
   "/sortiment",
   "/lieferung",
   "/vorbestellen",
+  "/kafe",
+  "/kontakt",
+  "/karriere",
+  "/partner",
   "/impressum",
   "/datenschutz",
 ] as const;
