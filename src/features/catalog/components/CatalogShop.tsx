@@ -47,6 +47,7 @@ export function CatalogShop({
   const [sort, setSort] = useState<ProductSort>("beliebt");
   const { items, totals, addToCart } = useCart();
   const t = useTranslations("catalog");
+  const hasItems = items.length > 0;
 
   const visibleProducts = useMemo(() => {
     const filtered = filterProducts(products, {
@@ -60,7 +61,7 @@ export function CatalogShop({
   }, [allergen, category, products, query, sort, tag]);
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1fr_22rem]">
+    <div className={`grid gap-8 ${hasItems ? "lg:grid-cols-[1fr_22rem]" : ""}`}>
       <div className="grid gap-6">
         <CategoryTabs
           categories={categories}
@@ -136,7 +137,7 @@ export function CatalogShop({
         </div>
       </div>
 
-      <ShopCartSummary />
+      {hasItems ? <ShopCartSummary /> : null}
     </div>
   );
 }
