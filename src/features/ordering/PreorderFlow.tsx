@@ -14,6 +14,7 @@ import {
 import { PreorderSlotPicker } from "./PreorderSlotPicker";
 import { PreorderSummary } from "./PreorderSummary";
 import { PreorderCustomerForm } from "./PreorderCustomerForm";
+import type { CartTotals } from "./cart";
 
 type PreorderFlowProps = {
   locale: SiteLocale;
@@ -37,7 +38,7 @@ function subscribeNothing(): () => void {
 }
 
 export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement {
-  const { items } = useCart();
+  const { items, totals, clearCart } = useCart();
   const t = useTranslations("vorbestellen");
   const tval = useTranslations("validation");
   const firstDate = useSyncExternalStore(
@@ -50,6 +51,7 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
   const [form, setForm] = useState<PreorderFormValues>(EMPTY_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [confirmed, setConfirmed] = useState(false);
+  const [placedTotals, setPlacedTotals] = useState<CartTotals | null>(null);
 
   const mounted = firstDate !== "";
   const effectiveDate = date ?? firstDate;
@@ -58,7 +60,9 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
     return <div className="grid gap-8 py-8 lg:grid-cols-[1fr_22rem]" />;
   }
 
-  if (items.length === 0) {
+  // The confirmation screen owns the view once the cart is emptied, otherwise
+  // the empty-cart guard would immediately replace it.
+  if (items.length === 0 && !confirmed) {
     return (
       <div className="grid place-content-center gap-4 py-20 text-center">
         <p className="max-w-md text-ink/70">
@@ -103,6 +107,8 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
     }
 
     setErrors({});
+    setPlacedTotals(totals);
+    clearCart();
     setConfirmed(true);
   }
 
@@ -128,7 +134,7 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
             {t("backToAssortment")}
           </Link>
         </section>
-        <PreorderSummary />
+        <PreorderSummary frozenTotals={placedTotals} />
       </div>
     );
   }

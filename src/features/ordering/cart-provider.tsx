@@ -85,6 +85,11 @@ export function changeQuantity(productId: string, quantity: number): void {
   updateItems(setCartItemQuantity(snapshot.items, productId, quantity));
 }
 
+export function clearCart(): void {
+  updateItems([]);
+  closeCart();
+}
+
 export function openCart(): void {
   snapshot = { ...snapshot, isOpen: true };
   emit();
@@ -108,6 +113,7 @@ export function useCart() {
     totals: calculateCart(items, { breakfastBundle: true }),
     addToCart,
     changeQuantity,
+    clearCart,
     openCart,
     closeCart,
   };

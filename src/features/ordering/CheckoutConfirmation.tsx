@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import type { SiteLocale } from "@/features/seo/site";
 import { formatEuroCents } from "@/lib/format";
 import { PreorderSummary } from "./PreorderSummary";
+import type { CartTotals } from "./cart";
 
 export type ConfirmedOrder = {
   orderNumber: string;
@@ -13,6 +14,9 @@ export type ConfirmedOrder = {
   address?: string;
   deliveryLabel?: string;
   deliveryFeeCents?: number;
+  // The cart is emptied at submit time, so the summary needs its own copy of
+  // the totals that were shown to the customer.
+  totals: CartTotals;
 };
 
 type CheckoutConfirmationProps = {
@@ -96,7 +100,10 @@ export function CheckoutConfirmation({
           {t("backToAssortment")}
         </Link>
       </section>
-      <PreorderSummary deliveryFeeCents={confirmed.deliveryFeeCents} />
+      <PreorderSummary
+        deliveryFeeCents={confirmed.deliveryFeeCents}
+        frozenTotals={confirmed.totals}
+      />
     </div>
   );
 }
