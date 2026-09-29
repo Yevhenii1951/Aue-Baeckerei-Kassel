@@ -30,6 +30,8 @@ const serverEnvSchema = z.object({
 
   ENABLE_EMAIL: flag,
   BREVO_API_KEY: z.string().min(1).optional(),
+  EMAIL_SENDER_NAME: z.string().min(1).optional(),
+  EMAIL_SENDER_ADDRESS: z.string().email().optional(),
 
   ENABLE_CRON: flag,
   CRON_SECRET: z.string().min(1).optional(),
@@ -72,6 +74,8 @@ export function parseServerEnv(
     AI_MONTHLY_BUDGET_EUR: optionalEnv(source.AI_MONTHLY_BUDGET_EUR),
     ENABLE_EMAIL: optionalEnv(source.ENABLE_EMAIL),
     BREVO_API_KEY: optionalEnv(source.BREVO_API_KEY),
+    EMAIL_SENDER_NAME: optionalEnv(source.EMAIL_SENDER_NAME),
+    EMAIL_SENDER_ADDRESS: optionalEnv(source.EMAIL_SENDER_ADDRESS),
     ENABLE_CRON: optionalEnv(source.ENABLE_CRON),
     CRON_SECRET: optionalEnv(source.CRON_SECRET),
     QUOTE_SIGNING_SECRET: optionalEnv(source.QUOTE_SIGNING_SECRET),
