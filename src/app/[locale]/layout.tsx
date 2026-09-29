@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Alegreya, Manrope } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/features/seo/site";
 import { CartProvider } from "@/features/ordering/cart-provider";
@@ -17,11 +17,11 @@ const manrope = Manrope({
   variable: "--font-manrope",
 });
 
-const cormorant = Cormorant_Garamond({
+const headline = Alegreya({
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  variable: "--font-headline",
 });
 
 export async function generateMetadata({
@@ -53,7 +53,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${cormorant.variable} ${manrope.variable}`}>
+    <html lang={locale} className={`${headline.variable} ${manrope.variable}`}>
       <body className="min-h-screen bg-cream text-ink font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
           <CartProvider>{children}</CartProvider>

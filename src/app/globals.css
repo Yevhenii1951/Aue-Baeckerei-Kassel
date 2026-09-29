@@ -4,7 +4,7 @@
   --font-sans:
     var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Grenette", var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-display: "Grenette", var(--font-headline), Georgia, "Times New Roman", serif;
 
   /* Palette roles, named after the bakery rather than the material colour.
      Every value is used by at least one component; adding a token means
@@ -39,6 +39,20 @@
     background-size: 42px 42px;
     color: var(--color-ink);
     text-rendering: optimizeLegibility;
+  }
+
+  /* Barely-there organic texture across the whole site. It is decorative
+     only: pointer-events none, disabled for reduced-motion, and it never
+     competes with focus states or modals (z-index stays below overlays). */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    mix-blend-mode: multiply;
   }
 
   ::selection {
@@ -141,6 +155,64 @@
     border-radius: 0.5rem;
   }
 
+  /* Gentle rise used once on every navigation: the routed main remounts per
+     route, so this plain mount animation is the page enter. Reduced-motion
+     collapses it (see the media query at the bottom). */
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .page-enter {
+    animation: page-enter 0.35s ease-out both;
+  }
+
+  /* Staged rise for the hero load sequence: eyebrow, lines, CTA, strip. */
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .hero-rise {
+    animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero-rise-2 {
+    animation-delay: 0.12s;
+  }
+  .hero-rise-3 {
+    animation-delay: 0.24s;
+  }
+  .hero-rise-4 {
+    animation-delay: 0.36s;
+  }
+
+  /* CTA arrows answer the hover with a small slide. */
+  .arrow-slide svg {
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .arrow-slide:hover svg,
+  .arrow-slide:focus-visible svg {
+    transform: translateX(4px);
+  }
+
+  /* Deepens the hero video with a vignette and a bottom fade into cream,
+     replacing the flat single gradient. */
+  .hero-vignette {
+    background:
+      radial-gradient(120% 120% at 50% 18%, transparent 46%, rgb(23 18 14 / 0.5) 100%),
+      linear-gradient(180deg, rgb(23 18 14 / 0.38) 0%, transparent 34%, transparent 58%, var(--color-brand-deep) 100%);
+  }
+
   /* Tailwind v4 does not emit a shadow utility for a custom --shadow-* token,
      so both shadows are declared by hand. */
   .shadow-panel {
@@ -168,6 +240,9 @@
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+  body::before {
+    display: none;
   }
   .hero-video {
     display: none;
