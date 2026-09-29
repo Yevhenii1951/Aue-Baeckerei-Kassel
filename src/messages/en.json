@@ -340,5 +340,116 @@
     "text": "This website does not load third-party content by default. The delivery map comes from OpenStreetMap and is only loaded after your consent. Only this setting is necessary for the site to work; there is no customer account.",
     "loadMap": "Load map",
     "noMap": "Without map"
+  },
+  "admin": {
+    "meta": {
+      "dashboardTitle": "Admin dashboard",
+      "loginTitle": "Admin login",
+      "passwordTitle": "Set staff password"
+    },
+    "dashboard": {
+      "ownerView": "Owner view",
+      "title": "Dashboard",
+      "demoDataNote": "Demo data until order persistence is introduced.",
+      "staffLogin": "Staff login",
+      "kpiOrders": "Orders today",
+      "kpiRevenue": "Revenue today",
+      "kpiTopProduct": "Top product",
+      "kpiCutoff": "Preorder cutoff",
+      "cutoffTime": "{time}",
+      "cutoffNote": "After 8 pm, the preorder applies to the day after tomorrow."
+    },
+    "filters": {
+      "title": "Filter",
+      "date": "Date",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "status": "Status",
+      "all": "All",
+      "fulfillment": "Fulfillment",
+      "pickup": "Pickup",
+      "delivery": "Delivery",
+      "reset": "Reset filters"
+    },
+    "statuses": {
+      "new": "New",
+      "preparing": "In preparation",
+      "ready": "Ready",
+      "collected": "Collected",
+      "delivered": "Delivered"
+    },
+    "orders": {
+      "title": "Orders",
+      "count": "{count, plural, one {# order} other {# orders}}",
+      "statusPathAria": "Order status"
+    },
+    "orderCard": {
+      "atTime": "at {time}",
+      "positions": "{count, plural, one {# item} other {# items}}",
+      "pieces": "{count, plural, one {# piece} other {# pieces}}",
+      "details": "Details",
+      "total": "Total: {price}",
+      "note": "Note: {note}",
+      "noNote": "No note.",
+      "cancelDemo": "Cancel (demo)",
+      "refundDemo": "Refund (demo)",
+      "cancelAria": "Cancellation is a demo action",
+      "refundAria": "Refund is a demo action"
+    },
+    "backliste": {
+      "production": "Production",
+      "title": "Production list",
+      "forDate": "Product quantities and slots for {date}.",
+      "productionDate": "Production date",
+      "exportCsv": "Export CSV",
+      "print": "Print",
+      "totals": "Total quantities",
+      "productSlot": "Product x slot",
+      "product": "Product",
+      "pieces": "{count, plural, one {# piece} other {# pieces}}"
+    },
+    "login": {
+      "backToSite": "Back to the site",
+      "staffAccess": "Staff access",
+      "intro": "Sign in with the Supabase staff account from your invitation. The public site stays available without staff access.",
+      "notConfigured": "Supabase staff auth is not configured yet. Add the Supabase URL, anon key, service role key and site URL before using admin login.",
+      "formWillActivate": "The login form will activate automatically after Supabase environment variables are set.",
+      "email": "Email",
+      "password": "Password",
+      "signingIn": "Signing in",
+      "signIn": "Sign in",
+      "emailForMagicLink": "Email for magic link",
+      "sendingLink": "Sending link",
+      "sendMagicLink": "Send magic link",
+      "resetPassword": "Reset password",
+      "staffEmail": "Staff email",
+      "sendingReset": "Sending reset",
+      "sendResetEmail": "Send reset email"
+    },
+    "password": {
+      "title": "Set staff password",
+      "intro": "Use this page after an invite or reset email opens a Supabase staff session in this browser.",
+      "notConfigured": "Supabase staff auth is not configured yet.",
+      "backToLogin": "Back to staff login",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "saving": "Saving password",
+      "save": "Save password"
+    },
+    "auth": {
+      "invalid_credentials": "Email or password is not valid.",
+      "not_staff_member": "This Supabase user is not an active staff member.",
+      "auth_not_configured": "Supabase staff auth is not configured yet.",
+      "set_url_first": "Set the site URL before sending staff email links.",
+      "magic_link_failed": "The magic link could not be sent.",
+      "magic_link_sent": "Magic link sent. Check the staff mailbox.",
+      "reset_email_failed": "The password reset email could not be sent.",
+      "reset_email_sent": "Password reset email sent. Check the staff mailbox.",
+      "password_update_failed": "The password could not be updated.",
+      "check_fields": "Check the highlighted fields.",
+      "invalid_email": "Please enter a valid email address.",
+      "password_too_short": "At least 8 characters.",
+      "passwords_must_match": "The passwords must match."
+    }
   }
 }

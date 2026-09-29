@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { useTranslations } from "next-intl";
 import {
   updatePasswordAction,
   type AuthActionState,
@@ -8,7 +9,7 @@ import {
 
 const initialAuthActionState: AuthActionState = {
   status: "idle",
-  message: "",
+  key: "",
 };
 
 type PasswordUpdateFormProps = {
@@ -18,6 +19,7 @@ type PasswordUpdateFormProps = {
 export function PasswordUpdateForm({
   locale,
 }: PasswordUpdateFormProps): React.ReactNode {
+  const t = useTranslations("admin.password");
   const [state, action, pending] = useActionState(
     updatePasswordAction,
     initialAuthActionState,
@@ -27,7 +29,7 @@ export function PasswordUpdateForm({
     <form action={action} className="space-y-4">
       <input type="hidden" name="locale" value={locale} />
       <label className="block space-y-1 text-sm font-medium">
-        <span>New password</span>
+        <span>{t("newPassword")}</span>
         <input
           required
           autoComplete="new-password"
@@ -39,7 +41,7 @@ export function PasswordUpdateForm({
         <FieldError messages={state.fieldErrors?.password} />
       </label>
       <label className="block space-y-1 text-sm font-medium">
-        <span>Confirm password</span>
+        <span>{t("confirmPassword")}</span>
         <input
           required
           autoComplete="new-password"
@@ -55,18 +57,32 @@ export function PasswordUpdateForm({
         disabled={pending}
         className="min-h-11 w-full rounded-md bg-brand px-4 py-2 font-medium text-white disabled:opacity-60"
       >
-        {pending ? "Saving password" : "Save password"}
+        {pending ? t("saving") : t("save")}
       </button>
-      {state.message && (
-        <p role="status" className="text-sm text-brand">
-          {state.message}
-        </p>
-      )}
+      <FormMessage state={state} />
     </form>
   );
 }
 
 function FieldError({ messages }: { messages?: string[] }): React.ReactNode {
+  const t = useTranslations("admin.auth");
   if (!messages?.length) return null;
-  return <span className="text-sm text-brand">{messages[0]}</span>;
+  const code = messages[0];
+  return <span className="text-sm text-brand">{t.has(code) ? t(code) : code}</span>;
+}
+
+function FormMessage({ state }: { state: AuthActionState }): React.ReactNode {
+  const t = useTranslations("admin.auth");
+  if (!state.key) return null;
+  const text = t.has(state.key) ? t(state.key) : state.key;
+  return (
+    <p
+      role="status"
+      className={
+        state.status === "error" ? "text-sm text-brand" : "text-sm text-ink/70"
+      }
+    >
+      {text}
+    </p>
+  );
 }

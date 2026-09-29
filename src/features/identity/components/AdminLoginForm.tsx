@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { useTranslations } from "next-intl";
 import {
   sendMagicLinkAction,
   sendPasswordResetAction,
@@ -10,7 +11,7 @@ import {
 
 const initialAuthActionState: AuthActionState = {
   status: "idle",
-  message: "",
+  key: "",
 };
 
 type AdminLoginFormProps = {
@@ -20,6 +21,7 @@ type AdminLoginFormProps = {
 export function AdminLoginForm({
   locale,
 }: AdminLoginFormProps): React.ReactNode {
+  const t = useTranslations("admin.login");
   const [passwordState, passwordAction, passwordPending] = useActionState(
     signInWithPasswordAction,
     initialAuthActionState,
@@ -38,7 +40,7 @@ export function AdminLoginForm({
       <form action={passwordAction} className="space-y-4">
         <input type="hidden" name="locale" value={locale} />
         <label className="block space-y-1 text-sm font-medium">
-          <span>Email</span>
+          <span>{t("email")}</span>
           <input
             required
             autoComplete="email"
@@ -49,7 +51,7 @@ export function AdminLoginForm({
           <FieldError messages={passwordState.fieldErrors?.email} />
         </label>
         <label className="block space-y-1 text-sm font-medium">
-          <span>Password</span>
+          <span>{t("password")}</span>
           <input
             required
             autoComplete="current-password"
@@ -65,7 +67,7 @@ export function AdminLoginForm({
           disabled={passwordPending}
           className="min-h-11 w-full rounded-md bg-brand px-4 py-2 font-medium text-white disabled:opacity-60"
         >
-          {passwordPending ? "Signing in" : "Sign in"}
+          {passwordPending ? t("signingIn") : t("signIn")}
         </button>
         <FormMessage state={passwordState} />
       </form>
@@ -74,7 +76,7 @@ export function AdminLoginForm({
         <form action={magicAction} className="space-y-3">
           <input type="hidden" name="locale" value={locale} />
           <label className="block space-y-1 text-sm font-medium">
-            <span>Email for magic link</span>
+            <span>{t("emailForMagicLink")}</span>
             <input
               required
               autoComplete="email"
@@ -88,7 +90,7 @@ export function AdminLoginForm({
             disabled={magicPending}
             className="min-h-11 w-full rounded-md border border-ink/20 px-4 py-2 font-medium disabled:opacity-60"
           >
-            {magicPending ? "Sending link" : "Send magic link"}
+            {magicPending ? t("sendingLink") : t("sendMagicLink")}
           </button>
           <FormMessage state={magicState} />
         </form>
@@ -96,12 +98,12 @@ export function AdminLoginForm({
 
       <details className="border-t border-ink/10 pt-5">
         <summary className="cursor-pointer text-sm font-medium underline-offset-4 hover:underline">
-          Reset password
+          {t("resetPassword")}
         </summary>
         <form action={resetAction} className="mt-3 space-y-3">
           <input type="hidden" name="locale" value={locale} />
           <label className="block space-y-1 text-sm font-medium">
-            <span>Staff email</span>
+            <span>{t("staffEmail")}</span>
             <input
               required
               autoComplete="email"
@@ -115,7 +117,7 @@ export function AdminLoginForm({
             disabled={resetPending}
             className="min-h-11 w-full rounded-md border border-ink/20 px-4 py-2 font-medium disabled:opacity-60"
           >
-            {resetPending ? "Sending reset" : "Send reset email"}
+            {resetPending ? t("sendingReset") : t("sendResetEmail")}
           </button>
           <FormMessage state={resetState} />
         </form>
@@ -125,12 +127,16 @@ export function AdminLoginForm({
 }
 
 function FieldError({ messages }: { messages?: string[] }): React.ReactNode {
+  const t = useTranslations("admin.auth");
   if (!messages?.length) return null;
-  return <span className="text-sm text-brand">{messages[0]}</span>;
+  const code = messages[0];
+  return <span className="text-sm text-brand">{t.has(code) ? t(code) : code}</span>;
 }
 
 function FormMessage({ state }: { state: AuthActionState }): React.ReactNode {
-  if (!state.message) return null;
+  const t = useTranslations("admin.auth");
+  if (!state.key) return null;
+  const text = t.has(state.key) ? t(state.key) : state.key;
   return (
     <p
       role="status"
@@ -138,7 +144,7 @@ function FormMessage({ state }: { state: AuthActionState }): React.ReactNode {
         state.status === "error" ? "text-sm text-brand" : "text-sm text-ink/70"
       }
     >
-      {state.message}
+      {text}
     </p>
   );
 }
