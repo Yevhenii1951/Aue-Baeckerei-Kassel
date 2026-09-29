@@ -1,6 +1,7 @@
 import "server-only";
 import { getServerPool } from "@/lib/db/serverPool";
 import { createOrder } from "@/features/ordering/orderService";
+import { sendOrderConfirmationIfEnabled } from "@/features/notifications/runtime";
 import { serverEnv } from "@/lib/env/server";
 import { assertEnvGroup, isEnvGroupEnabled } from "@/lib/env/groups";
 import { createStripeCheckoutClient } from "./stripeClient";
@@ -25,5 +26,6 @@ export function createCheckoutRuntime(
     locale,
     returnPath,
     createOrder: (input) => createOrder(pool, input),
+    onOrderConfirmed: sendOrderConfirmationIfEnabled,
   };
 }

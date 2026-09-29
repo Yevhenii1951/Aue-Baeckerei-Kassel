@@ -1,14 +1,35 @@
 # State
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
-workflow was enforced). ABE-010 through ABE-021, plus ABE-022 to ABE-025 and
-ABE-028, merged on `main`. ABE-026 in review on
-`feature/abe-026-stripe-test-mode`.
+workflow was enforced). ABE-010 through ABE-021, plus ABE-022 to ABE-028, merged on
+`main`. ABE-027 in review on `feature/abe-027-email-confirmation`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-027 order confirmation email on `feature/abe-027-email-confirmation`: a
+  new `src/features/notifications` with `domain.ts` (the `EmailAdapter`
+  contract), `brevo.ts` (the provider adapter, ported from Kalyna with bakery
+  vocabulary instead of the restaurant's), `orderConfirmation.ts` (the pure
+  payload builder) and `runtime.ts` (the env gate). The message is built from
+  the same server-calculated lines and totals that reach Stripe, and the order
+  number doubles as the Brevo `idempotency-key` so a retry cannot send twice.
+  HTML escapes customer input; the text part carries the same numbers.
+  `startCheckout` now takes an optional `onOrderConfirmed` and calls it only
+  after the payment session exists, inside a `try`/`catch`, so a Brevo outage
+  cannot take down an order that is already committed or stop a customer who
+  is already at Stripe — that "a failed mail must not lose the order" case is
+  a test, not a claim.
+  The bakery has no mail domain, so `EMAIL_SENDER_NAME` and
+  `EMAIL_SENDER_ADDRESS` are **required** for the group rather than invented;
+  `assertEnvGroup` fails closed without them, and `env-groups.test.ts` was
+  updated (it caught the change) plus a new case for the enabled group.
+  6 new unit tests.
+  Worth knowing: because the demo checkout never reaches the server, the
+  confirmation only exists on the Stripe path — with payments off there is no
+  order row to confirm. A real Brevo delivery was not exercised; no API key
+  and no sender domain are configured here.
 - ABE-026 Stripe test mode on `feature/abe-026-stripe-test-mode`: a new
   `src/features/payments` in three layers — `stripeClient.ts` (server-only
   `StripeCheckoutClient` behind an interface, `stripe@^22.6.2`, the version
@@ -222,7 +243,6 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
-- ABE-027 email confirmation (order mail behind the email group).
 - i18n of the new bakery features. `de/en/uk` message files are complete, but
   all 17 bakery components hardcode German, so `/en/sortiment` and
   `/uk/sortiment` serve German. NFR-1 permits the fallback for now. ABE-011

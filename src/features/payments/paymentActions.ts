@@ -1,6 +1,7 @@
 "use server";
 
 import type { CheckoutFormValues } from "@/features/ordering/checkout-form";
+import type { OrderConfirmationData } from "@/features/notifications/orderConfirmation";
 import { isEnvGroupEnabled } from "@/lib/env/groups";
 import { createCheckoutRuntime } from "./runtime";
 import { startCheckout, type StartCheckoutResult } from "./checkout";
@@ -32,3 +33,5 @@ export async function startStripeCheckoutAction(input: {
 
   return startCheckout(runtime, { cart: input.cart, customer: input.customer });
 }
+
+export type { OrderConfirmationData };

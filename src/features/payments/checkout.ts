@@ -1,14 +1,22 @@
+import type { CheckoutFormValues } from "@/features/ordering/checkout-form";
 import type { CreateOrderResult } from "@/features/ordering/orderService";
+import { deliveryTimeLabel } from "@/features/ordering/checkoutLabels";
+import type { OrderConfirmationData } from "@/features/notifications/orderConfirmation";
 import type { StripeCheckoutClient } from "./stripeClient";
 
 export type StartCheckoutInput = {
   cart: { productId: string; quantity: number }[];
-  customer: unknown;
+  customer: CheckoutFormValues;
 };
 
 export type StartCheckoutDeps = {
   baseUrl: string;
   createOrder: (input: unknown) => Promise<CreateOrderResult>;
+  /**
+   * Runs after the payment session exists. A throwing implementation must not
+   * stop the customer: the order is already committed either way.
+   */
+  onOrderConfirmed?: (data: OrderConfirmationData) => Promise<void>;
   locale: string;
   stripe: StripeCheckoutClient;
   returnPath: string;
@@ -49,6 +57,8 @@ export async function startCheckout(
       cancelUrl: `${deps.baseUrl}${returnPath}?payment=cancelled`,
     });
 
+    await notifyOrderConfirmed(deps.onOrderConfirmed, order, input.customer);
+
     return { ok: true, checkoutUrl: session.url };
   } catch {
     return {
@@ -56,5 +66,30 @@ export async function startCheckout(
       code: "CHECKOUT_FAILED",
       message: "Der Bezahlvorgang konnte nicht gestartet werden.",
     };
+  }
+}
+
+async function notifyOrderConfirmed(
+  onOrderConfirmed: StartCheckoutDeps["onOrderConfirmed"],
+  order: Extract<CreateOrderResult, { ok: true }>,
+  customer: CheckoutFormValues,
+): Promise<void> {
+  if (!onOrderConfirmed) return;
+
+  try {
+    await onOrderConfirmed({
+      orderNumber: order.orderNumber,
+      customerName: customer.name,
+      customerEmail: customer.email,
+      mode: customer.mode,
+      deliveryLabel: customer.mode === "delivery" ? deliveryTimeLabel(customer) : null,
+      lines: order.lines,
+      subtotalCents: order.subtotalCents,
+      deliveryFeeCents: order.deliveryFeeCents,
+      totalCents: order.totalCents,
+    });
+  } catch {
+    // The order is already stored and the customer is already at Stripe.
+    // A failed confirmation must not undo either.
   }
 }

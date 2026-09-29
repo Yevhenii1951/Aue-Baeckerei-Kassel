@@ -42,9 +42,29 @@ describe("optional env groups", () => {
   it("names the missing keys and the flag to flip off", () => {
     const env = parseServerEnv({ ...minimal, ENABLE_EMAIL: "true" });
 
-    expect(missingEnvGroupKeys("email", env)).toEqual(["BREVO_API_KEY"]);
+    // The sender identity is required too: the bakery has no mail domain yet,
+    // so an enabled group without it must fail closed rather than guess one.
+    expect(missingEnvGroupKeys("email", env)).toEqual([
+      "BREVO_API_KEY",
+      "EMAIL_SENDER_NAME",
+      "EMAIL_SENDER_ADDRESS",
+    ]);
     expect(() => assertEnvGroup("email", env)).toThrow(/BREVO_API_KEY/);
+    expect(() => assertEnvGroup("email", env)).toThrow(/EMAIL_SENDER_ADDRESS/);
     expect(() => assertEnvGroup("email", env)).toThrow(/ENABLE_EMAIL=false/);
+  });
+
+  it("accepts the email group once the sender identity is configured", () => {
+    const env = parseServerEnv({
+      ...minimal,
+      ENABLE_EMAIL: "true",
+      BREVO_API_KEY: "xkeysib-test",
+      EMAIL_SENDER_NAME: "Aue-Bäckerei Kassel",
+      EMAIL_SENDER_ADDRESS: "backstube@example.test",
+    });
+
+    expect(missingEnvGroupKeys("email", env)).toEqual([]);
+    expect(() => assertEnvGroup("email", env)).not.toThrow();
   });
 
   it("treats a whitespace-only key as missing", () => {

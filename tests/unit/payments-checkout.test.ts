@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { startCheckout, type StartCheckoutDeps } from "@/features/payments/checkout";
+import { deliveryTimeLabel } from "@/features/ordering/checkoutLabels";
 import type { CreateOrderResult } from "@/features/ordering/orderService";
 import type { StripeCheckoutSessionInput } from "@/features/payments/stripeClient";
 
@@ -34,22 +35,24 @@ function orderResult(overrides: Partial<Extract<CreateOrderResult, { ok: true }>
   } satisfies Extract<CreateOrderResult, { ok: true }>;
 }
 
+type Deps = StartCheckoutDeps & { createOrder: ReturnType<typeof vi.fn> };
+
 function deps(
   order: CreateOrderResult,
-  createCheckoutSession = vi.fn().mockResolvedValue({ id: "cs_1", url: "https://checkout.stripe.test/cs_1" }),
+  createCheckoutSession = vi
+    .fn()
+    .mockResolvedValue({ id: "cs_1", url: "https://checkout.stripe.test/cs_1" }),
 ) {
   const createOrder = vi.fn().mockResolvedValue(order);
-  return {
-    value: {
-      baseUrl: "https://aue-baeckerei.test",
-      locale: "de",
-      returnPath: "/de/kasse",
-      stripe: { createCheckoutSession },
-      createOrder,
-    } satisfies StartCheckoutDeps,
+  const value: Deps = {
+    baseUrl: "https://aue-baeckerei.test",
+    locale: "de",
+    returnPath: "/de/kasse",
+    stripe: { createCheckoutSession },
     createOrder,
-    createCheckoutSession,
   };
+
+  return { value, createOrder, createCheckoutSession };
 }
 
 describe("startCheckout", () => {
@@ -123,5 +126,47 @@ describe("startCheckout", () => {
       code: "CHECKOUT_FAILED",
       message: "Der Bezahlvorgang konnte nicht gestartet werden.",
     });
+  });
+
+  it("hands the server order to the confirmation callback", async () => {
+    const onOrderConfirmed = vi.fn().mockResolvedValue(undefined);
+    const { value } = deps(orderResult());
+    value.onOrderConfirmed = onOrderConfirmed;
+
+    await startCheckout(value, {
+      cart: [{ productId: "hausbrot", quantity: 1 }],
+      customer,
+    });
+
+    expect(onOrderConfirmed).toHaveBeenCalledWith({
+      orderNumber: "ABE-2026-0042",
+      customerName: "Max Mustermann",
+      customerEmail: "max@example.de",
+      mode: "delivery",
+      deliveryLabel: deliveryTimeLabel(customer),
+      lines: [
+        { name: "Hausbrot", unitPriceCents: 450, quantity: 2, lineTotalCents: 900 },
+        { name: "Caffè Crema", unitPriceCents: 350, quantity: 1, lineTotalCents: 350 },
+      ],
+      subtotalCents: 1250,
+      deliveryFeeCents: 450,
+      totalCents: 1700,
+    });
+  });
+
+  it("still returns the checkout url when the confirmation email fails", async () => {
+    const onOrderConfirmed = vi
+      .fn()
+      .mockRejectedValue(new Error("Brevo is down"));
+    const { value } = deps(orderResult());
+    value.onOrderConfirmed = onOrderConfirmed;
+
+    const result = await startCheckout(value, {
+      cart: [{ productId: "hausbrot", quantity: 1 }],
+      customer,
+    });
+
+    expect(result).toEqual({ ok: true, checkoutUrl: "https://checkout.stripe.test/cs_1" });
+    expect(onOrderConfirmed).toHaveBeenCalledOnce();
   });
 });

@@ -30,7 +30,7 @@ export const ENV_GROUP_SPECS: Record<EnvGroup, GroupSpec> = {
   email: {
     flag: "ENABLE_EMAIL",
     label: "E-Mail-Versand (Brevo)",
-    required: ["BREVO_API_KEY"],
+    required: ["BREVO_API_KEY", "EMAIL_SENDER_NAME", "EMAIL_SENDER_ADDRESS"],
   },
   cron: {
     flag: "ENABLE_CRON",
