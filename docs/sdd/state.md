@@ -1,13 +1,35 @@
 # State
 
 Status: ABE-001 through ABE-009 implemented on `main` (before the branch
-workflow was enforced). ABE-010 through ABE-021, plus ABE-022 to ABE-031,
-merged on `main`.
+workflow was enforced). ABE-010 through ABE-032 merged on `main`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-032 landing refresh on `feature/abe-032-landing-refresh` (PR #25):
+  direction was agreed with the owner first and recorded in `docs/sdd/design.md`
+  (typography + hero + rhythm, micro-interactions, lucide icons, grain over the
+  whole site, animated transitions). Display font Cormorant → **Alegreya**
+  (latin + cyrillic, so uk headings stay on brand — Fraunces has no cyrillic
+  glyphs), H1 tightened to `leading-[0.96]` up to `text-8xl`. Hero becomes
+  kinematic: `hero-rise`-staged load (eyebrow → headline → intro/CTA → bottom
+  strip), a `hero-vignette` falloff over the oven video, and three real product
+  miniatures (Hausbrot, Laugenbrezel, Zimtschnecke) with price links into
+  `/sortiment`. A barely-visible `body::before` feTurbulence grain (~5%) spans
+  the whole site and is disabled under `prefers-reduced-motion`. Route changes
+  animate via a CSS-only `page-enter` on the routed `<main>`; one deliberate
+  `Reveal` (IntersectionObserver + reduced-motion + no-JS fallback) is reserved
+  for the paths tiles only. Paths became real link tiles with lucide icons
+  (Store/ShoppingBag/Coffee), hover shadow and sliding arrow; the preorder
+  steps became a hairline editorial sequence keeping its numbered markers
+  (real 1-2-3 ordering). Primary hero CTA now points at the `/vorbestellen`
+  page instead of the `#vorbestellen` anchor. `npm run check` green (184 unit
+  + 24 integration); `npm run build` green; browser-QA on `/de` (computed
+  styles confirm Alegreya, grain, vignette, page-enter and hero-rise live) plus
+  reduced-motion emulation (grain + video off, still on, animations flattened,
+  tiles visible). Sole console error remains the benign React dev eval/CSP
+  message.
 - ABE-031 admin/identity i18n on `feature/abe-031-admin-identity-i18n`: the
   staff surface is off hardcoded language onto a new `admin` next-intl
   namespace. `bakery-admin/*` (which was hardcoded German) and `identity/*`
@@ -279,10 +301,9 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
-- ABE-031 is the last i18n ticket; nothing hardcoded remains on the surface.
-  Follow-ups if any: end-to-end auth flows against a real Supabase project
-  (the form-level codes are already localised but were not exercised with a
-  live staff session).
+- ABE-031 and ABE-032 close the i18n and the landing surface. Follow-ups if
+  any: end-to-end auth flows against a real Supabase project (form-level codes
+  are localised but were not exercised with a live staff session).
 - ABE-029 PWA was explicitly dropped by the owner: not in scope.
 
 ## Notes
