@@ -23,6 +23,11 @@
   gradient. The alt text is a neutral guess and needs the owner's eyes.
 - The "Passt dazu" section reuses existing `public/products/*.webp` shots for
   the drink and the cake of each pairing, so it added no new files.
+- `src/features/shell/BrandIcon.tsx` — the Instagram and Facebook glyphs in the
+  footer, inlined as SVG paths from the Simple Icons set
+  (simpleicons.org, CC0-1.0, fetched from the jsDelivr copy of `simple-icons@11`).
+  The glyphs stay the property of their owners and are only used to link to the
+  bakery's own profiles; the hrefs are still `#` placeholders.
 
 ## Provenance
 

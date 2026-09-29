@@ -7,6 +7,7 @@ import {
   legalLinks,
   SOCIAL_LINKS,
 } from "./siteNavigation";
+import { BrandIcon } from "./BrandIcon";
 
 type SiteFooterProps = {
   locale: SiteLocale;
@@ -44,9 +45,11 @@ export default async function SiteFooter({ locale }: SiteFooterProps) {
                 <li key={social.label}>
                   <a
                     href={social.href}
-                    className="text-sm text-cream/75 underline underline-offset-4 transition-colors duration-300 hover:text-amber"
+                    aria-label={social.label}
+                    title={social.label}
+                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-cream/75 transition-colors duration-300 hover:text-amber"
                   >
-                    {social.label}
+                    <BrandIcon name={social.label} />
                   </a>
                 </li>
               ))}

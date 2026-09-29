@@ -65,8 +65,8 @@ export function legalLinks(locale: SiteLocale, labels: NavLabels): NavLink[] {
 /**
  * Placeholder profiles: the owner has no accounts yet, so the footer shows the
  * channels without pretending they exist. Replace the hrefs, not the markup.
- * Brand glyphs are not drawn here — that would mean shipping other people's
- * logos; owned SVGs belong in public/ with an entry in docs/sdd/assets.md.
+ * The glyphs in BrandIcon.tsx are the Simple Icons paths, linked because they
+ * point at the bakery's own profiles.
  */
 export const SOCIAL_LINKS: { label: string; href: string }[] = [
   { label: "Instagram", href: "#" },
