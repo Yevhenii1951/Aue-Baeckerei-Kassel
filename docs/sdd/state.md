@@ -1,13 +1,27 @@
 # State
 
-Status: ABE-001 through ABE-009 implemented on `main` (before the branch
-workflow was enforced). ABE-010 through ABE-032 merged on `main`.
-ABE-033 (sortiment categories) and ABE-034 (content pages) are on local
-branches, not pushed: the owner wants the new look reviewed before anything
-reaches the remote.
+Status: ABE-001 through ABE-032 merged on `main` earlier. ABE-033 through
+ABE-044 shipped as one squash PR #26 (`b4e44a5`), because the twelve tickets
+formed a single linear chain of chrome work that only makes sense together.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
+## Next
+
+The site chrome is done and reviewed. Open with the owner:
+
+- Real Instagram and Facebook URLs — the footer hrefs are still `#`.
+- Sources and licences for the four café photos and the 66 product photos are
+  unrecorded (`docs/sdd/assets.md`).
+- Alt texts on the café photos were derived from the file names; nobody has
+  compared them against the real frames.
+- A café vitrine photo: "Kuchenvitrine" became "Fensterplatz II" because the
+  second file is a second window-seat shot.
+- Phone and e-mail on `/kontakt` and in the Impressum are placeholders.
+- ABE-035 has a commit but no ticket file; the header work is described in
+  this file and in PR #26 instead.
+
+## Done
 ## Done
 
 - ABE-037 palette re-theme on `feature/abe-037-palette-retheme`: the tokens are
