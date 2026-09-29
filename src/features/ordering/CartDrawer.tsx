@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { SiteLocale } from "@/features/seo/site";
 import { useCart } from "./cart-provider";
 import { formatPrice } from "./price";
@@ -13,6 +14,13 @@ type CartDrawerProps = {
 export function CartDrawer({ locale }: CartDrawerProps) {
   const { isOpen, totals, changeQuantity, closeCart } = useCart();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
+
+  // The store lives in a module singleton, so isOpen survives navigation. Without
+  // this the drawer stays on top of the page the "Zur Vorbestellung" link leads to.
+  useEffect(() => {
+    closeCart();
+  }, [pathname, closeCart]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -38,7 +46,7 @@ export function CartDrawer({ locale }: CartDrawerProps) {
         role="presentation"
         aria-hidden="true"
         onClick={closeCart}
-        className="absolute inset-0 bg-ink/60 backdrop-blur-sm"
+        className="absolute inset-0 touch-none bg-ink/60 backdrop-blur-sm"
       />
       <aside
         role="dialog"
@@ -53,7 +61,7 @@ export function CartDrawer({ locale }: CartDrawerProps) {
             type="button"
             onClick={closeCart}
             aria-label="Warenkorb schließen"
-            className="size-10 rounded-lg border border-brand-deep/15 text-lg text-brand-deep"
+            className="size-11 rounded-lg border border-brand-deep/15 text-lg text-brand-deep"
           >
             ×
           </button>
@@ -64,7 +72,7 @@ export function CartDrawer({ locale }: CartDrawerProps) {
             <p className="text-ink/65">Dein Warenkorb ist noch leer.</p>
             <Link
               href={`/${locale}/sortiment`}
-              className="mx-auto rounded-lg bg-brand px-4 py-2 font-semibold text-cream"
+              className="mx-auto min-h-11 rounded-lg bg-brand px-4 py-2 font-semibold text-cream"
             >
               Zum Sortiment
             </Link>
@@ -97,7 +105,7 @@ export function CartDrawer({ locale }: CartDrawerProps) {
                         changeQuantity(line.productId, line.quantity - 1)
                       }
                       aria-label={`${line.name} reduzieren`}
-                      className="size-9 rounded-md border border-brand-deep/15 text-brand-deep"
+                      className="size-11 rounded-md border border-brand-deep/15 text-brand-deep"
                     >
                       –
                     </button>
@@ -107,7 +115,7 @@ export function CartDrawer({ locale }: CartDrawerProps) {
                         changeQuantity(line.productId, line.quantity + 1)
                       }
                       aria-label={`${line.name} erhöhen`}
-                      className="size-9 rounded-md border border-brand-deep/15 text-brand-deep"
+                      className="size-11 rounded-md border border-brand-deep/15 text-brand-deep"
                     >
                       +
                     </button>

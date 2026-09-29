@@ -8,6 +8,18 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
+- ABE-025 mobile polish on `feature/abe-025-mobile-polish`: the header no
+  longer renders six nav links in a wrapping row that made the sticky bar 185 px
+  tall on a 390 px screen; a burger + drawer below `lg` (reused from Kalyna's
+  `MobileMenu`) brings it to 77 px. The real overlap bug was elsewhere:
+  `cart-provider` keeps `isOpen` in a module-level singleton, so navigating via
+  "Zur Vorbestellung" left the drawer and its backdrop on top of the preorder
+  page — `CartDrawer` now closes on pathname change. Nav, footer, slot, date
+  and quantity controls all moved to `min-h-11`/`size-11`, and the brand no
+  longer breaks mid-word at 320 px. Both overlays used `body { overflow: hidden }`
+  which does nothing here because `html` is the scroll container, so that was
+  replaced with `touch-none` on the backdrop. Findings and measurements are in
+  `docs/sdd/tickets/ABE-025-mobile-polish-qa.md`.
 - ABE-028 consent-safe delivery map on `feature/abe-028-map-delivery-ui`:
   `DeliveryZoneMap.tsx` draws the three zones as concentric circles around the
   bakery using radii taken from `DELIVERY_ZONES` (2/5/8 km) instead of invented

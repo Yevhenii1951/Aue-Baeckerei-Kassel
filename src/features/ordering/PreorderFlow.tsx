@@ -150,7 +150,7 @@ export function PreorderFlow({ locale }: PreorderFlowProps): React.ReactElement 
                   type="button"
                   onClick={() => setDate(candidate)}
                   aria-pressed={selected}
-                  className={`rounded-lg border px-3 py-2 text-left text-sm font-medium ${
+                  className={`min-h-11 rounded-lg border px-3 py-2 text-left text-sm font-medium ${
                     selected
                       ? "border-brand bg-brand text-cream"
                       : "border-brand-deep/15 bg-white text-brand-deep"

@@ -12,7 +12,10 @@
     "navCafe": "Café",
     "navImprint": "Impressum",
     "navPrivacy": "Datenschutz",
-    "footerNote": "Portfolio-Demo für eine moderne Handwerksbäckerei in Kassel. Rechtstexte vor einem echten Livegang prüfen lassen."
+    "footerNote": "Portfolio-Demo für eine moderne Handwerksbäckerei in Kassel. Rechtstexte vor einem echten Livegang prüfen lassen.",
+    "menuOpen": "Menü öffnen",
+    "menuClose": "Menü schließen",
+    "mobileNav": "Mobile Navigation"
   },
   "home": {
     "eyebrow": "Handwerksbäckerei an der Karlsaue",
