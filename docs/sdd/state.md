@@ -4,8 +4,10 @@ Status: ABE-001 through ABE-032 merged on `main` earlier. ABE-033 through
 ABE-044 shipped as one squash PR #26 (`b4e44a5`), because the twelve tickets
 formed a single linear chain of chrome work that only makes sense together.
 ABE-045 (empty the cart after a submitted order) is merged on `main`
-(`bdc6b34`, PR #27). ABE-046 (real product photos for the catalogue) is open on
-`feature/abe-046-product-photos`.
+(`bdc6b34`, PR #27). ABE-046 (real product photos for the catalogue) is merged
+on `main` (`3034a2a`, PR #28). ABE-047 (drop the two shipped photos with a
+rights reservation) is open on
+`feature/abe-047-drop-restricted-product-photos`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
@@ -13,15 +15,20 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 - Real Instagram and Facebook URLs — the footer hrefs are still `#`.
 - **Product photo provenance is owner-declared, not verified.** The owner
-  called all 69 files free Pexels downloads, but no per-file URL came with them
-  and three originals carry an express reservation of rights in their EXIF — two
-  of them are in the shipped set. Traced to Pexels pages before any public or
+  called all 69 files free Pexels downloads, but no per-file URL came with them.
+  Three originals carried an express reservation of rights in their EXIF; none of
+  the three is in the repository after ABE-047. That removed the evidence
+  *against* the claim, not the missing proof for it — the claim is still
+  owner-asserted. Trace the shipped 49 to Pexels pages before any public or
   client use (`docs/sdd/assets.md`).
 - Nobody has compared the 4:3 crops against the real subjects. 46 of the 69
   sources were portrait and were centre-cropped, which cuts up to 58% of their
   height.
 - The 13 bread products share 3 photos, so one image repeats several times in
   the grid. Real bread photography would fix it.
+- The 10 snack products sit on 6 photos, so four of them render twice. ABE-047
+  accepted that to drop two restricted files; the set only had 8 photos for 10
+  products.
 - Sources and licences for the four café photos are still unrecorded.
 - Alt texts on the café photos were derived from the file names; nobody has
   compared them against the real frames.
@@ -34,6 +41,13 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 ## Done
 ## Done
 
+- ABE-047 drop the restricted product photos on
+  `feature/abe-047-drop-restricted-product-photos`: `snacks-deli-1` and
+  `snacks-deli-4` carried an express reservation of rights in their original
+  EXIF, so the owner had them replaced. Both files are deleted; the 10 snack
+  products now sit on the remaining 6 deli photos, 2-2-2-2-1-1. Shipped set is
+  49 photos. No shipped file contradicts the licence claim any more — but no
+  shipped file proves it either.
 - ABE-046 product photos on `feature/abe-046-product-photos`: 51 of the 69 JPEG
   the owner supplied ship as 1200x900 WebP q80, and `PRODUCT_IMAGES` in
   `demoProducts.ts` maps all 66 products onto them, so the catalogue no longer
