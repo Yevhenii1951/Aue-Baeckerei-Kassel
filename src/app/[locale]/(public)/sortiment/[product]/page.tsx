@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { demoProducts } from "@/features/catalog/demoProducts";
+import { AddToCartButton } from "@/features/catalog/components/AddToCartButton";
 import {
   allergenText,
   buildProductJsonLd,
@@ -89,9 +90,7 @@ export default async function ProductPage({ params }: ProductPageProps): Promise
               {t("perUnit", { unit: product.unit })}
             </p>
             <div className="mt-6 grid gap-3">
-              <Link href={`/${locale}/sortiment`} className="btn-amber text-center">
-                {t("addToCart")}
-              </Link>
+              <AddToCartButton product={product} />
               <Link
                 href={`/${locale}/vorbestellen`}
                 className="inline-flex min-h-12 items-center justify-center rounded-lg border border-brand-deep/15 px-6 py-2.5 font-semibold text-brand-dark"

@@ -7,7 +7,7 @@ import { useCart } from "@/features/ordering/cart-provider";
 export function CartToggleButton() {
   const { items, isOpen, openCart } = useCart();
   const t = useTranslations("cart");
-  const count = items.length;
+  const count = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <button
