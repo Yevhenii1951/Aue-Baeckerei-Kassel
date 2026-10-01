@@ -1,20 +1,58 @@
 # Aue-Bäckerei Kassel
 
-A portfolio project for a modern craft bakery in Kassel: video-led landing page,
-catalogue, preorder flow, cafe content, delivery/subscription concepts, and an
-admin backliste for bakery production.
+![Aue-Bäckerei Kassel landing page](public/screenshots/hauptseite.webp)
 
-It is derived from the Kalyna infrastructure base and now owns its bakery
-domain, SDD artifacts, and feature tickets.
+A portfolio project for a modern craft bakery in Kassel. The site combines a
+video-led landing page with a multilingual catalogue, shared cart, preorder
+flow, local delivery content, legal pages, and a production-focused admin
+backliste.
+
+It is derived from a reusable infrastructure base and now owns its bakery
+domain, SDD artifacts, feature tickets, and visual language.
+
+## Screenshots
+
+### Public site
+
+| Homepage | Footer |
+| --- | --- |
+| ![Homepage](public/screenshots/hauptseite.webp) | ![Homepage footer](public/screenshots/hauptseite-footer.webp) |
+
+| Sortiment | Vorbestellen |
+| --- | --- |
+| ![Product catalogue](public/screenshots/sortiment.webp) | ![Preorder flow](public/screenshots/vorbestellen.webp) |
+
+| Lieferung | Kontakt |
+| --- | --- |
+| ![Delivery page](public/screenshots/lieferung.webp) | ![Contact page](public/screenshots/kontakt.webp) |
+
+### Admin
+
+| Dashboard | Backliste and operations |
+| --- | --- |
+| ![Admin dashboard](public/screenshots/admin-panel-1.webp) | ![Admin backliste](public/screenshots/admin-panel-2.webp) |
 
 ## What is inside
 
 - Next.js App Router, React, TypeScript, Tailwind CSS v4
-- next-intl with German as canonical language
-- Supabase/Postgres infrastructure for future staff/admin workflows
+- next-intl with German as canonical language and English/Ukrainian locales
+- Shared cart and preorder flow with quantity-aware cart badge
+- Supabase/Postgres infrastructure for staff authentication and admin workflows
 - German legal shell with Impressum and Datenschutz routes
 - SDD docs in `docs/sdd/`
 - first hero assets at `public/hero-oven.mp4` and `public/hero-oven.jpg`
+
+## Product flow
+
+1. Discover the bakery and its local Kassel positioning on the homepage.
+2. Browse and filter products in the catalogue.
+3. Add products to the shared cart from catalogue cards or product detail pages.
+4. Choose pickup or delivery in the preorder flow.
+5. Staff use the admin backliste to prepare the next production day.
+
+The project is a portfolio/demo implementation. Payment, customer accounts,
+and external integrations are intentionally feature-gated rather than enabled
+by default.
 
 ## Setup
 
@@ -81,6 +119,16 @@ their feature ticket needs them.
 
 `AGENTS.md` and the workspace rules hold the coding contract. `docs/sdd/` holds
 the product contract and ticket scope.
+
+## Verification
+
+```bash
+npm run check
+npm run build
+```
+
+The check suite covers linting, type checking, unit tests, and integration tests
+against the disposable local test database.
 
 ## Licence and provenance
 
