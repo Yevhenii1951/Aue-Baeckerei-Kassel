@@ -67,15 +67,23 @@ Two things stop this from being a verified record:
   `snacks-deli-4` as `classique-tomate-ei`. The exporter stripped all metadata,
   so nothing in `public/products/` reveals this.
 
-A further 14 shipped files carry a photographer or studio name in the original
-EXIF and therefore want a recorded credit even though Pexels asks for none:
-`feinkost-geschenkkorb-1` (bondarev nick), `feinkost-geschenkkorb-3` (Varzhen
-Gennadiy), `getraenke-caramel-macchiato-1` (DTuncer),
-`getraenke-caramel-macchiato-2` (jay chan), `snacks-deli-1`, `snacks-deli-4`,
-`snacks-deli-7` (YAW), `suess-brownie-3` and `-4` (studioheaven),
-`suess-brownie-5` (Jonathan Lapada), `suess-kaesekuchen-3` (Lusia),
-`suess-streuselkuchen-7` (Nadine Ginzel), `broetchen-laugenstange-1` (Baran
-Robin) and `broetchen-laugenstange-5` (Taiss A&S).
+All 69 originals carry an EXIF block, and none of them carries GPS. 17 name an
+author or a copyright string; 14 of those 17 are in the shipped set. Two are the
+reservations named above. The other 12 want a recorded credit even though Pexels
+asks for none: `feinkost-geschenkkorb-1` (bondarev nick), `feinkost-geschenkkorb-3`
+(Varzhen Gennadiy), `getraenke-caramel-macchiato-1` (DTuncer),
+`getraenke-caramel-macchiato-2` (jay chan), `snacks-deli-7` (YAW),
+`suess-brownie-3` and `-4` (studioheaven), `suess-brownie-5` (Jonathan Lapada),
+`suess-kaesekuchen-3` (Lusia), `suess-streuselkuchen-7` (Nadine Ginzel),
+`broetchen-laugenstange-1` (Baran Robin) and `broetchen-laugenstange-5` (Taiss
+A&S). The three marked originals left out of the repository are
+`feinkost-knabbermix-1` (the third reservation), `suess-brownie-6` and
+`suess-streuselkuchen-8`.
+
+No shipped file carries EXIF, IPTC, XMP or GPS. Every raster asset in
+`public/` went through a metadata-stripping encoder, and the café photos arrived
+without metadata, so the repository itself shows none of the above. The names
+above survive only because they were transcribed here.
 
 - Source: _owner-declared Pexels; per-file URLs missing_
 - Licence: _Pexels License (free commercial use, no attribution), unverified_
