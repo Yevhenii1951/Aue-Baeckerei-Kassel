@@ -101,11 +101,11 @@ const CAFE_PAGE: CompanyPage = {
       title: "Cappuccino + Zimtschnecke",
       text: "Der schnelle Klassiker für den Vormittag, warm, süß und nicht zu schwer.",
       drink: {
-        src: "/products/placeholder.png",
+        src: "/products/getraenke-kaffee-3.webp",
         alt: "Cappuccino",
       },
       cake: {
-        src: "/products/placeholder.png",
+        src: "/products/suess-streuselkuchen-1.webp",
         alt: "Zimtschnecke",
       },
     },
@@ -113,11 +113,11 @@ const CAFE_PAGE: CompanyPage = {
       title: "Earl Grey + Käsekuchen",
       text: "Ruhiger Nachmittag am Fenster mit cremigem Kuchen und Bergamotte.",
       drink: {
-        src: "/products/placeholder.png",
+        src: "/products/getraenke-chai-latte-2.webp",
         alt: "Earl Grey",
       },
       cake: {
-        src: "/products/placeholder.png",
+        src: "/products/suess-kaesekuchen-1.webp",
         alt: "Käsekuchen",
       },
     },
@@ -125,11 +125,11 @@ const CAFE_PAGE: CompanyPage = {
       title: "Caffè Crema + Brownie",
       text: "Kräftiger Kaffee zu Schokolade, ideal für die kleine Arbeitspause.",
       drink: {
-        src: "/products/placeholder.png",
+        src: "/products/getraenke-kaffee-1.webp",
         alt: "Caffè Crema",
       },
       cake: {
-        src: "/products/placeholder.png",
+        src: "/products/suess-brownie-1.webp",
         alt: "Brownie",
       },
     },
@@ -137,11 +137,11 @@ const CAFE_PAGE: CompanyPage = {
       title: "Mango Lassi + Apfel-Mandel-Schnecke",
       text: "Fruchtig, vegan möglich und perfekt für warme Kasseler Tage.",
       drink: {
-        src: "/products/placeholder.png",
+        src: "/products/getraenke-caramel-macchiato-3.webp",
         alt: "Mango Lassi",
       },
       cake: {
-        src: "/products/placeholder.png",
+        src: "/products/suess-streuselkuchen-6.webp",
         alt: "Apfel-Mandel-Schnecke",
       },
     },
