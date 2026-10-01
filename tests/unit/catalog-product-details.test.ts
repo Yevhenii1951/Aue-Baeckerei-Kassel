@@ -36,7 +36,7 @@ describe("catalog product details", () => {
 
     expect(jsonLd["@type"]).toBe("Product");
     expect(jsonLd.offers.price).toBe("3.80");
-    expect(jsonLd.image).toBe("https://example.test/products/placeholder.png");
+    expect(jsonLd.image).toBe(`https://example.test${product.imageUrl}`);
     expect(jsonLd.offers.priceCurrency).toBe("EUR");
     expect(jsonLd.offers.url).toBe("https://example.test/de/sortiment/baguette");
   });

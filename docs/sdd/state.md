@@ -4,17 +4,25 @@ Status: ABE-001 through ABE-032 merged on `main` earlier. ABE-033 through
 ABE-044 shipped as one squash PR #26 (`b4e44a5`), because the twelve tickets
 formed a single linear chain of chrome work that only makes sense together.
 ABE-045 (empty the cart after a submitted order) is merged on `main`
-(`bdc6b34`, PR #27).
+(`bdc6b34`, PR #27). ABE-046 (real product photos for the catalogue) is open on
+`feature/abe-046-product-photos`.
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
-The site chrome is done and reviewed. Open with the owner:
-
 - Real Instagram and Facebook URLs — the footer hrefs are still `#`.
-- Sources and licences for the four café photos and the 66 product photos are
-  unrecorded (`docs/sdd/assets.md`).
+- **Product photo provenance is owner-declared, not verified.** The owner
+  called all 69 files free Pexels downloads, but no per-file URL came with them
+  and three originals carry an express reservation of rights in their EXIF — two
+  of them are in the shipped set. Traced to Pexels pages before any public or
+  client use (`docs/sdd/assets.md`).
+- Nobody has compared the 4:3 crops against the real subjects. 46 of the 69
+  sources were portrait and were centre-cropped, which cuts up to 58% of their
+  height.
+- The 13 bread products share 3 photos, so one image repeats several times in
+  the grid. Real bread photography would fix it.
+- Sources and licences for the four café photos are still unrecorded.
 - Alt texts on the café photos were derived from the file names; nobody has
   compared them against the real frames.
 - A café vitrine photo: "Kuchenvitrine" became "Fensterplatz II" because the
@@ -26,6 +34,15 @@ The site chrome is done and reviewed. Open with the owner:
 ## Done
 ## Done
 
+- ABE-046 product photos on `feature/abe-046-product-photos`: 51 of the 69 JPEG
+  the owner supplied ship as 1200x900 WebP q80, and `PRODUCT_IMAGES` in
+  `demoProducts.ts` maps all 66 products onto them, so the catalogue no longer
+  shows one `placeholder.png` for everything. The 8 "Passt dazu" images on
+  `/kafe` point at the photo of their own pairing, and
+  `public/products/placeholder.png` is gone. Provenance is recorded but
+  **unverified** — see Next. `npm run check` green (191 unit, 24 integration),
+  `npm run build` green, browser: 66/66 images load on `/de/sortiment`, 8/8
+  pairings and 4/4 café photos on `/de/kafe`, no placeholder left anywhere.
 - ABE-037 palette re-theme on `feature/abe-037-palette-retheme`: the tokens are
   now deep green `#17453e` / `#0f332c`, amber `#fae462` and a navy
   `#0f0f2d` for the dark surfaces. `sage` is retired and every former use
