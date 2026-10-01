@@ -1,4 +1,19 @@
+<div align="center">
+
 # Aue-Bäckerei Kassel
+
+**Handwerkliche Backwaren entdecken, vorbestellen und für den nächsten Tag vorbereiten.**
+
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
+![Supabase](https://img.shields.io/badge/Supabase-Postgres%20%7C%20Auth-3ECF8E?logo=supabase)
+![Portfolio](https://img.shields.io/badge/type-portfolio%20project-7c1428)
+
+</div>
+
+---
+
+## Überblick
 
 ![Aue-Bäckerei Kassel landing page](public/screenshots/hauptseite.webp)
 
@@ -9,6 +24,14 @@ backliste.
 
 It is derived from a reusable infrastructure base and now owns its bakery
 domain, SDD artifacts, feature tickets, and visual language.
+
+## Der Ablauf
+
+```
+Startseite entdecken -> Sortiment durchsuchen -> Produkte in den Warenkorb
+       -> Abholung oder Lieferung wählen -> Vorbestellung absenden
+       -> Team bereitet die Backliste für den Produktionstag vor
+```
 
 ## Screenshots
 
