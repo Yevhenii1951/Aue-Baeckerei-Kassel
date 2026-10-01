@@ -6,8 +6,7 @@ formed a single linear chain of chrome work that only makes sense together.
 ABE-045 (empty the cart after a submitted order) is merged on `main`
 (`bdc6b34`, PR #27). ABE-046 (real product photos for the catalogue) is merged
 on `main` (`3034a2a`, PR #28). ABE-047 (drop the two shipped photos with a
-rights reservation) is open on
-`feature/abe-047-drop-restricted-product-photos`.
+rights reservation) is merged on `main` (`f916a12`, PR #29).
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
@@ -41,8 +40,7 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 ## Done
 ## Done
 
-- ABE-047 drop the restricted product photos on
-  `feature/abe-047-drop-restricted-product-photos`: `snacks-deli-1` and
+- ABE-047 drop the restricted product photos, merged as `f916a12` (PR #29): `snacks-deli-1` and
   `snacks-deli-4` carried an express reservation of rights in their original
   EXIF, so the owner had them replaced. Both files are deleted; the 10 snack
   products now sit on the remaining 6 deli photos, 2-2-2-2-1-1. Shipped set is
