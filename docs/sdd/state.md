@@ -7,12 +7,16 @@ ABE-045 (empty the cart after a submitted order) is merged on `main`
 (`bdc6b34`, PR #27). ABE-046 (real product photos for the catalogue) is merged
 on `main` (`3034a2a`, PR #28). ABE-047 (drop the two shipped photos with a
 rights reservation) is merged on `main` (`f916a12`, PR #29).
+ABE-048 (product detail add-to-cart and quantity badge) is merged on `main`
+(`944a4dd`, PR #30).
 
 Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
 - Real Instagram and Facebook URLs — the footer hrefs are still `#`.
+- Product detail CTAs now add to the shared cart without opening the drawer;
+  the header badge counts total units (`quantity`), not distinct product lines.
 - **Product photo provenance is owner-declared, not verified.** The owner
   called all 69 files free Pexels downloads, but no per-file URL came with them.
   Three originals carried an express reservation of rights in their EXIF; none of
@@ -39,6 +43,14 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 ## Done
+
+- ABE-048 product detail cart CTA, merged as `944a4dd` (PR #30): replaced the
+  misleading `/sortiment` link with a real shared-cart button, kept the visitor
+  on the product page, showed the existing quantity feedback in de/en/uk, and
+  made the header badge update from total cart units. `npm run check` green
+  (191 unit, 24 integration), `npm run build` green, browser: 9/9 detail-page
+  combinations passed across 3 locales and 3 products; repeated additions
+  updated the badge `null -> 1 -> 2` without opening the drawer.
 
 - ABE-047 drop the restricted product photos, merged as `f916a12` (PR #29): `snacks-deli-1` and
   `snacks-deli-4` carried an express reservation of rights in their original
