@@ -46,9 +46,9 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Done
 
-- 2026-10-07 mobile header/drawer repair (working tree, not yet committed):
-  removed the header `backdrop-filter` — it made the header the containing
-  block for the fixed menu drawer, so the drawer collapsed to 77 px and its
+- 2026-10-07 mobile header/drawer repair, ABE-051 (PR #31): removed the
+  header `backdrop-filter` — it made the header the containing block for the
+  fixed menu drawer, so the drawer collapsed to 77 px and its
   links were clipped; hid the café pill below `sm` and added Café to the drawer
   (the 320 px header no longer clips the burger); scroll lock on `<html>` while
   the drawer is open, focus moves to close and returns to the burger.
