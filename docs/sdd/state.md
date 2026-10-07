@@ -14,6 +14,9 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
+- Sticky mobile bottom action (`Jetzt vorbestellen`, design.md §Components) is
+  still unimplemented; it needs a decision on pages, the consent banner
+  (z-30) and safe-area handling before building.
 - Real Instagram and Facebook URLs — the footer hrefs are still `#`.
 - Product detail CTAs now add to the shared cart without opening the drawer;
   the header badge counts total units (`quantity`), not distinct product lines.
@@ -42,7 +45,15 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
   this file and in PR #26 instead.
 
 ## Done
-## Done
+
+- 2026-10-07 mobile header/drawer repair (working tree, not yet committed):
+  removed the header `backdrop-filter` — it made the header the containing
+  block for the fixed menu drawer, so the drawer collapsed to 77 px and its
+  links were clipped; hid the café pill below `sm` and added Café to the drawer
+  (the 320 px header no longer clips the burger); scroll lock on `<html>` while
+  the drawer is open, focus moves to close and returns to the burger.
+  Verified in the browser at 320/360/390/414/640/1024/1440; `npm run check`
+  (191 unit, 24 integration) and `npm run build` green.
 
 - ABE-048 product detail cart CTA, merged as `944a4dd` (PR #30): replaced the
   misleading `/sortiment` link with a real shared-cart button, kept the visitor

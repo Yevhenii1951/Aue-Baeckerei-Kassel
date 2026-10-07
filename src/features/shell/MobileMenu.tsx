@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { NavLink } from "./siteNavigation";
 
 export type { NavLink } from "./siteNavigation";
@@ -20,20 +20,32 @@ export function MobileMenu({
   brandLabel,
 }: MobileMenuProps): React.ReactElement {
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
+    // The document scrolls on <html>, so locking <body> does nothing here.
+    const root = document.documentElement;
+    const previousOverflow = root.style.overflow;
+    root.style.overflow = "hidden";
+    closeRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent): void => {
       if (event.key === "Escape") setOpen(false);
     };
     document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      root.style.overflow = previousOverflow;
+      triggerRef.current?.focus();
+    };
   }, [open]);
 
   return (
     <>
       <button
         type="button"
+        ref={triggerRef}
         onClick={() => setOpen(true)}
         aria-expanded={open}
         aria-haspopup="dialog"
@@ -83,6 +95,7 @@ export function MobileMenu({
             </span>
             <button
               type="button"
+              ref={closeRef}
               onClick={() => setOpen(false)}
               aria-label={closeLabel}
               className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-brand-deep/70 transition-colors duration-300 hover:bg-cream"

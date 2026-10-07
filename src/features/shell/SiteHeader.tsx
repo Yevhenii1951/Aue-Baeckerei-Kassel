@@ -25,9 +25,14 @@ export default async function SiteHeader({ locale }: SiteHeaderProps) {
   };
   const links = navigationLinks(locale, labels);
   const cafe = cafeLink(locale, labels.cafe);
+  // Café after the ordering steps, mirroring the footer. The drawer is the
+  // only way to reach the café below sm, where the framed pill is hidden.
+  const menuLinks = [...links.slice(0, 2), cafe, ...links.slice(2)];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-brand-deep/95 text-cream backdrop-blur">
+    // No backdrop-filter here: it would turn the header into the containing
+    // block for the fixed menu drawer, collapsing it to the header height.
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-brand-deep/95 text-cream">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-8">
         <Link
           href={`/${locale}`}
@@ -49,12 +54,12 @@ export default async function SiteHeader({ locale }: SiteHeaderProps) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href={cafe.href} className="nav-cafe-link">
+          <Link href={cafe.href} className="nav-cafe-link hidden sm:inline-flex">
             {cafe.label}
           </Link>
           <CartToggleButton />
           <MobileMenu
-            links={links}
+            links={menuLinks}
             menuLabel={t("menuOpen")}
             closeLabel={t("menuClose")}
             brandLabel={t("brandPlaceholder")}
