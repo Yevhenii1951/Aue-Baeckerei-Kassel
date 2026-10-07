@@ -28,6 +28,7 @@ export function MobileMenu({
     // The document scrolls on <html>, so locking <body> does nothing here.
     const root = document.documentElement;
     const previousOverflow = root.style.overflow;
+    const triggerEl = triggerRef.current;
     root.style.overflow = "hidden";
     closeRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent): void => {
@@ -37,7 +38,7 @@ export function MobileMenu({
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       root.style.overflow = previousOverflow;
-      triggerRef.current?.focus();
+      triggerEl?.focus();
     };
   }, [open]);
 
