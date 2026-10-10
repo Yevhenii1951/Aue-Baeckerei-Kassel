@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import "leaflet/dist/leaflet.css";
 import { DeliveryZoneChecker } from "@/features/ordering/DeliveryZoneChecker";
 import { DeliveryZoneMap } from "@/features/ordering/DeliveryZoneMap";
+import { ConsentBanner } from "@/features/consent/ConsentBanner";
 import {
   DELIVERY_ZONES,
   type DeliveryZoneInfo,
@@ -57,6 +58,8 @@ export default async function LieferungPage({
           <DeliveryZoneMap />
         </div>
       </section>
+
+      <ConsentBanner />
     </div>
   );
 }

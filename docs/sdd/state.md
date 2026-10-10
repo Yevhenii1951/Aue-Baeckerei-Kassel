@@ -14,6 +14,8 @@ Purpose: PORTFOLIO. Tier: Standard. Locales: de (canonical), en, uk.
 
 ## Next
 
+- ABE-052 (consent banner only on `/lieferung`) is on
+  `feature/abe-052-consent-banner-delivery-only`, not yet committed.
 - Sticky mobile bottom action (`Jetzt vorbestellen`, design.md §Components) is
   still unimplemented; it needs a decision on pages, the consent banner
   (z-30) and safe-area handling before building.

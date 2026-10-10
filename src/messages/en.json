@@ -180,7 +180,7 @@
     "deliveryFee": "Delivery fee",
     "freeFromValue": "Free from order value",
     "zoneShort": "Zone {zone} · {km} km",
-    "mapHint": "The map shows the three delivery zones as rings around the bakery. It comes from OpenStreetMap and is only loaded once you give consent above. The postcode check and the zone table work without the map.",
+    "mapHint": "The map shows the three delivery zones as rings around the bakery. It comes from OpenStreetMap and is only loaded once you press “Load map” below. The postcode check and the zone table work without the map.",
     "mapFailed": "The map could not be loaded. The zone table above shows the same details.",
     "mapTitle": "Delivery area as a map"
   },

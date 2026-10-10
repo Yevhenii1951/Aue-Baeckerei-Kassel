@@ -180,7 +180,7 @@
     "deliveryFee": "Lieferkosten",
     "freeFromValue": "Ab Warenwert frei",
     "zoneShort": "Zone {zone} · {km} km",
-    "mapHint": "Die Karte zeigt die drei Lieferzonen als Ringe um die Backstube. Sie kommt von OpenStreetMap und wird erst geladen, wenn Sie oben der Zustimmung zugestimmt haben. Die PLZ-Prüfung und die Zonentabelle funktionieren ohne die Karte.",
+    "mapHint": "Die Karte zeigt die drei Lieferzonen als Ringe um die Backstube. Sie kommt von OpenStreetMap und wird erst geladen, wenn Sie unten auf „Karte laden“ tippen. Die PLZ-Prüfung und die Zonentabelle funktionieren ohne die Karte.",
     "mapFailed": "Die Karte konnte nicht geladen werden. Die Zonentabelle oben zeigt dieselben Angaben.",
     "mapTitle": "Liefergebiet als Karte"
   },
